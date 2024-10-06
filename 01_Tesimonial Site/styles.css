@@ -70,6 +70,19 @@ nav {
   gap: 1rem;
 }
 
+/* Mobile Navigation */
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.menu-icon div {
+  width: 30px;
+  height: 3px;
+  background-color: var(--text-color);
+  margin: 5px 0;
+}
+
 /* Hero Section */
 .hero {
   margin-top: 80px;
@@ -96,35 +109,41 @@ nav {
 .hero-content {
   position: relative;
   z-index: 1;
+  padding: 20px; /* Added padding for better spacing */
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-family: 'Montserrat', sans-serif; /* New font for h1 */
+  font-size: 4rem; /* Increased size */
   margin-bottom: 1rem;
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  letter-spacing: 1px; /* Added letter spacing */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif; /* New font for p */
+  font-size: 1.5rem; /* Increased size */
   margin-bottom: 2rem;
   color: #cccccc;
+  line-height: 1.6; /* Increased line height for better readability */
 }
 
 .btn {
-  display: inline-block;
-  padding: 8px 26px;
-  background: var(--primary-color);
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   text-decoration: none;
-  border-radius: 30px;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+  background-color: var(--secondary-color);
 }
 
 /* Testimonial Grid */
@@ -245,7 +264,7 @@ nav {
   border: 1px solid #e0e0e0;
 }
 
-/*  cookie cards  */
+/* cookie cards */
 
 .review-popup .close-btn {
   position: absolute;
@@ -279,5 +298,44 @@ nav {
   to {
       transform: translateX(0);
       opacity: 1;
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+      display: none; /* Hide the navigation links */
+      flex-direction: column; /* Stack links vertically */
+      position: absolute;
+      top: 60px; /* Position below the navbar */
+      right: 0;
+      background-color: rgba(10, 3, 32, 0.95); /* Match navbar background */
+      width: 100%; /* Full width */
+      z-index: 1000;
+  }
+
+  .nav-links.active {
+      display: flex; /* Show links when active */
+  }
+
+  .menu-icon {
+      display: flex; /* Show menu icon */
+      flex-direction: column; /* Stack lines vertically */
+  }
+
+  .btn {
+      font-size: 0.9rem; /* Reduce button size */
+  }
+
+  .hero h1 {
+      font-size: 3rem; /* Smaller font size for mobile */
+  }
+
+  .hero p {
+      font-size: 1.2rem; /* Smaller font size for mobile */
+  }
+
+  .testimonial-grid {
+      gap: 1rem; /* Reduce gap for mobile */
   }
 }
