@@ -47,6 +47,7 @@ const reviews = [
 
 let currentReviewIndex = 0;
 let popupVisible = false;
+let reviewInterval; // Define a variable to store the interval
 
 function showReviewPopup() {
     const review = reviews[currentReviewIndex];
@@ -71,14 +72,12 @@ function showReviewPopup() {
 function closeReviewPopup() {
     reviewPopup.style.display = 'none';
     popupVisible = false;
+    // Stop the popups from reappearing after closing
+    clearInterval(reviewInterval); 
 }
-
-// Show a new review every 5 seconds
-setInterval(showReviewPopup, 5000);
-
 // Show the first review popup after 2 seconds
 setTimeout(() => {
     showReviewPopup();
     // Start the rotation immediately after showing the first review
-    setInterval(showReviewPopup, 5000);
+    reviewInterval = setInterval(showReviewPopup, 5000); // Store the interval so we can clear it
 }, 2000);
