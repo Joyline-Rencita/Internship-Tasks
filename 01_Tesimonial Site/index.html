@@ -6,6 +6,7 @@
     <title>TestiFlow - Testimonials Made Easy</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
 
 </head>
 <body>
@@ -13,10 +14,12 @@
         <div class="container nav-container">
             <a href="#" class="logo">TestiFlow</a>
             <div class="nav-links">
-                <a href="#features">Features</a>
+                <a href="#features">Home</a>
+                <a href="#plans">Plans</a>
+                <a href="#about">About Us</a>
                 <a href="#testimonials">Testimonials</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#about">About</a>
+                <a href="#categories">Categories</a>
+                
             </div>
             <div class="nav-buttons">
                 <a href="#" class="btn">Login</a>
@@ -111,6 +114,20 @@
                 <i class="fas fa-calendar"></i> Schedule a Call
             </div>
         </div>
+    </div>
+    <!-- Suggested Review pop ups   -->
+    <div class="review-popup" id="reviewPopup">
+        <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
+        <h4>Customer Review</h4>
+        <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>"TestiFlow has transformed how we collect and display testimonials. It's incredibly user-friendly!"</p>
+        <p><strong>- Alex Chen, Product Manager</strong></p>
     </div>
 
     <script src="script.js"></script>
