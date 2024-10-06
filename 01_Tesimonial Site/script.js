@@ -81,3 +81,12 @@ setTimeout(() => {
     // Start the rotation immediately after showing the first review
     reviewInterval = setInterval(showReviewPopup, 5000); // Store the interval so we can clear it
 }, 2000);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+});
