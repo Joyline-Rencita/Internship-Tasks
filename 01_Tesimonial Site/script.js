@@ -1,3 +1,11 @@
+// function toggleMenu() {
+//     const menu = document.querySelector(".menu-links");
+//     const icon = document.querySelector(".hamburger-icon");
+//     menu.classList.toggle("open");
+//     icon.classList.toggle("open");
+// }
+
+
 const helpButton = document.getElementById('helpButton');
 const helpPopup = document.getElementById('helpPopup');
 
@@ -90,3 +98,21 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
     });
 });
+
+// Toggle navigation visibility on mobile
+const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+const navButtons = document.querySelector('.nav-buttons');
+
+mobileNavToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+  navButtons.classList.toggle('show');
+
+  // Change ☰ to X when clicked
+  if (mobileNavToggle.textContent === '☰') {
+    mobileNavToggle.textContent = '✖';  // Change to X
+  } else {
+    mobileNavToggle.textContent = '☰';  // Revert to ☰
+  }
+});
+
