@@ -32,9 +32,10 @@ nav {
   left: 0;
   right: 0;
   background-color: rgba(10, 3, 32, 0.95);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   z-index: 1000;
   padding: 1rem 0;
+  margin-bottom: 10px;
 }
 
 .nav-container {
@@ -50,27 +51,36 @@ nav {
   text-decoration: none;
 }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-links a {
+.nav-links a, .nav-buttons a {
   color: var(--text-color);
   text-decoration: none;
+  margin-right: 2rem;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
   color: var(--primary-color);
 }
+.nav-links a {
+  text-decoration: none; /* Remove underline from links */
+  color: white; /* Set the color for links, can adjust as needed */
+}
+
 
 .nav-buttons {
   display: flex;
   gap: 1rem;
 }
 
-/* Mobile Navigation */
+/* Hamburger icon - initially hidden */
+.mobile-nav-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+/* Hamburger menu icon */
 .menu-icon {
   display: none;
   cursor: pointer;
@@ -81,6 +91,23 @@ nav {
   height: 3px;
   background-color: var(--text-color);
   margin: 5px 0;
+}
+
+section {
+  padding: 80px 20px; /* Adds padding above and below the section content */
+  margin: 0 auto; /* Centers the section horizontally */
+  max-width: 1200px; /* Sets a maximum width for better layout */
+  color: white; /* Default text color */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+}
+
+section h2 {
+  font-size: 2em; /* Adjust size as needed */
+  color: white; /* Make sure it's white */
+  font-family: 'Poppins', sans-serif; /* Change to your preferred font */
+  margin: 0; /* Reset margin if needed */
+  text-align: center;
 }
 
 /* Hero Section */
@@ -109,41 +136,41 @@ nav {
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: 20px; /* Added padding for better spacing */
+  padding: 20px;
 }
 
 .hero h1 {
-  font-family: 'Montserrat', sans-serif; /* New font for h1 */
-  font-size: 4rem; /* Increased size */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
   margin-bottom: 1rem;
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px; /* Added letter spacing */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .hero p {
-  font-family: 'Poppins', sans-serif; /* New font for p */
-  font-size: 1.5rem; /* Increased size */
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
   color: #cccccc;
-  line-height: 1.6; /* Increased line height for better readability */
+  line-height: 1.6;
 }
 
 .btn {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  display: inline-block;
+  padding: 8px 26px;
+  background: var(--primary-color);
+  color: white;
   text-decoration: none;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
-  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
 }
 
 /* Testimonial Grid */
@@ -248,10 +275,11 @@ nav {
   color: var(--primary-color);
 }
 
+/* Review Popup */
 .review-popup {
   position: fixed;
   bottom: 20px;
-  left: 20px; /* Changed from right to left */
+  left: 20px;
   background-color: white;
   color: #333;
   border-radius: 8px;
@@ -260,11 +288,9 @@ nav {
   max-width: 300px;
   z-index: 1000;
   display: none;
-  animation: slideInLeft 0.5s ease-out; /* Updated animation name */
+  animation: slideInLeft 0.5s ease-out;
   border: 1px solid #e0e0e0;
 }
-
-/* cookie cards */
 
 .review-popup .close-btn {
   position: absolute;
@@ -289,53 +315,100 @@ nav {
   margin-bottom: 5px;
 }
 
-/* Updated animation for left-side appearance */
+/* Animation for the review popup */
 @keyframes slideInLeft {
   from {
-      transform: translateX(-100%);
-      opacity: 0;
+    transform: translateX(-100%);
+    opacity: 0;
   }
   to {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .nav-links {
-      display: none; /* Hide the navigation links */
-      flex-direction: column; /* Stack links vertically */
-      position: absolute;
-      top: 60px; /* Position below the navbar */
-      right: 0;
-      background-color: rgba(10, 3, 32, 0.95); /* Match navbar background */
-      width: 100%; /* Full width */
-      z-index: 1000;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(10, 3, 32, 0.95);
+    width: 100%;
+    z-index: 1000;
   }
 
   .nav-links.active {
-      display: flex; /* Show links when active */
+    display: flex;
   }
 
   .menu-icon {
-      display: flex; /* Show menu icon */
-      flex-direction: column; /* Stack lines vertically */
+    display: flex;
+    flex-direction: column;
   }
 
   .btn {
-      font-size: 0.9rem; /* Reduce button size */
+    font-size: 0.9rem;
   }
 
   .hero h1 {
-      font-size: 3rem; /* Smaller font size for mobile */
+    font-size: 3rem;
   }
 
   .hero p {
-      font-size: 1.2rem; /* Smaller font size for mobile */
+    font-size: 1.2rem;
   }
 
   .testimonial-grid {
-      gap: 1rem; /* Reduce gap for mobile */
+    gap: 1rem;
+  }
+}
+
+/* For mobile: Hide links initially and set the mobile menu */
+@media (max-width: 991px) {
+  .nav-links, .nav-buttons {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(10, 3, 32, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 999;
+    text-align: center;
+    padding-top: 60px; /* Push down content to avoid overlap with mobile toggle */
+  }
+
+  /* Show the menu when the show class is added */
+  .nav-links.show, .nav-buttons.show {
+    display: flex;
+  }
+
+  /* Style for the mobile nav toggle (hamburger icon) */
+  .mobile-nav-toggle {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    z-index: 1001; /* Higher z-index to ensure it stays on top */
+  }
+
+  /* Nav buttons */
+  .nav-buttons .btn {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Close button (cross icon) */
+  .mobile-nav-toggle.close {
+    position: fixed;
+    right: 1.5rem;
+    top: 1.5rem;
   }
 }
