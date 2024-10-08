@@ -5,39 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestiFlow - Testimonials Made Easy</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
-
 </head>
 <body>
     <nav>
         <div class="container nav-container">
-            <a href="#" class="logo">TestiFlow</a>
+            <a href="index.html" class="logo">TestimonyHub</a>
+            
             <div class="nav-links">
-                <a href="#features">Home</a>
-                <a href="#plans">Plans</a>
-                <a href="#about">About Us</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#categories">Categories</a>
-                
+                <a href="#home" onclick="toggleMenu()">Home</a>
+                <a href="#about" onclick="toggleMenu()">About Us</a>
+                <a href="#plans" onclick="toggleMenu()">Plans</a>
+                <a href="#testimonials" onclick="toggleMenu()">Testimonials</a>
+                <a href="#categories" onclick="toggleMenu()">Categories</a>
+                <a href="#reviews" onclick="toggleMenu()">Reviews</a>
             </div>
+
             <div class="nav-buttons">
                 <a href="#" class="btn">Login</a>
                 <a href="#" class="btn" style="background: transparent; border: 1px solid var(--primary-color)">Sign Up</a>
             </div>
+
+            <!-- Hamburger icon for mobile -->
+            <div class="mobile-nav-toggle">☰</div>
+
         </div>
     </nav>
 
-    <div class="hero">
-        <div class="container hero-content">
-            <h1>Testimonials Made Easy</h1>
-            <p>Collect, manage, and showcase your customer testimonials effortlessly.</p>
-            <a href="#" class="btn">Start for free</a>
+    <!-- <section id="home"> -->
+        <div class="hero">
+            <div class="container hero-content">
+                <h1>Quick and Easy Testimonials</h1>
+                <p>It allows users to automate the gathering of feedback, organize it in a central location, and share it seamlessly across various platforms.</p>
+                <a href="#" class="btn">Start for free</a>
+            </div>
         </div>
-    </div>
+    <!-- </section> -->
 
+    <section id="about">
+        <h2>About Us</h2>
+        <!-- <p>Information about us.</p> -->
+    </section>
+
+    <section id="plans">
+        <h2>Plans Section</h2>
+        <!-- <p>Details about our plans.</p> -->
+    </section>
+    
+    <section id="testimonials">
+        <h2>Testimonials Section</h2>
+        <!-- <p>User reviews and feedback.</p> -->
+    </section>
+    
+    <section id="categories">
+        <h2>Categories Section</h2>
+        <!-- <p>Various categories of our offerings.</p> -->
+    </section>
+
+    <section id="reviews">
+        <!-- <p id="text">What our users say</p>  -->
+        <h2>Reviews</h2>
+        
+    <!-- Final Review  Section -->
     <div class="container">
         <div class="testimonial-grid">
+
+            <!-- small Review cards -->
             <div class="testimonial-card">
                 <div class="client-info">
                     <img src="img/user.png" alt="John Doe" class="client-image">
@@ -91,8 +127,62 @@
                 </div>
                 <p>"I've collected twenty testimonials in just two days. The ease of use and professional appearance have exceeded my expectations!"</p>
             </div>
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <img src="img/user4.jpg" alt="Mike Brown" class="client-image">
+                    <div class="client-details">
+                        <h3>Simone Lewis</h3>
+                        <p>Associate Director</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"I've collected twenty testimonials in just two days. The ease of use and professional appearance have exceeded my expectations!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <img src="img/user5.webp" alt="Sarah Johnson" class="client-image">
+                    <div class="client-details">
+                        <h3>Sarah Marin</h3>
+                        <p>Cheif Architect</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"We've already seen a tangible impact on revenue and conversion since implementing this solution. The results speak for themselves!"</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <img src="img/user6.jpg" alt="Mike Brown" class="client-image">
+                    <div class="client-details">
+                        <h3>Molly Clare</h3>
+                        <p>Full Stack Deveoper</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"I've collected twenty testimonials in just two days. The ease of use and professional appearance have exceeded my expectations!"</p>
+            </div>
         </div>
     </div>
+
+    </section>
 
     <button class="help-button" id="helpButton">
         <i class="fa-solid fa-comment-dots"></i>
@@ -115,6 +205,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- Suggested Review pop ups   -->
     <div class="review-popup" id="reviewPopup">
         <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
