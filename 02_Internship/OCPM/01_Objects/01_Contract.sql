@@ -1,4 +1,4 @@
--- ********************************************        
+--                          ********************************************        EKKO        *************************************************
 
 WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDPOS"."TABKEY",
@@ -46,3 +46,60 @@ FROM "EKKO" AS "EKKO"
                        AND COALESCE("Changes"."USERNAME", "EKKO"."ERNAM") = "USR02"."BNAME"
 WHERE "EKKO"."MANDT" IS NOT NULL
   AND "EKKO"."BSTYP" = 'K'
+
+
+
+-- =====================================================================================================================================================================
+
+
+
+--                  ****************************************          CDPOS          ********************************************
+
+
+SELECT <%=sourceSystem%>  || 'Contract_' || "CDPOS"."TABKEY" AS "ObjectID",
+	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
+       || "CDPOS"."CHANGENR"
+       || "CDPOS"."CHNGIND"                                  AS "ID",
+       CAST("CDHDR"."UDATE" AS DATE)
+            + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
+            "CDHDR"."UTIME") AS INTERVAL SECOND)             AS "Time",
+       CASE
+           WHEN "CDPOS"."FNAME" = 'KDATB' THEN 'ValidityPeriodStartDate'
+           WHEN "CDPOS"."FNAME" = 'KDATE' THEN 'ValidityPeriodEndDate'
+           WHEN "CDPOS"."FNAME" = 'LOEKZ' THEN 'DeletionIndicator'
+           WHEN "CDPOS"."FNAME" = 'ZTERM' THEN 'PaymentTerms'
+           END                                               AS "Attribute",
+       CASE
+           WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
+           ELSE "CDPOS"."VALUE_OLD"
+           END                                               AS "OldValue",
+       CASE
+           WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
+           ELSE "CDPOS"."VALUE_NEW"
+           END                                               AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    AS "ChangedBy",
+       "CDHDR"."TCODE"                                       AS "OperationType",
+       "CDHDR"."CHANGENR"                                    AS "OperationID",
+       CASE
+           WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
+           ELSE 'Manual' END                                 AS "ExecutionType"
+FROM "CDPOS" AS "CDPOS"
+         LEFT JOIN "CDHDR" AS "CDHDR"
+                   ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
+                       AND "CDPOS"."OBJECTCLAS" = "CDHDR"."OBJECTCLAS"
+                       AND "CDPOS"."OBJECTID" = "CDHDR"."OBJECTID"
+                       AND "CDPOS"."CHANGENR" = "CDHDR"."CHANGENR"
+                       AND "CDPOS"."TABNAME" = 'EKKO'
+                       AND "CDPOS"."CHNGIND" = 'U'
+                       AND "CDPOS"."FNAME" IN ('KDATB', 'KDATE', 'LOEKZ', 'ZTERM')
+                       AND "CDPOS"."OBJECTCLAS" = 'EINKBELEG'
+         LEFT JOIN "EKKO" AS "EKKO"
+                   ON "CDPOS"."TABKEY" = "EKKO"."MANDT" || "EKKO"."EBELN"
+                       AND "EKKO"."BSTYP" = 'K'
+         LEFT JOIN "USR02" AS "USR02"
+                   ON "CDHDR"."USERNAME" = "USR02"."BNAME"
+                       AND "CDHDR"."MANDANT" = "USR02"."MANDT"
+WHERE "CDPOS"."MANDANT" IS NOT NULL
+  AND "CDHDR"."MANDANT" IS NOT NULL
+  AND "EKKO"."MANDT" IS NOT NULL
+
