@@ -1,7 +1,7 @@
 Invoices :
 COUNT("o_celonis_VendorAccountCreditItem"."ID")
 
-#Average Aging of Invoices :
+Average Aging of Invoices :
 AVG(
   CASE
     WHEN ROUND_DAY("o_celonis_VendorAccountCreditItem"."ClearingDate") IS NULL
