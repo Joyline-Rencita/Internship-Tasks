@@ -1,4 +1,4 @@
-# Invoices :
+#Invoices :
 COUNT("o_celonis_VendorAccountCreditItem"."ID")
 
 #Average Aging of Invoices :
@@ -12,9 +12,11 @@ AVG(
   END
 )
 
-# avg_past_due_days_v :
+#avg_past_due_days_v :
 AVG (KPI("past_due_date"))
 
-# count_table_currencyconversion
+#count_table_currencyconversion
 Count_Table("o_celonis_CurrencyConversion")
 
+#count_exceptiontypesheet1
+COUNT_TABLE("o_custom_ExceptionTypeSheet1")
