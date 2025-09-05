@@ -1,3 +1,5 @@
+-- ********************************************        
+
 WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDPOS"."TABKEY",
                               "CDHDR"."UDATE",
