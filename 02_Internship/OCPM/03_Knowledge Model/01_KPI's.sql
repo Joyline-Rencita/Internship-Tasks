@@ -42,3 +42,6 @@ COUNT(CASE WHEN {p1} THEN 0 ELSE NULL END)
 
 Incoming Material Document Items :
 COUNT_TABLE("o_celonis_IncomingMaterialDocumentItem")
+
+Invoice Not Posted Avg Aging :
+AVG(DAYS_BETWEEN (("o_celonis_VendorAccountCreditItem"."BaseLineDate"),today()))
