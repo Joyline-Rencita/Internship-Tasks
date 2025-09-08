@@ -40,3 +40,5 @@ END
 filtered_count :
 COUNT(CASE WHEN {p1} THEN 0 ELSE NULL END)
 
+Incoming Material Document Items :
+COUNT_TABLE("o_celonis_IncomingMaterialDocumentItem")
