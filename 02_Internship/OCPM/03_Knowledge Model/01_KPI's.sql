@@ -63,6 +63,9 @@ COUNT(
 Invoice Value :
 SUM("o_celonis_VendorAccountCreditItem"."Amount")
 
+Invoices :
+COUNT("r_o_celonis_VendorAccountClearingAssignment__VendorAccountCreditItems"."ID")
+
 
 
 
