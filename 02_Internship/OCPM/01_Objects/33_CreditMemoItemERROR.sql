@@ -29,3 +29,4 @@ FROM "VBRP" AS "VBRP"
                        AND "VBRP"."MANDT" = "USR02"."MANDT"
 WHERE "VBRP"."MANDT" IS NOT NULL
   AND "VBRK"."VBTYP" = 'O'
+
