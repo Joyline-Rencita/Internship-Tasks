@@ -111,6 +111,35 @@ ROUND(CASE WHEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" > 0 THE
   THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays1" ELSE 0 END)
 
 
+Open Invoice By Value :
+sum (CASE WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
+THEN CURRENCY_CONVERT(
+             "o_celonis_VendorAccountCreditItem"."Amount",
+             FROM ("o_celonis_VendorAccountCreditItem"."Currency"),
+             TO ('USD'),
+             "o_celonis_VendorAccountCreditItem"."DocumentDate",
+             "o_celonis_currencyconversion",
+             'M',
+             'ECC' 
+           )
+  END
+)
+
+Open Invoice Lines Avg Aging :
+sum (CASE WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
+THEN CURRENCY_CONVERT(
+             "o_celonis_VendorAccountCreditItem"."Amount",
+             FROM ("o_celonis_VendorAccountCreditItem"."Currency"),
+             TO ('USD'),
+             "o_celonis_VendorAccountCreditItem"."DocumentDate",
+             "o_celonis_currencyconversion",
+             'M',
+             'ECC' 
+           )
+  END
+)
+
+
 
 
 
