@@ -45,3 +45,18 @@ COUNT_TABLE("o_celonis_IncomingMaterialDocumentItem")
 
 Invoice Not Posted Avg Aging :
 AVG(DAYS_BETWEEN (("o_celonis_VendorAccountCreditItem"."BaseLineDate"),today()))
+
+Invoice Not Posted By Value :
+SUM("o_celonis_VendorAccountCreditItem"."Amount")
+
+
+
+
+
+
+
+
+
+
+
+
