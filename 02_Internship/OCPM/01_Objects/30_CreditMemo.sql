@@ -1,3 +1,5 @@
+	***************************          VBRK      ***********************************
+
 SELECT <%=sourceSystem%>  || 'CreditMemo_' || "VBRK"."MANDT" || "VBRK"."VBELN" AS "ID",
     CAST("VBRK"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("VBRK"."ERZET" AS DATE),
