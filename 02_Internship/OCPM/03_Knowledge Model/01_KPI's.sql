@@ -155,6 +155,23 @@ THEN DAYS_BETWEEN ( ADD_DAYS ( "o_celonis_VendorAccountCreditItem"."BaseLineDate
 KPI("maximun_available_payment_days")), TODAY()) END
 
 
+past_due_values_result :
+SUM (
+  CASE
+    WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
+      AND ADD_DAYS("o_celonis_VendorAccountCreditItem"."BaseLineDate", KPI("maximun_available_payment_days")) < TODAY()
+    THEN CURRENCY_CONVERT(
+             "o_celonis_VendorAccountCreditItem"."Amount",
+             FROM ("o_celonis_VendorAccountCreditItem"."Currency"),
+             TO ('USD'),
+             "o_celonis_VendorAccountCreditItem"."DocumentDate",
+             "o_celonis_currencyconversion",
+             'M',
+             'ECC' 
+           )
+  END
+)
+
 
 
 
