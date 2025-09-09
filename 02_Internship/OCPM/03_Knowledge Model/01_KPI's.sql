@@ -172,12 +172,12 @@ SUM (
   END
 )
 
-
 Ratio :
 AVG(CASE WHEN {p1} THEN 1 ELSE 0 END)
 
 
-
+Total Purchase OrderItems :
+COUNT_TABLE("o_celonis_PurchaseOrderItem")
 
 
 
