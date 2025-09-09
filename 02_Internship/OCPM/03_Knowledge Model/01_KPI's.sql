@@ -49,6 +49,16 @@ AVG(DAYS_BETWEEN (("o_celonis_VendorAccountCreditItem"."BaseLineDate"),today()))
 Invoice Not Posted By Value :
 SUM("o_celonis_VendorAccountCreditItem"."Amount")
 
+Invoice Not Posted By Volume :
+COUNT_TABLE("o_celonis_IncomingMaterialDocumentItem")
+
+Invoice Not Posted Count :
+COUNT(
+   CASE WHEN "o_custom_OpenInvoiceDeepdiveManualFile"."STATUS" = 'Invoice Not Posted'
+        THEN "o_custom_OpenInvoiceDeepdiveManualFile"."ID"
+   END
+)
+
 
 
 
