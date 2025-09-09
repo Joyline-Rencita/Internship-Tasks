@@ -60,6 +60,9 @@ COUNT(
 )
 
 
+Invoice Value :
+SUM("o_celonis_VendorAccountCreditItem"."Amount")
+
 
 
 
