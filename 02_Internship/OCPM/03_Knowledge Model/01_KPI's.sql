@@ -67,6 +67,39 @@ Invoices :
 COUNT("r_o_celonis_VendorAccountClearingAssignment__VendorAccountCreditItems"."ID")
 
 
+Invoices posted but not cleared -By Aging :
+AVG(DAYS_BETWEEN ( "o_celonis_VendorAccountCreditItem"."BaseLineDate",TODAY()))
+
+
+  
+Invoices posted but not cleared -By Value (in USD):
+-- SUM(
+--   CASE 
+--     WHEN "o_celonis_VendorAccountCreditItem"."CreationExecutionType" = 'Posted'
+--      AND "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL 
+--     THEN CURRENCY_CONVERT( "o_celonis_VendorAccountCreditItem"."Amount", FROM ("o_celonis_VendorAccountCreditItem"."Currency"), TO ('USD'), "o_celonis_VendorAccountCreditItem"."DocumentDate", "o_celonis_currencyconversion", 'M', 'ECC' ) END )
+
+SUM(
+  CASE 
+    WHEN "o_custom_OpenInvoiceDeepdiveManualFile"."Status" = 'Invoices Posted but Not Cleared'
+    AND "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
+    THEN CURRENCY_CONVERT(
+             "o_celonis_VendorAccountCreditItem"."Amount",
+             FROM ("o_celonis_VendorAccountCreditItem"."Currency"),
+             TO ('USD'),
+             "o_celonis_VendorAccountCreditItem"."DocumentDate",
+             "o_celonis_currencyconversion",
+             'M',
+             'ECC'
+         )
+  END
+)
+
+Invoices posted but not cleared -By Volume :
+COUNT(DISTINCT CASE WHEN "o_custom_OpenInvoiceDeepdiveManualFile"."Status" = 'Invoices Posted but Not Cleared' and "o_celonis_VendorAccountCreditItem"."ClearingDate" iS NULL 
+then "o_custom_OpenInvoiceDeepdiveManualFile"."BELNR"||"o_custom_OpenInvoiceDeepdiveManualFile"."BUKRS"||"o_custom_OpenInvoiceDeepdiveManualFile"."GJAHR" END)
+
+
 
 
 
