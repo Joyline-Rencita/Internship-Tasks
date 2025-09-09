@@ -184,11 +184,10 @@ v_pl_req_qty :
 "o_celonis_PurchaseOrderItem"."Quantity" * ((100 - TO_INT("o_celonis_PurchaseOrderItem"."ToleranceLimit"))/100)
 
 
+Vendor Credit Items :
+COUNT_TABLE ( "o_celonis_VendorAccountCreditItem" )
 
-
-
-
-
-
+Vendor Debit Items :
+COUNT_TABLE ( "o_celonis_VendorAccountDebitItem" )
 
 
