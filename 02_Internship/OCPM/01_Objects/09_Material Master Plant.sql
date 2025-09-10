@@ -5,8 +5,8 @@ SELECT <%=sourceSystem%>  || 'MaterialMasterPlant_' || "MARC"."MANDT" || "MARC".
     CAST("MARC"."MMSTD" AS TIMESTAMP)                                                                     AS "ValidityPeriodStartDate",
     CAST("MARC"."AUSDT" AS TIMESTAMP)                                                                     AS "ValidityPeriodEndDate",
     "MARC"."PLIFZ"                                                                                        AS "PlannedDeliveryTimeDays",
-	<%=sourceSystem%>  || 'Material_' || "MARC"."MANDT" || "MARC"."MATNR"                                    AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "MARC"."MANDT" || "MARC"."WERKS"                                       AS "Plant",
+	<%=sourceSystem%>  || 'Material_' || "MARC"."MANDT" || "MARC"."MATNR"                                 AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "MARC"."MANDT" || "MARC"."WERKS"                                    AS "Plant",
     CAST("MARC"."EISBE" AS BIGINT)                                                                        AS "SafetyStockLevel",
     "MARC"."NFMAT"                                                                                        AS "FollowUpMaterial",
     CASE
@@ -36,7 +36,7 @@ SELECT <%=sourceSystem%>  || 'MaterialMasterPlant_' || "MARC"."MANDT" || "MARC".
     "T001"."WAERS"                                                                                        AS "BaseCurrency",
     "MARA"."MEINS"                                                                                        AS "BaseQuantityUnit",
     'SAP'                                                                                                 AS "SourceSystemType",
-	<%=sourceSystem%>  || "MARC"."MANDT"                                                                     AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "MARC"."MANDT"                                                                  AS "SourceSystemInstance"
 FROM "MARC" AS "MARC"
          LEFT JOIN "T001W" AS "T001W"
                    ON "MARC"."MANDT" = "T001W"."MANDT"
