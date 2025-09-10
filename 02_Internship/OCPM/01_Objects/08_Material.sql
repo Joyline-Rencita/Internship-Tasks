@@ -17,7 +17,7 @@ SELECT <%=sourceSystem%>  || 'Material_' || "MARA"."MANDT" || "MARA"."MATNR" AS 
             THEN "MARM"."MEINH"
         END                                                                   AS "StockKeepingUnit",
     'SAP'                                                                     AS "SourceSystemType",
-	<%=sourceSystem%>  || "MARA"."MANDT"                                        AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "MARA"."MANDT"                                      AS "SourceSystemInstance"
 FROM "MARA" AS "MARA"
          LEFT JOIN "MAKT" AS "MAKT"
                    ON "MARA"."MANDT" = "MAKT"."MANDT"
@@ -60,16 +60,17 @@ SELECT <%=sourceSystem%>  || 'Material_' || "CDPOS"."TABKEY" AS "ObjectID",
            END                                               AS "Attribute",
        CASE
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
-           ELSE "CDPOS"."VALUE_OLD" END                      AS "OldValue",
+           ELSE "CDPOS"."VALUE_OLD" END                      				AS "OldValue",
        CASE
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
-           ELSE "CDPOS"."VALUE_NEW" END                      AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    AS "ChangedBy",
-       "CDHDR"."TCODE"                                       AS "OperationType",
-       "CDHDR"."CHANGENR"                                    AS "OperationID",
+           ELSE "CDPOS"."VALUE_NEW" END                      				AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    				AS "ChangedBy",
+       "CDHDR"."TCODE"                                      				AS "OperationType",
+       "CDHDR"."CHANGENR"                                    				AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                 AS "ExecutionType"
+           ELSE 'Manual' END                                 				AS "ExecutionType"
+				 
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR" ON
             "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
@@ -77,12 +78,10 @@ FROM "CDPOS" AS "CDPOS"
             AND "CDPOS"."OBJECTID" = "CDHDR"."OBJECTID"
             AND "CDPOS"."CHANGENR" = "CDHDR"."CHANGENR"
     AND "CDPOS"."OBJECTCLAS" = 'MATERIAL'
-         LEFT JOIN "USR02" AS "USR02"
-                   ON "CDHDR"."USERNAME" = "USR02"."BNAME"
-                       AND "CDHDR"."MANDANT" = "USR02"."MANDT"
+         LEFT JOIN "USR02" AS "USR02"  ON "CDHDR"."USERNAME" = "USR02"."BNAME"  AND "CDHDR"."MANDANT" = "USR02"."MANDT"
+				 
 WHERE "CDPOS"."CHNGIND" = 'U'
   AND "CDPOS"."TABNAME" = 'MARA'
-  AND "CDPOS"."FNAME" IN
-      ('MATKL', 'MBRSH', 'MTART')
+  AND "CDPOS"."FNAME" IN ('MATKL', 'MBRSH', 'MTART')
   AND "CDPOS"."MANDANT" IS NOT NULL
   AND "CDHDR"."MANDANT" IS NOT NULL
