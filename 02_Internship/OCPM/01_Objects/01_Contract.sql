@@ -17,25 +17,25 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                          AND "CDPOS"."TABNAME" = 'EKKO'
                          AND "CDPOS"."FNAME" = 'KEY'
                          AND "CDPOS"."CHNGIND" = 'I')
-SELECT <%=sourceSystem%>  || 'Contract_' || "EKKO"."MANDT" || "EKKO"."EBELN"                       AS "ID",
+SELECT <%=sourceSystem%>  || 'Contract_' || "EKKO"."MANDT" || "EKKO"."EBELN"                       			AS "ID",
        COALESCE(CAST("Changes"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes"."UTIME" AS DATE), "Changes"."UTIME") AS INTERVAL SECOND),
-            CAST("EKKO"."AEDAT" AS TIMESTAMP))                                                     AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM") AS "CreatedBy",
-       "EKKO"."LOEKZ"                                                                              AS "DeletionIndicator",
+            CAST("EKKO"."AEDAT" AS TIMESTAMP))                                                    			AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM") 		AS "CreatedBy",
+       "EKKO"."LOEKZ"                                                                              			AS "DeletionIndicator",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                                       AS "CreationExecutionType",
-       "EKKO"."ZTERM"                                                                              AS "PaymentTerms",
-       CAST("EKKO"."KDATB" AS TIMESTAMP)                                                           AS "ValidityPeriodStartDate",
-       CAST("EKKO"."KDATE" AS TIMESTAMP)                                                           AS "ValidityPeriodEndDate",
-       'SAP'                                                                                       AS "SourceSystemType",
-	<%=sourceSystem%>  || "EKKO"."MANDT"                                                              AS "SourceSystemInstance",
-       "EKKO"."EBELN"                                                                              AS "SystemContractNumber",
-       "EKKO"."EBELN"                                                                              AS "DatabaseContractNumber",
-	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                               AS "Vendor",
+           ELSE 'Manual' END                                                                       			AS "CreationExecutionType",
+       "EKKO"."ZTERM"                                                                              			AS "PaymentTerms",
+       CAST("EKKO"."KDATB" AS TIMESTAMP)                                                           			AS "ValidityPeriodStartDate",
+       CAST("EKKO"."KDATE" AS TIMESTAMP)                                                           			AS "ValidityPeriodEndDate",
+       'SAP'                                                                                       			AS "SourceSystemType",
+	<%=sourceSystem%>  || "EKKO"."MANDT"                                                              		AS "SourceSystemInstance",
+       "EKKO"."EBELN"                                                                              			AS "SystemContractNumber",
+       "EKKO"."EBELN"                                                                              			AS "DatabaseContractNumber",
+	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                               		AS "Vendor",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT"
-       || "EKKO"."LIFNR" || "EKKO"."BUKRS"                                                         AS "VendorMasterCompanyCode"
+       || "EKKO"."LIFNR" || "EKKO"."BUKRS"                                                         			AS "VendorMasterCompanyCode"
 FROM "EKKO" AS "EKKO"
          LEFT JOIN "CTE_Changes" AS "Changes"
                    ON "EKKO"."MANDT" = "Changes"."MANDANT"
