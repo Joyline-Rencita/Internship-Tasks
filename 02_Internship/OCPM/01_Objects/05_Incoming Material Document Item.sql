@@ -1,4 +1,4 @@
---                  ***********************************************                 MSEG                 *******************************************************   
+                ***********************************************                 MSEG                 *******************************************************   
 
 WITH "CTE_EKBE" AS (SELECT DISTINCT "EKBE"."MANDT",
                                     "EKBE"."BELNR",
@@ -12,7 +12,7 @@ WITH "CTE_EKBE" AS (SELECT DISTINCT "EKBE"."MANDT",
 SELECT <%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."MBLNR" || "MSEG"."MJAHR" || "MSEG"."ZEILE" AS "ID",
     CAST("MSEG"."CPUDT_MKPF" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("MSEG"."CPUTM_MKPF" AS DATE),
             "MSEG"."CPUTM_MKPF") AS INTERVAL SECOND)                                                                                 AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "MSEG"."MANDT" || "MSEG"."USNAM_MKPF"                                                              AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "MSEG"."MANDT" || "MSEG"."USNAM_MKPF"                                                           AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                                                            AS "CreationExecutionType",
@@ -36,21 +36,21 @@ SELECT <%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" |
     "EKBE"."WRBTR"                                                                                                                   AS "Amount",
     "EKBE"."WAERS"                                                                                                                   AS "Currency",
     'SAP'                                                                                                                            AS "SourceSystemType",
-	<%=sourceSystem%>  || "MSEG"."MANDT"                                                                                                AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "MSEG"."MANDT"                                                                                             AS "SourceSystemInstance",
     "MSEG"."MBLNR"                                                                                                                   AS "SystemIncomingMaterialDocumentNumber",
     "MSEG"."ZEILE"                                                                                                                   AS "SystemIncomingMaterialDocumentItemNumber",
     "MSEG"."MBLNR"                                                                                                                   AS "DatabaseIncomingMaterialDocumentNumber",
     "MSEG"."ZEILE"                                                                                                                   AS "DatabaseIncomingMaterialDocumentItemNumber",
 	<%=sourceSystem%>  || 'PurchaseOrderItem_' || "MSEG"."MANDT" || "MSEG"."EBELN"
     || "MSEG"."EBELP"                                                                                                                AS "PurchaseOrderItem",
-	<%=sourceSystem%>  || 'VendorInvoice_' || "MSEG"."MANDT" || "MSEG"."LFBNR" || "MSEG"."LFBJA"                                        AS "VendorInvoice",
+	<%=sourceSystem%>  || 'VendorInvoice_' || "MSEG"."MANDT" || "MSEG"."LFBNR" || "MSEG"."LFBJA"                                     AS "VendorInvoice",
 	<%=sourceSystem%>  || 'OutgoingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."SMBLN" || "MSEG"."SJAHR"
     || "MSEG"."SMBLP"                                                                                                                AS "ReversedOutgoingGood",
-	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                                 AS "Vendor",
-	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                               AS "Material",
+	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                              AS "Vendor",
+	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                            AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "MSEG"."MANDT" || "MSEG"."MATNR"
     || "MSEG"."WERKS"                                                                                                                AS "MaterialMasterPlant",
-	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                                  AS "Plant"
+	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                               AS "Plant"
 FROM "MSEG" AS "MSEG"
          LEFT JOIN "CTE_EKBE" AS "EKBE"
                    ON "MSEG"."MANDT" = "EKBE"."MANDT"
