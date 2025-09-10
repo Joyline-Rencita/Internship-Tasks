@@ -1,3 +1,5 @@
+				******************************			CTE_DATE_RANGE			******************************
+
 WITH "CTE_TCURF_TMP" AS (SELECT "TCURF"."MANDT",
                                 "TCURF"."KURST",
                                 "TCURF"."FCURR",
