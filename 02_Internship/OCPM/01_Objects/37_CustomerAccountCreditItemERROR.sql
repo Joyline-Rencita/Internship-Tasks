@@ -1,4 +1,5 @@
                 *************************************             BSEG            ***************************************
+					
 
 SELECT <%=sourceSystem%>  || 'CustomerAccountCreditItem_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR" || "BSEG"."GJAHR"
        || "BSEG"."BUZEI"                                                                                                     AS "ID",
@@ -61,3 +62,4 @@ WHERE "BSEG"."MANDT" IS NOT NULL
   AND "BKPF"."MANDT" IS NOT NULL
   AND "BSEG"."KOART" = 'D'
   AND "BSEG"."SHKZG" = 'H'
+
