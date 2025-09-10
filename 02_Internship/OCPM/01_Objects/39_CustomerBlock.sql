@@ -1,3 +1,5 @@
+					***************************		CTE_Block		*******************************
+
 WITH "CTE_JoinTable" AS (SELECT "CDPOS"."TABKEY"                       AS "JoinID",
                                CAST("CDHDR"."UDATE" AS DATE)
                                             + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE), "CDHDR"."UTIME") AS INTERVAL SECOND),
