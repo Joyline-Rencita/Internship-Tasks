@@ -33,3 +33,33 @@ FROM "VBRP" AS "VBRP"
                        AND "VBRP"."ERNAM" = "USR02"."BNAME"
 WHERE "VBRP"."MANDT" IS NOT NULL
   AND "VBRK"."VBTYP" = 'M'
+
+
+===================================================================================================================================================================
+
+								RELATIONSHIP -  
+				  
+===================================================================================================================================================================
+
+
+
+					***********************			VBRP - 1 		************************
+
+
+SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" AS "ID",
+	<%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN" || "LIPS"."POSNR"              AS "DeliveryItems"
+FROM (SELECT "VBRP"."MANDT" AS "MANDT",
+             "VBRP"."VGBEL" AS "VGBEL",
+             "VBRP"."VGPOS" AS "VGPOS",
+             "VBRP"."VBELN" AS "VBELN",
+             "VBRP"."POSNR" AS "POSNR"
+      FROM "VBRP" AS "VBRP"
+          INNER JOIN "VBRK" AS "VBRK"
+      ON "VBRP"."MANDT" = "VBRK"."MANDT"
+          AND "VBRP"."VBELN" = "VBRK"."VBELN"
+          AND "VBRK"."VBTYP" = 'M'
+      ORDER BY "VBRP"."MANDT", "VBRP"."VGBEL", "VBRP"."VGPOS") AS "VBRP"
+         INNER JOIN "LIPS" AS "LIPS"
+                ON "VBRP"."MANDT" = "LIPS"."MANDT"
+                    AND "VBRP"."VGBEL" = "LIPS"."VBELN"
+                    AND "VBRP"."VGPOS" = "LIPS"."POSNR"
