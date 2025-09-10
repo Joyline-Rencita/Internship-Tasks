@@ -7,6 +7,7 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDHDR"."USERNAME",
                               ROW_NUMBER()
                               OVER (PARTITION BY "CDPOS"."TABKEY" ORDER BY "CDHDR"."UDATE" ASC, "CDHDR"."UTIME" DESC) AS "rn"
+			
                        FROM "CDPOS" AS "CDPOS"
                                 LEFT JOIN "CDHDR" AS "CDHDR"
                                           ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
@@ -17,11 +18,12 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                          AND "CDPOS"."TABNAME" = 'EKPO'
                          AND "CDPOS"."FNAME" = 'KEY'
                          AND "CDPOS"."CHNGIND" = 'I')
+			
 SELECT <%=sourceSystem%>  || 'ContractItem_' || "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP" AS "ID",
        CAST("Changes"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes"."UTIME" AS DATE),
             "Changes"."UTIME") AS INTERVAL SECOND)                                                 AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "Changes"."MANDANT" || "Changes"."USERNAME"                      AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "Changes"."MANDANT" || "Changes"."USERNAME"                   AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                                                       AS "CreationExecutionType",
@@ -38,17 +40,17 @@ SELECT <%=sourceSystem%>  || 'ContractItem_' || "EKPO"."MANDT" || "EKPO"."EBELN"
        CAST("EKKO"."KDATB" AS TIMESTAMP)                                                           AS "ValidityPeriodStartDate",
        CAST("EKKO"."KDATE" AS TIMESTAMP)                                                           AS "ValidityPeriodEndDate",
        'SAP'                                                                                       AS "SourceSystemType",
-	<%=sourceSystem%>  || "EKPO"."MANDT"                                                              AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "EKPO"."MANDT"                                                           AS "SourceSystemInstance",
        "EKPO"."EBELN"                                                                              AS "SystemContractNumber",
        "EKPO"."EBELP"                                                                              AS "SystemContractItemNumber",
        "EKPO"."EBELN"                                                                              AS "DatabaseContractNumber",
        "EKPO"."EBELP"                                                                              AS "DatabaseContractItemNumber",
-	<%=sourceSystem%>  || 'Contract_' || "EKPO"."MANDT" || "EKPO"."EBELN"                             AS "Header",
-	<%=sourceSystem%>  || 'Material_' || "EKPO"."MANDT" || "EKPO"."MATNR"                             AS "Material",
+	<%=sourceSystem%>  || 'Contract_' || "EKPO"."MANDT" || "EKPO"."EBELN"                          AS "Header",
+	<%=sourceSystem%>  || 'Material_' || "EKPO"."MANDT" || "EKPO"."MATNR"                          AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "EKPO"."MANDT" || "EKPO"."MATNR"
            || "EKPO"."WERKS"                                                                       AS "MaterialMasterPlant",
-	<%=sourceSystem%>  || 'Plant_' || "EKPO"."MANDT" || "EKPO"."WERKS"                                AS "Plant",
-	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                               AS "Vendor",
+	<%=sourceSystem%>  || 'Plant_' || "EKPO"."MANDT" || "EKPO"."WERKS"                             AS "Plant",
+	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                            AS "Vendor",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT"
        || "EKKO"."LIFNR" || "EKKO"."BUKRS"                                                         AS "VendorMasterCompanyCode"
 FROM "EKPO" AS "EKPO"
