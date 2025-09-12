@@ -1,4 +1,4 @@
---                   ************************************       EKET         *************************************
+                   ************************************       EKET         *************************************
 
 SELECT <%=sourceSystem%>  || 'PurchaseOrderScheduleLine_' || "EKET"."MANDT" || "EKET"."EBELN" || "EKET"."EBELP" || "EKET"."ETENR" AS "ID",
     CAST('9999-01-01 00:00:00' AS TIMESTAMP)                                                                                      AS "CreationTime",
@@ -9,7 +9,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrderScheduleLine_' || "EKET"."MANDT" || "
     "EKET"."MENGE"                                                                                                                AS "ScheduledQuantity",
     "EKPO"."MEINS"                                                                                                                AS "QuantityUnit",
     'SAP'                                                                                                                         AS "SourceSystemType",
-	<%=sourceSystem%>  || "EKET"."MANDT"                                                                                             AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "EKET"."MANDT"                                                                                          AS "SourceSystemInstance",
     "EKET"."EBELN"                                                                                                                AS "SystemPurchaseOrderNumber",
     "EKET"."EBELP"                                                                                                                AS "SystemPurchaseOrderItemNumber",
     "EKET"."ETENR"                                                                                                                AS "SystemPurchaseOrderScheduleLineNumber",
@@ -36,8 +36,8 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrderScheduleLine_' || "CDPOS"."TABKEY" AS
            WHEN "CDPOS"."CHNGIND" = 'I' THEN 'CreationTime'
            WHEN "CDPOS"."CHNGIND" = 'D' THEN 'DeletionTime'
            END                                                                AS "Attribute",
-       'NULL'                                                                   AS "OldValue",
-       'NULL'                                                                   AS "NewValue",
+       'NULL'                                                                 AS "OldValue",
+       'NULL'                                                                 AS "NewValue",
        'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                     AS "ChangedBy",
        "CDHDR"."TCODE"                                                        AS "OperationType",
        "CDHDR"."CHANGENR"                                                     AS "OperationID",
