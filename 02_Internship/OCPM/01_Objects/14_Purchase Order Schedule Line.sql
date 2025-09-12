@@ -61,32 +61,31 @@ WHERE
   AND "CDHDR"."MANDANT" IS NOT NULL
 
 
-
---  ===============================================================================================================================================================
-
-
---                        ***********************          CDPOS         *******************************
+==================================================================================================================================================================
 
 
-SELECT <%=sourceSystem%>  || 'PurchaseOrderScheduleLine_' || "CDPOS"."TABKEY" AS "ObjectID",
+                        ***********************          CDPOS         *******************************
+
+
+SELECT <%=sourceSystem%>  || 'PurchaseOrderScheduleLine_' || "CDPOS"."TABKEY" 	AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."FNAME"
        || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                             AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                             	AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND), INTERVAL '86399' SECOND)    AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND), INTERVAL '86399' SECOND)    	AS "Time",
        CASE
            WHEN "CDPOS"."CHNGIND" = 'I' THEN 'CreationTime'
            WHEN "CDPOS"."CHNGIND" = 'D' THEN 'DeletionTime'
-           END                                                                AS "Attribute",
+           END                                                                	AS "Attribute",
        'NULL'                                                                   AS "OldValue",
        'NULL'                                                                   AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                     AS "ChangedBy",
-       "CDHDR"."TCODE"                                                        AS "OperationType",
-       "CDHDR"."CHANGENR"                                                     AS "OperationID",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                     	AS "ChangedBy",
+       "CDHDR"."TCODE"                                                        	AS "OperationType",
+       "CDHDR"."CHANGENR"                                                     	AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                  AS "ExecutionType"
+           ELSE 'Manual' END                                                  	AS "ExecutionType"
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR"
                    ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
