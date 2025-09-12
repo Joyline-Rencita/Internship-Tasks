@@ -1,12 +1,11 @@
---                     ******************************                 EKKO            ***********************************
+                  ******************************                 EKKO            ***********************************
 
 WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDPOS"."TABKEY",
                               "CDHDR"."UDATE",
                               "CDHDR"."UTIME",
                               "CDHDR"."USERNAME",
-                              ROW_NUMBER()
-                              OVER (PARTITION BY "CDPOS"."TABKEY" ORDER BY "CDHDR"."UDATE" ASC, "CDHDR"."UTIME" DESC) AS "rn"
+                              ROW_NUMBER() OVER (PARTITION BY "CDPOS"."TABKEY" ORDER BY "CDHDR"."UDATE" ASC, "CDHDR"."UTIME" DESC) AS "rn"
                        FROM "CDPOS" AS "CDPOS"
                                 LEFT JOIN "CDHDR" AS "CDHDR"
                                           ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
@@ -17,22 +16,22 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                          AND "CDPOS"."TABNAME" = 'EKKO'
                          AND "CDPOS"."FNAME" = 'KEY'
                          AND "CDPOS"."CHNGIND" = 'I')
-SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN"                       AS "ID",
+SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN"                          AS "ID",
        COALESCE(
             CAST("Changes"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes"."UTIME" AS DATE),
             "Changes"."UTIME") AS INTERVAL SECOND),
-            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                         AS "CreationTime",
+            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                            AS "CreationTime",
 	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")      AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                                            AS "CreationExecutionType",
-       "EKKO"."LOEKZ"                                                                                   AS "DeletionIndicator",
-	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                    AS "Vendor",
-	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT" || "EKKO"."LIFNR" || "EKKO"."BUKRS" AS "VendorMasterCompanyCode",
-       "EKKO"."WAERS"                                                                                   AS "Currency",
-       "EKKO"."ZTERM"                                                                                   AS "PaymentTerms",
-	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")      AS "ApprovedBy",
+           ELSE 'Manual' END                                                                            	AS "CreationExecutionType",
+       "EKKO"."LOEKZ"                                                                                   	AS "DeletionIndicator",
+	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                     AS "Vendor",
+	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT" || "EKKO"."LIFNR" || "EKKO"."BUKRS"  AS "VendorMasterCompanyCode",
+       "EKKO"."WAERS"                                                                                   	AS "Currency",
+       "EKKO"."ZTERM"                                                                                   	AS "PaymentTerms",
+	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")       AS "ApprovedBy",
        CASE
            WHEN "EKKO"."FRGZU" IS NULL THEN 0
            WHEN "EKKO"."FRGZU" = 'X' THEN 1
@@ -64,7 +63,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN
        "EKKO"."EBELN"                                                                                   AS "SystemPurchaseOrderNumber",
        "EKKO"."EBELN"                                                                                   AS "DatabasePurchaseOrderNumber",
        'SAP'                                                                                            AS "SourceSystemType",
-	<%=sourceSystem%>  || "EKKO"."MANDT"                                                                   AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "EKKO"."MANDT"                                                                AS "SourceSystemInstance"
 FROM "EKKO" AS "EKKO"
          LEFT JOIN "CTE_Changes" AS "Changes"
                    ON "EKKO"."MANDT" = "Changes"."MANDANT"
