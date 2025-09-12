@@ -1,4 +1,4 @@
---                  *************************************        EBAN        **********************************************
+                  *************************************        EBAN        **********************************************
 
 WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDPOS"."TABKEY",
@@ -17,12 +17,12 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                          AND "CDPOS"."TABNAME" = 'EBAN'
                          AND "CDPOS"."FNAME" = 'KEY'
                          AND "CDPOS"."CHNGIND" = 'I')
-SELECT <%=sourceSystem%>  || 'PurchaseRequisitionItem_' || "EBAN"."MANDT" || "EBAN"."BANFN" || "EBAN"."BNFPO" AS "ID",
+SELECT <%=sourceSystem%>  || 'PurchaseRequisitionItem_' || "EBAN"."MANDT" || "EBAN"."BANFN" || "EBAN"."BNFPO" 		AS "ID",
        COALESCE(
             CAST("Changes"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes"."UTIME" AS DATE), "Changes"."UTIME") AS INTERVAL SECOND),
-            CAST("EBAN"."BADAT" AS DATE) + INTERVAL '1' SECOND)                                               AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "EBAN"."MANDT" || "EBAN"."ERNAM"                                            AS "CreatedBy",
+            CAST("EBAN"."BADAT" AS DATE) + INTERVAL '1' SECOND)                                               		AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "EBAN"."MANDT" || "EBAN"."ERNAM"                                            	AS "CreatedBy",
        CASE
            WHEN "EBAN"."ESTKZ" = 'B' AND "USR02"."USTYP" IS NULL THEN 'Automatic'
            WHEN "USR02"."USTYP" IN ('B', 'S', 'C') THEN 'Automatic'
@@ -30,7 +30,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseRequisitionItem_' || "EBAN"."MANDT" || "EB
            END                                                                                                AS "CreationExecutionType",
        "EBAN"."LOEKZ"                                                                                         AS "DeletionIndicator",
        "EBAN"."AFNAM"                                                                                         AS "Requester",
-	<%=sourceSystem%>  || 'Vendor_' || "EBAN"."MANDT" || "EBAN"."LIFNR"                                          AS "Vendor",
+	<%=sourceSystem%>  || 'Vendor_' || "EBAN"."MANDT" || "EBAN"."LIFNR"                                       AS "Vendor",
        "EBAN"."WAERS"                                                                                         AS "Currency",
        "EBAN"."PREIS" / COALESCE("EBAN"."PEINH", 1)                                                           AS "NetUnitPrice",
        "EBAN"."MENGE"                                                                                         AS "Quantity",
