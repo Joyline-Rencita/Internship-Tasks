@@ -1,4 +1,4 @@
-                  ******************************                 EKKO            ***********************************
+                  ******************************               EKKO            ***********************************
 
 WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                               "CDPOS"."TABKEY",
@@ -88,20 +88,19 @@ WHERE "EKKO"."MANDT" IS NOT NULL
 
 
 
--- ====================================================================================================================================================================
+====================================================================================================================================================================
 
 
 
+               ****************************        CDPOS       ***********************************
 
---                ****************************        CDPOS       ***********************************
 
-
-SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" 				AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 				AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)                  AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                  				AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'FRGKE' THEN 'ReleaseIndicator'
            WHEN "CDPOS"."FNAME" = 'FRGZU' THEN 'ApprovalLevel'
@@ -109,7 +108,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
            WHEN "CDPOS"."FNAME" = 'LOEKZ' THEN 'DeletionIndicator'
            WHEN "CDPOS"."FNAME" = 'WAERS' THEN 'Currency'
            WHEN "CDPOS"."FNAME" = 'ZTERM' THEN 'PaymentTerms'
-           END                                                    AS "Attribute",
+           END                                                    				AS "Attribute",
        CASE
            WHEN "CDPOS"."FNAME" = 'FRGZU' THEN
                CASE
@@ -125,7 +124,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
                    END
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
            ELSE "CDPOS"."VALUE_OLD"
-           END                                                    AS "OldValue",
+           END                                                    				AS "OldValue",
        CASE
            WHEN "CDPOS"."FNAME" = 'FRGZU' THEN
                CASE
@@ -141,13 +140,13 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
                    END
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
            ELSE "CDPOS"."VALUE_NEW"
-           END                                                    AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"         AS "ChangedBy",
-       "CDHDR"."TCODE"                                            AS "OperationType",
-       "CDHDR"."CHANGENR"                                         AS "OperationID",
+           END                                                    				AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"         				AS "ChangedBy",
+       "CDHDR"."TCODE"                                            				AS "OperationType",
+       "CDHDR"."CHANGENR"                                         				AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                      AS "ExecutionType"
+           ELSE 'Manual' END                                     				AS "ExecutionType"
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR"
                    ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
