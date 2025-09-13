@@ -40,11 +40,11 @@ SELECT <%=sourceSystem%>  || 'PurchaseRequisitionItem_' || "EBAN"."MANDT" || "EB
 	<%=sourceSystem%>  || 'Material_' || "EBAN"."MANDT" || "EBAN"."MATNR"                                        AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "EBAN"."MANDT" || "EBAN"."MATNR" || "EBAN"."WERKS"           AS "MaterialMasterPlant",
 	<%=sourceSystem%>  || 'Plant_' || "EBAN"."MANDT" || "EBAN"."WERKS"                                           AS "Plant",
-       "EBAN"."FRGKZ"                                                                                         AS "ReleaseIndicator",
-       "T161U"."FKZTX"                                                                                        AS "ReleaseIndicatorText",
-       "EBAN"."TXZ01"                                                                                         AS "ShortText",
-       'SAP'                                                                                                  AS "SourceSystemType",
-	<%=sourceSystem%>  || "EBAN"."MANDT"                                                                         AS "SourceSystemInstance",
+       "EBAN"."FRGKZ"                                                                                         	AS "ReleaseIndicator",
+       "T161U"."FKZTX"                                                                                        	AS "ReleaseIndicatorText",
+       "EBAN"."TXZ01"                                                                                         	AS "ShortText",
+       'SAP'                                                                                                  	AS "SourceSystemType",
+	<%=sourceSystem%>  || "EBAN"."MANDT"                                                                        AS "SourceSystemInstance",
        "EBAN"."BANFN"                                                                                         AS "SystemPurchaseRequisitionNumber",
        "EBAN"."BNFPO"                                                                                         AS "SystemPurchaseRequisitionItemNumber",
        "EBAN"."BANFN"                                                                                         AS "DatabasePurchaseRequisitionNumber",
@@ -68,7 +68,7 @@ WHERE "EBAN"."MANDT" IS NOT NULL
 ==================================================================================================================================================================
 
 
---                        **********************          CDPOS           ******************************
+                      **********************          CDPOS           ******************************
 
 SELECT <%=sourceSystem%>  || 'PurchaseRequisitionItem_' || "CDPOS"."TABKEY" AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
