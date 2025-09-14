@@ -64,7 +64,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN
        "EKKO"."EBELN"                                                                                   AS "SystemPurchaseOrderNumber",
        "EKKO"."EBELN"                                                                                   AS "DatabasePurchaseOrderNumber",
        'SAP'                                                                                            AS "SourceSystemType",
-	<%=sourceSystem%>  || "EKKO"."MANDT"                                                                  AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "EKKO"."MANDT"                                                                AS "SourceSystemInstance"
 FROM "EKKO" AS "EKKO"
          LEFT JOIN "CTE_Changes" AS "Changes"
                    ON "EKKO"."MANDT" = "Changes"."MANDANT"
@@ -91,3 +91,77 @@ WHERE "EKKO"."MANDT" IS NOT NULL
 ==================================================================================================================================================================
 
 
+							***********************			CDPOS			**************************
+						  
+
+SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
+	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 AS "ID",
+       CAST("CDHDR"."UDATE" AS DATE)
+            + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                  AS "Time",
+       CASE
+           WHEN "CDPOS"."FNAME" = 'FRGKE' THEN 'ReleaseIndicator'
+           WHEN "CDPOS"."FNAME" = 'FRGZU' THEN 'ApprovalLevel'
+           WHEN "CDPOS"."FNAME" = 'LIFNR' THEN 'Vendor'
+           WHEN "CDPOS"."FNAME" = 'LOEKZ' THEN 'DeletionIndicator'
+           WHEN "CDPOS"."FNAME" = 'WAERS' THEN 'Currency'
+           WHEN "CDPOS"."FNAME" = 'ZTERM' THEN 'PaymentTerms'
+           END                                                    AS "Attribute",
+       CASE
+           WHEN "CDPOS"."FNAME" = 'FRGZU' THEN
+               CASE
+                   WHEN TRIM("CDPOS"."VALUE_OLD") IS NULL THEN '0'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'X' THEN '1'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XX' THEN '2'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXX' THEN '3'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXXX' THEN '4'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXXXX' THEN '5'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXXXXX' THEN '6'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXXXXXX' THEN '7'
+                   WHEN TRIM("CDPOS"."VALUE_OLD") = 'XXXXXXXX' THEN '8'
+                   END
+           WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
+           ELSE "CDPOS"."VALUE_OLD"
+           END                                                    AS "OldValue",
+       CASE
+           WHEN "CDPOS"."FNAME" = 'FRGZU' THEN
+               CASE
+                   WHEN TRIM("CDPOS"."VALUE_NEW") IS NULL THEN '0'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'X' THEN '1'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XX' THEN '2'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXX' THEN '3'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXXX' THEN '4'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXXXX' THEN '5'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXXXXX' THEN '6'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXXXXXX' THEN '7'
+                   WHEN TRIM("CDPOS"."VALUE_NEW") = 'XXXXXXXX' THEN '8'
+                   END
+           WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
+           ELSE "CDPOS"."VALUE_NEW"
+           END                                                    AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"         AS "ChangedBy",
+       "CDHDR"."TCODE"                                            AS "OperationType",
+       "CDHDR"."CHANGENR"                                         AS "OperationID",
+       CASE
+           WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
+           ELSE 'Manual' END                                      AS "ExecutionType"
+FROM "CDPOS" AS "CDPOS"
+         LEFT JOIN "CDHDR" AS "CDHDR"
+                   ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
+                       AND "CDPOS"."OBJECTCLAS" = "CDHDR"."OBJECTCLAS"
+                       AND "CDPOS"."OBJECTID" = "CDHDR"."OBJECTID"
+                       AND "CDPOS"."CHANGENR" = "CDHDR"."CHANGENR"
+                       AND "CDPOS"."TABNAME" = 'EKKO'
+                       AND "CDPOS"."CHNGIND" = 'U'
+                       AND "CDPOS"."FNAME" IN ('FRGKE', 'FRGZU', 'LIFNR', 'LOEKZ', 'WAERS', 'ZTERM')
+                       AND "CDPOS"."OBJECTCLAS" = 'EINKBELEG'
+         LEFT JOIN "EKKO" AS "EKKO"
+                   ON "CDPOS"."TABKEY" = "EKKO"."MANDT" || "EKKO"."EBELN"
+         LEFT JOIN "USR02" AS "USR02"
+                   ON "CDHDR"."USERNAME" = "USR02"."BNAME"
+                       AND "CDHDR"."MANDANT" = "USR02"."MANDT"
+WHERE "EKKO"."BSTYP" = 'F'
+  AND "CDPOS"."MANDANT" IS NOT NULL
+  AND "CDHDR"."MANDANT" IS NOT NULL
+  AND "EKKO"."MANDT" IS NOT NULL
