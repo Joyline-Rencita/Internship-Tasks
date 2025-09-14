@@ -9,7 +9,7 @@ WITH "CTE_ADRP_Latest" AS (SELECT "ADRP"."CLIENT",
                        FROM "ADRP" AS "ADRP")
 SELECT <%=sourceSystem%>  || 'User_' || "USR02"."MANDT" || "USR02"."BNAME" 					AS "ID",
        "USR02"."BNAME"                                                     					AS "DisplayName",
-       "USR02"."USTYP"                                                     AS "Type",
+       "USR02"."USTYP"                                                     					AS "Type",
        "ADRP_Latest"."NAME_FIRST"                                          AS "FirstName",
        "ADRP_Latest"."NAME_LAST"                                           AS "LastName",
        'SAP'                                                               AS "SourceSystemType",
