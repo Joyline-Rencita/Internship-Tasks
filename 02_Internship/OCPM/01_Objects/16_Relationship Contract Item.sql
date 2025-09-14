@@ -60,9 +60,9 @@ WITH "CTE_RCI" AS (
                       
                      FROM "CTE_RCI"
                      UNION ALL
-                     SELECT "CTE_RCITE_1"."ContractItem_ID"            AS "ContractItem_ID",
-                            "CTE_RCITE_1"."PurchaseOrderItem_ID"       AS "PurchaseOrderItem_ID",
-                            "CTE_RCITE_1"."PurchaseRequisitionItem_ID" AS "PurchaseRequisitionItem_ID"
+                     SELECT "CTE_RCITE_1"."ContractItem_ID"                                AS "ContractItem_ID",
+                            "CTE_RCITE_1"."PurchaseOrderItem_ID"                           AS "PurchaseOrderItem_ID",
+                            "CTE_RCITE_1"."PurchaseRequisitionItem_ID"                     AS "PurchaseRequisitionItem_ID"
                      FROM "CTE_RCITE_1"
                      UNION ALL
                      SELECT "CTE_RCITE_2"."ContractItem_ID"            AS "ContractItem_ID",
