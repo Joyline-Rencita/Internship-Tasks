@@ -45,18 +45,19 @@ WITH "CTE_RCI" AS (
                        FROM "CTE_RCI"),
    "CTE_RCITE_3" AS (SELECT "ContractItem"."ID"                                            AS "ContractItem_ID",
                               NULL                                                         AS "PurchaseOrderItem_ID",
-                              "PurchaseRequisitionItem"."ID" AS "PurchaseRequisitionItem_ID"
-                       FROM "o_celonis_PurchaseRequisitionItem" AS "PurchaseRequisitionItem"
-                                INNER JOIN "o_celonis_ContractItem" AS "ContractItem"
+                              "PurchaseRequisitionItem"."ID"                               AS "PurchaseRequisitionItem_ID"
+                       FROM "o_celonis_PurchaseRequisitionItem"                            AS "PurchaseRequisitionItem"
+                                INNER JOIN "o_celonis_ContractItem"                        AS "ContractItem"
                                            ON "PurchaseRequisitionItem"."ContractItem_ID" = "ContractItem"."ID"
                        EXCEPT
-                       SELECT "ContractItem_ID"            AS "ContractItem_ID",
-                              NULL                         AS "PurchaseOrderItem_ID",
-                              "PurchaseRequisitionItem_ID" AS "PurchaseRequisitionItem_ID"
+                       SELECT "ContractItem_ID"                                            AS "ContractItem_ID",
+                              NULL                                                         AS "PurchaseOrderItem_ID",
+                              "PurchaseRequisitionItem_ID"                                 AS "PurchaseRequisitionItem_ID"
                        FROM "CTE_RCI"),
-   "CTE_UNION" AS (SELECT "CTE_RCI"."ContractItem_ID"              AS "ContractItem_ID",
-                            "CTE_RCI"."PurchaseOrderItem_ID"       AS "PurchaseOrderItem_ID",
-                            "CTE_RCI"."PurchaseRequisitionItem_ID" AS "PurchaseRequisitionItem_ID"
+   "CTE_UNION" AS (SELECT "CTE_RCI"."ContractItem_ID"                                      AS "ContractItem_ID",
+                            "CTE_RCI"."PurchaseOrderItem_ID"                               AS "PurchaseOrderItem_ID",
+                            "CTE_RCI"."PurchaseRequisitionItem_ID"                         AS "PurchaseRequisitionItem_ID"
+                      
                      FROM "CTE_RCI"
                      UNION ALL
                      SELECT "CTE_RCITE_1"."ContractItem_ID"            AS "ContractItem_ID",
