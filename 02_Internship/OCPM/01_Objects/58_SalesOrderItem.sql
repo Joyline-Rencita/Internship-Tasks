@@ -58,3 +58,56 @@ WHERE "VBAP"."MANDT" IS NOT NULL
   AND "VBAK"."VBTYP" IN ('C', 'I')
 
 
+====================================================================================================================================================================
+
+
+								**************************			CDPOS			**********************************
+
+SELECT <%=sourceSystem%>  || 'SalesOrderItem_' || SUBSTRING("CDPOS"."TABKEY", 1, 19) AS "ObjectID",
+	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                                    AS "ID",
+       CAST("CDHDR"."UDATE" AS DATE)
+            + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                                     AS "Time",
+       CASE
+           WHEN "CDPOS"."FNAME" = 'NETPR' THEN 'NetUnitPrice'
+           WHEN "CDPOS"."FNAME" = 'MATNR' THEN 'MaterialNumber'
+           WHEN "CDPOS"."FNAME" = 'ABGRU' THEN 'RejectionReason'
+           WHEN "CDPOS"."FNAME" = 'WERKS' THEN 'Plant'
+           WHEN "CDPOS"."FNAME" = 'KWMENG' THEN 'OrderedQuantity'
+           END                                                                       AS "Attribute",
+       CASE
+           WHEN "CDPOS"."VALUE_OLD" LIKE '%-'
+               THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
+           ELSE "CDPOS"."VALUE_OLD" END                                              AS "OldValue",
+       CASE
+           WHEN "CDPOS"."VALUE_NEW" LIKE '%-'
+               THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
+           ELSE "CDPOS"."VALUE_NEW" END                                              AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                            AS "ChangedBy",
+       "CDHDR"."TCODE"                                                               AS "OperationType",
+       "CDHDR"."CHANGENR"                                                            AS "OperationID",
+       CASE
+           WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
+           ELSE 'Manual' END                                                         AS "ExecutionType"
+FROM "CDPOS" AS "CDPOS"
+         LEFT JOIN "CDHDR" AS "CDHDR"
+                   ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
+                       AND "CDPOS"."OBJECTCLAS" = "CDHDR"."OBJECTCLAS"
+                       AND "CDPOS"."OBJECTID" = "CDHDR"."OBJECTID"
+                       AND "CDPOS"."CHANGENR" = "CDHDR"."CHANGENR"
+                       AND "CDPOS"."OBJECTCLAS" = 'VERKBELEG'
+         LEFT JOIN "USR02" AS "USR02"
+                   ON "CDHDR"."USERNAME" = "USR02"."BNAME"
+                       AND "CDHDR"."MANDANT" = "USR02"."MANDT"
+WHERE "CDPOS"."TABNAME" = 'VBAP'
+  AND "CDPOS"."FNAME" IN ('NETPR', 'MATNR', 'ABGRU', 'WERKS', 'KWMENG')
+  AND "CDPOS"."CHNGIND" = 'U'
+  AND "CDPOS"."MANDANT" IS NOT NULL
+  AND "CDHDR"."MANDANT" IS NOT NULL
+
+
+
+================================================================================================================================================================
+
+
