@@ -111,3 +111,43 @@ WHERE "CDPOS"."TABNAME" = 'VBAP'
 ================================================================================================================================================================
 
 
+								************************		JCDS		*************************
+
+
+WITH "CTE_VBAP_VBAK" AS (SELECT "VBAP"."OBJNR" AS "OBJNR",
+                     "VBAP"."MANDT"            AS "MANDT",
+                     "VBAP"."VBELN"            AS "VBELN",
+                     "VBAP"."POSNR"            AS "POSNR"
+                      FROM "VBAP" AS "VBAP"
+                      INNER JOIN "VBAK" AS "VBAK"
+                            ON "VBAP"."MANDT" = "VBAK"."MANDT"
+                                AND "VBAP"."VBELN" = "VBAK"."VBELN"
+                                AND "VBAK"."VBTYP" IN ('C', 'I')
+                      ORDER BY "VBAP"."MANDT", "VBAP"."OBJNR")
+SELECT <%=sourceSystem%>  || 'SalesOrderItem_' || "VBAP"."MANDT" || "VBAP"."VBELN" || "VBAP"."POSNR" AS "ObjectID",
+	<%=sourceSystem%>  || "VBAP"."VBELN" || "VBAP"."POSNR" || "JCDS"."UDATE" || "JCDS"."UTIME" || "JCDS"."STAT" || "JCDS"."USNAM"
+       || "JCDS"."CHGNR"                                                                             AS "ID",
+       CAST("JCDS"."UDATE" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("JCDS"."UTIME" AS DATE),
+                                            "JCDS"."UTIME") AS INTERVAL SECOND)                      AS "Time",
+       'DocumentStatus'                                                                              AS "Attribute",
+       LAG("JCDS"."STAT", 1, NULL)
+       OVER (PARTITION BY "JCDS"."OBJNR", "JCDS"."STAT"
+           ORDER BY "JCDS"."OBJNR", "JCDS"."STAT", "JCDS"."CHGNR", "JCDS"."UDATE", "JCDS"."UTIME")
+                                                                               AS "OldValue",
+       "JCDS"."STAT"                                                                                 AS "NewValue",
+       'User_' || "JCDS"."USNAM"                                                                     AS "ChangedBy",
+       "JCDS"."CDTCODE"                                                                              AS "OperationType",
+       CAST("JCDS"."CHGNR" AS VARCHAR)                                                               AS "OperationID",
+       CASE
+           WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
+           ELSE 'Manual' END                                                                         AS "ExecutionType"
+FROM "JCDS" AS "JCDS"
+    INNER JOIN "CTE_VBAP_VBAK" AS "VBAP"
+        ON "JCDS"."MANDT" = "VBAP"."MANDT"
+            AND "JCDS"."OBJNR" = "VBAP"."OBJNR"
+    LEFT JOIN "USR02" AS "USR02"
+        ON "JCDS"."USNAM" = "USR02"."BNAME"
+            AND "JCDS"."MANDT" = "USR02"."MANDT"
+WHERE "JCDS"."INACT" IS NULL
+  AND "JCDS"."UDATE" IS NOT NULL
+  AND "JCDS"."MANDT" IS NOT NULL
