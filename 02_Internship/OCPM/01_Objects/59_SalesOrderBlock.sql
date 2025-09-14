@@ -432,3 +432,180 @@ FROM "CTE_Block" AS "Block"
                ON "VBAK"."MANDT" = "TVFST"."MANDT"
                    AND "VBAK"."FAKSK" = "TVFST"."FAKSP"
                    AND "TVFST"."SPRAS" = <%=LanguageKey%> 
+
+
+==================================================================================================================================================================
+
+
+								**********************			CDPOS		***********************
+
+WITH "CTE_JoinTable" AS (SELECT "CDPOS"."TABKEY"    AS "TABKEY",
+                               "CDPOS"."MANDANT"    AS "MANDANT",
+                               "CDPOS"."OBJECTCLAS" AS "OBJECTCLAS",
+                               "CDPOS"."OBJECTID"   AS "OBJECTID",
+                               "CDPOS"."FNAME"      AS "FNAME",
+                               "CDPOS"."VALUE_NEW"  AS "VALUE_NEW",
+                               "CDPOS"."VALUE_OLD"  AS "VALUE_OLD",
+                               "CDPOS"."TABNAME"    AS "TABNAME",
+                               "CDHDR"."UDATE"      AS "UDATE",
+                               "CDHDR"."UTIME"      AS "UTIME",
+                               "CDPOS"."CHNGIND"    AS "CHNGIND",
+                               "CDHDR"."USERNAME"   AS "USERNAME",
+                               "CDHDR"."TCODE"      AS "TCODE",
+                               "CDHDR"."CHANGENR"   AS "CHANGENR",
+                               "USR02"."USTYP"      AS "USTYP"
+                        FROM "CDPOS" AS "CDPOS"
+                             INNER JOIN "CDHDR" AS "CDHDR"
+                                        ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
+                                            AND "CDPOS"."OBJECTCLAS" = "CDHDR"."OBJECTCLAS"
+                                            AND "CDPOS"."OBJECTID" = "CDHDR"."OBJECTID"
+                                            AND "CDPOS"."CHANGENR" = "CDHDR"."CHANGENR"
+                                            AND "CDPOS"."OBJECTCLAS" = 'VERKBELEG'
+                                            AND "CDPOS"."CHNGIND" = 'U'
+                                            AND "CDPOS"."TABNAME" IN ('VBAK', 'VBUK')
+                                            AND "CDPOS"."FNAME" IN ('FAKSK', 'LIFSK', 'CMGST')
+                             LEFT JOIN "USR02" AS "USR02"
+                                       ON "CDHDR"."MANDANT" = "USR02"."MANDT"
+                                           AND "CDHDR"."USERNAME" = "USR02"."BNAME"),
+    "CTE_BlockFromChangelog" AS (SELECT 'SalesOrderBlock_' || "JoinTable"."TABKEY"      AS "BlockID",
+                                        CAST("JoinTable"."UDATE" AS DATE)
+                                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                                            "JoinTable"."UTIME") AS INTERVAL SECOND),
+                                            INTERVAL '86399' SECOND)                    AS "BlockTime",
+                                        CASE
+                                            WHEN "JoinTable"."FNAME" = 'FAKSK'
+                                                THEN 'BillingBlock'
+                                            WHEN "JoinTable"."FNAME" = 'LIFSK'
+                                                THEN 'DeliveryBlock'
+                                        END                                             AS "BlockType",
+                                        'Block to ' || "JoinTable"."VALUE_NEW"          AS "ValueType",
+                                        "JoinTable"."VALUE_NEW"                         AS "VALUE_NEW",
+                                        "JoinTable"."VALUE_OLD"                         AS "VALUE_OLD",
+                                        "JoinTable"."MANDANT" || "JoinTable"."USERNAME" AS "BlockedBy",
+                                        CASE
+                                            WHEN "JoinTable"."USTYP" IN ('B', 'C')
+                                                THEN 'Automatic'
+                                            ELSE 'Manual'
+                                        END                                             AS "BlockExecutionType",
+                                        "JoinTable"."TCODE"                             AS "BlockOperationType",
+                                        "JoinTable"."CHANGENR"                          AS "SystemBlockNumber",
+                                        'SalesOrder_' || "JoinTable"."TABKEY"           AS "SalesOrderID",
+                                        "JoinTable"."MANDANT"                           AS "MANDANT",
+                                        "JoinTable"."OBJECTCLAS"                        AS "OBJECTCLAS",
+                                        "JoinTable"."OBJECTID"                          AS "OBJECTID",
+                                        "JoinTable"."FNAME"                             AS "FNAME"
+                                 FROM "CTE_JoinTable" AS "JoinTable"
+                                 WHERE "JoinTable"."CHNGIND" = 'U'
+                                   AND "JoinTable"."TABNAME" = 'VBAK'
+                                   AND "JoinTable"."FNAME" IN ('FAKSK', 'LIFSK')
+                                   AND "JoinTable"."VALUE_OLD" IS NULL
+                                   AND "JoinTable"."VALUE_NEW" IS NOT NULL
+                                 UNION ALL
+                                 SELECT 'SalesOrderBlock_' || "JoinTable"."TABKEY"      AS "BlockID",
+                                        CAST("JoinTable"."UDATE" AS DATE)
+                                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                                            "JoinTable"."UTIME") AS INTERVAL SECOND),
+                                            INTERVAL '86399' SECOND)                    AS "BlockTime",
+                                        'CreditBlock'                                   AS "BlockType",
+                                        'Block to ' || "JoinTable"."VALUE_NEW"          AS "ValueType",
+                                        "JoinTable"."VALUE_NEW"                         AS "VALUE_NEW",
+                                        "JoinTable"."VALUE_OLD"                         AS "VALUE_OLD",
+                                        "JoinTable"."MANDANT" || "JoinTable"."USERNAME" AS "BlockedBy",
+                                        CASE
+                                            WHEN "JoinTable"."USTYP" IN ('B', 'C')
+                                                THEN 'Automatic'
+                                            ELSE 'Manual'
+                                        END                                             AS "BlockExecutionType",
+                                        "JoinTable"."TCODE"                             AS "BlockOperationType",
+                                        "JoinTable"."CHANGENR"                          AS "SystemBlockNumber",
+                                        'SalesOrder_' || "JoinTable"."TABKEY"           AS "SalesOrderID",
+                                        "JoinTable"."MANDANT"                           AS "MANDANT",
+                                        "JoinTable"."OBJECTCLAS"                        AS "OBJECTCLAS",
+                                        "JoinTable"."OBJECTID"                          AS "OBJECTID",
+                                        "JoinTable"."FNAME"                             AS "FNAME"
+                                 FROM "CTE_JoinTable" AS "JoinTable"
+                                 WHERE "JoinTable"."CHNGIND" = 'U'
+                                   AND "JoinTable"."TABNAME" = 'VBUK'
+                                   AND "JoinTable"."FNAME" = 'CMGST'
+                                   AND ("JoinTable"."VALUE_OLD" IS NULL OR "JoinTable"."VALUE_OLD" IN ('A', 'D'))
+                                   AND "JoinTable"."VALUE_NEW" IS NOT NULL
+                                   AND "JoinTable"."VALUE_NEW" NOT IN ('A', 'D')),
+    "CTE_MinBlock" AS (
+        SELECT "JoinTable"."CHANGENR"                                  AS "CHANGENR",
+               "JoinTable"."TABKEY"                                    AS "TABKEY",
+               "JoinTable"."FNAME"                                     AS "FNAME",
+               MIN(TIMESTAMPDIFF(SECOND, "BlockFromChangelog"."BlockTime",
+                       CAST("JoinTable"."UDATE" AS DATE)
+                                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                                            "JoinTable"."UTIME") AS INTERVAL SECOND),
+                                            INTERVAL '86399' SECOND))) AS "LatestBlockSelector"
+        FROM "CTE_JoinTable" AS "JoinTable"
+             LEFT JOIN "CTE_BlockFromChangelog" AS "BlockFromChangelog"
+                       ON "JoinTable"."MANDANT" = "BlockFromChangelog"."MANDANT"
+                           AND "JoinTable"."OBJECTCLAS" = "BlockFromChangelog"."OBJECTCLAS"
+                           AND "JoinTable"."OBJECTID" = "BlockFromChangelog"."OBJECTID"
+                           AND 'SalesOrderBlock_' || "JoinTable"."TABKEY" = "BlockFromChangelog"."BlockID"
+                           AND CAST("JoinTable"."UDATE" AS DATE)
+                                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                                            "JoinTable"."UTIME") AS INTERVAL SECOND),
+                                            INTERVAL '86399' SECOND)
+                              >= "BlockFromChangelog"."BlockTime"
+                           AND "JoinTable"."FNAME" = "BlockFromChangelog"."FNAME"
+        GROUP BY "JoinTable"."CHANGENR", "JoinTable"."TABKEY", "JoinTable"."FNAME")
+SELECT <%=sourceSystem%>  || 'SalesOrderBlock_' || "JoinTable"."TABKEY" || '_'
+           || COALESCE("BlockFromChangelog"."SystemBlockNumber", '-1') || '_'
+           || CASE
+                  WHEN "JoinTable"."FNAME" = 'FAKSK'
+                      THEN 'BillingBlock'
+                  WHEN "JoinTable"."FNAME" = 'LIFSK'
+                      THEN 'DeliveryBlock'
+                  WHEN "JoinTable"."FNAME" = 'CMGST'
+                      THEN 'CreditBlock'
+              END                                                 AS "ObjectID",
+	<%=sourceSystem%>  || "JoinTable"."TABKEY" || "JoinTable"."TABNAME" || "JoinTable"."FNAME"
+           || "JoinTable"."CHANGENR" || "JoinTable"."CHNGIND"     AS "ID",
+       CAST("JoinTable"."UDATE" AS DATE)
+            + CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+            "JoinTable"."UTIME") AS INTERVAL SECOND)              AS "Time",
+       'LatestBlockReason'                                        AS "Attribute",
+       "JoinTable"."VALUE_OLD"                                    AS "OldValue",
+       "JoinTable"."VALUE_NEW"                                    AS "NewValue",
+       'User_' || "JoinTable"."MANDANT" || "JoinTable"."USERNAME" AS "ChangedBy",
+       "JoinTable"."TCODE"                                        AS "OperationType",
+       "JoinTable"."CHANGENR"                                     AS "OperationID",
+       CASE
+           WHEN "JoinTable"."USTYP" IN ('B', 'C')
+               THEN 'Automatic'
+           ELSE 'Manual'
+           END                                                    AS "ExecutionType"
+FROM "CTE_JoinTable" AS "JoinTable"
+     LEFT JOIN "CTE_MinBlock" AS "MinBlock"
+               ON "JoinTable"."CHANGENR" = "MinBlock"."CHANGENR"
+                   AND "JoinTable"."TABKEY" = "MinBlock"."TABKEY"
+                   AND "JoinTable"."FNAME" = "MinBlock"."FNAME"
+     LEFT JOIN "CTE_BlockFromChangelog" AS "BlockFromChangelog"
+               ON "JoinTable"."MANDANT" = "BlockFromChangelog"."MANDANT"
+                   AND "JoinTable"."OBJECTCLAS" = "BlockFromChangelog"."OBJECTCLAS"
+                   AND "JoinTable"."OBJECTID" = "BlockFromChangelog"."OBJECTID"
+                   AND 'SalesOrderBlock_' || "JoinTable"."TABKEY" = "BlockFromChangelog"."BlockID"
+                   AND CAST("JoinTable"."UDATE" AS DATE)
+                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                            "JoinTable"."UTIME") AS INTERVAL SECOND), INTERVAL '86399' SECOND)
+                      >= "BlockFromChangelog"."BlockTime"
+                   AND "JoinTable"."FNAME" = "BlockFromChangelog"."FNAME"
+                   AND TIMESTAMPDIFF(SECOND, "BlockFromChangelog"."BlockTime",
+                           CAST("JoinTable"."UDATE" AS DATE)
+                                            + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE),
+                                            "JoinTable"."UTIME") AS INTERVAL SECOND),
+                                            INTERVAL '86399' SECOND))
+                      = "MinBlock"."LatestBlockSelector"
+WHERE "JoinTable"."CHNGIND" = 'U'
+  AND (("JoinTable"."TABNAME" = 'VBAK'
+    AND "JoinTable"."FNAME" IN ('FAKSK', 'LIFSK')
+    AND "JoinTable"."VALUE_OLD" IS NOT NULL
+    AND "JoinTable"."VALUE_NEW" IS NOT NULL)
+    OR ("JoinTable"."TABNAME" = 'VBUK'
+        AND "JoinTable"."FNAME" = 'CMGST'
+        AND "JoinTable"."VALUE_OLD" IS NOT NULL AND "JoinTable"."VALUE_OLD" NOT IN ('A', 'D')
+        AND "JoinTable"."VALUE_NEW" IS NOT NULL AND "JoinTable"."VALUE_NEW" NOT IN ('A', 'D'))
+    )
