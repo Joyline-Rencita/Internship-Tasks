@@ -24,7 +24,7 @@ WITH "CTE_RCI" AS (
                               "PurchaseOrderItem"."ID"                                   AS "PurchaseOrderItem_ID",
                               "PurchaseRequisitionItem_JoinTable"."ID"                   AS "PurchaseRequisitionItem_ID"
                        FROM "o_celonis_PurchaseOrderItem"                                AS "PurchaseOrderItem"
-                                INNER JOIN "r_o_celonis_PurchaseRequisitionItem__PurchaseOrderItems" AS "PurchaseRequisitionItem_JoinTable"
+                                INNER JOIN "r_o_celonis_PurchaseRequisitionItem__PurchaseOrderItems"       AS "PurchaseRequisitionItem_JoinTable"
                                            ON "PurchaseOrderItem"."ID"
                                               = "PurchaseRequisitionItem_JoinTable"."PurchaseOrderItems_ID"
                        EXCEPT
@@ -65,15 +65,17 @@ WITH "CTE_RCI" AS (
                             "CTE_RCITE_1"."PurchaseRequisitionItem_ID"                     AS "PurchaseRequisitionItem_ID"
                      FROM "CTE_RCITE_1"
                      UNION ALL
-                     SELECT "CTE_RCITE_2"."ContractItem_ID"            AS "ContractItem_ID",
-                            "CTE_RCITE_2"."PurchaseOrderItem_ID"       AS "PurchaseOrderItem_ID",
-                            "CTE_RCITE_2"."PurchaseRequisitionItem_ID" AS "PurchaseRequisitionItem_ID"
+                     SELECT "CTE_RCITE_2"."ContractItem_ID"                                AS "ContractItem_ID",
+                            "CTE_RCITE_2"."PurchaseOrderItem_ID"                           AS "PurchaseOrderItem_ID",
+                            "CTE_RCITE_2"."PurchaseRequisitionItem_ID"                     AS "PurchaseRequisitionItem_ID"
                      FROM "CTE_RCITE_2"
                      UNION ALL
-                     SELECT "CTE_RCITE_3"."ContractItem_ID"            AS "ContractItem_ID",
-                            "CTE_RCITE_3"."PurchaseOrderItem_ID"       AS "PurchaseOrderItem_ID",
-                            "CTE_RCITE_3"."PurchaseRequisitionItem_ID" AS "PurchaseRequisitionItem_ID"
+                     SELECT "CTE_RCITE_3"."ContractItem_ID"                                AS "ContractItem_ID",
+                            "CTE_RCITE_3"."PurchaseOrderItem_ID"                           AS "PurchaseOrderItem_ID",
+                            "CTE_RCITE_3"."PurchaseRequisitionItem_ID"                     AS "PurchaseRequisitionItem_ID"
+                      
                      FROM "CTE_RCITE_3")
+                      
 SELECT 'RelationshipContractItem'
            || CASE WHEN "UNION"."ContractItem_ID" IS NOT NULL THEN CONCAT('_', "UNION"."ContractItem_ID") ELSE '' END
            || CASE WHEN "UNION"."PurchaseOrderItem_ID" IS NOT NULL THEN CONCAT('_', "UNION"."PurchaseOrderItem_ID") ELSE '' END
