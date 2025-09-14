@@ -1,4 +1,4 @@
---              **********************  USR02 *****************
+             **********************	 	 USR02		 *****************
 
 WITH "CTE_ADRP_Latest" AS (SELECT "ADRP"."CLIENT",
                               "ADRP"."PERSNUMBER",
