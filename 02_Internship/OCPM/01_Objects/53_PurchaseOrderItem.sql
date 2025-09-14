@@ -171,7 +171,7 @@ WHERE "CDPOS"."FNAME" IN ('ABSKZ', 'EGLKZ', 'ELIKZ', 'EREKZ', 'LABNR', 'LGORT', 
 ==================================================================================================================================================================
 
 
-                    RELATIONSHIPS :  RECOMMENDED MATERIAL CONTRACT ITEMS-> EKPO(2)
+                    RELATIONSHIPS :  RECOMMENDED MATERIAL CONTRACT ITEMS  -> EKPO(2)
 
 WITH "CTE_TMP_MaterialContractItem" AS
          (SELECT "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP"    AS "ID",
@@ -203,5 +203,34 @@ WHERE "EKPO"."BSTYP" = 'F'
 
 
 ================================================================================================================================================================
+								
+								RELATIONSHIPS :  RECOMMENDED MATERIAL CONTRACT ITEMS  -> EKPO(1)
 
 
+WITH "CTE_TMP_MaterialContract" AS
+         (SELECT "EKPO"."MANDT" || "EKPO"."EBELN"                      AS "ID",
+                 "EKPO"."MANDT",
+                 "EKPO"."WERKS",
+                 "EKKO"."WAERS",
+                 "EKPO"."MATNR",
+                 ROW_NUMBER() OVER (PARTITION BY "EKPO"."MANDT", "EKPO"."WERKS", "EKKO"."WAERS", "EKPO"."MATNR"
+                     ORDER BY "EKKO"."KDATE" DESC, "EKPO"."NETPR" ASC) AS "rn"
+          FROM "EKPO" AS "EKPO"
+                   LEFT JOIN "EKKO" AS "EKKO"
+                             ON "EKPO"."MANDT" = "EKKO"."MANDT"
+                                 AND "EKPO"."EBELN" = "EKKO"."EBELN"
+          WHERE "EKPO"."BSTYP" = 'K')
+SELECT DISTINCT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP" AS "ID",
+	<%=sourceSystem%>  || 'Contract_' || "TMP_MaterialContract"."ID"                                                AS "RecommendedMaterialContracts"
+FROM "EKPO" AS "EKPO"
+         LEFT JOIN "EKKO" AS "EKKO"
+                   ON "EKPO"."MANDT" = "EKKO"."MANDT"
+                       AND "EKPO"."EBELN" = "EKKO"."EBELN"
+         LEFT JOIN "CTE_TMP_MaterialContract" AS "TMP_MaterialContract"
+                    ON "EKPO"."WERKS" = "TMP_MaterialContract"."WERKS"
+                        AND "EKKO"."WAERS" = "TMP_MaterialContract"."WAERS"
+                        AND "EKPO"."MATNR" = "TMP_MaterialContract"."MATNR"
+                        AND "TMP_MaterialContract"."rn" < 6
+WHERE "EKPO"."BSTYP" = 'F'
+  AND "EKPO"."MANDT" IS NOT NULL
+  AND "TMP_MaterialContract"."MANDT" IS NOT NULL
