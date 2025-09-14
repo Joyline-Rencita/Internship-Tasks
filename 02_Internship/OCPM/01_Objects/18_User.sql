@@ -5,10 +5,10 @@ WITH "CTE_ADRP_Latest" AS (SELECT "ADRP"."CLIENT",
                               "ADRP"."NAME_FIRST",
                               "ADRP"."NAME_LAST",
                               ROW_NUMBER() OVER (PARTITION BY "ADRP"."CLIENT", "ADRP"."PERSNUMBER"
-                                  ORDER BY "ADRP"."DATE_FROM", "ADRP"."NATION") AS "rn"
+                                  ORDER BY "ADRP"."DATE_FROM", "ADRP"."NATION") 			AS "rn"
                        FROM "ADRP" AS "ADRP")
-SELECT <%=sourceSystem%>  || 'User_' || "USR02"."MANDT" || "USR02"."BNAME" AS "ID",
-       "USR02"."BNAME"                                                     AS "DisplayName",
+SELECT <%=sourceSystem%>  || 'User_' || "USR02"."MANDT" || "USR02"."BNAME" 					AS "ID",
+       "USR02"."BNAME"                                                     					AS "DisplayName",
        "USR02"."USTYP"                                                     AS "Type",
        "ADRP_Latest"."NAME_FIRST"                                          AS "FirstName",
        "ADRP_Latest"."NAME_LAST"                                           AS "LastName",
