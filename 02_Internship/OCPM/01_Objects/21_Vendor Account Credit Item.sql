@@ -1,4 +1,4 @@
---                        *****************************            BSEG             ************************************
+                        *****************************            BSEG             ************************************
 
 
 WITH "CTE_BSEG_FILTERED" AS (SELECT "MANDT" AS "MANDT",
@@ -61,7 +61,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountCreditItem_' || "BSEG"."MANDT" || "BS
            || "BSEG"."BUZEI"                                                                  AS "ID",
        CAST("BKPF"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("BKPF"."CPUTM" AS DATE),
                     "BKPF"."CPUTM") AS INTERVAL SECOND)                                       AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"                            AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"                         AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                                                  AS "CreationExecutionType",
@@ -80,7 +80,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountCreditItem_' || "BSEG"."MANDT" || "BS
        "BSEG"."SGTXT"                                                                         AS "ItemText",
        'VendorAccountCreditHead_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR"
            || "BSEG"."GJAHR"                                                                  AS "VendorAccountHead",
-	<%=sourceSystem%>  || 'Vendor_' || "BSEG"."MANDT" || "BSEG"."LIFNR"                          AS "Vendor",
+	<%=sourceSystem%>  || 'Vendor_' || "BSEG"."MANDT" || "BSEG"."LIFNR"                       AS "Vendor",
        "T052_Intermediate"."ZPRZ1"                                                            AS "VendorCashDiscountPercentage1",
        "T052_Intermediate"."ZPRZ2"                                                            AS "VendorCashDiscountPercentage2",
        "BSEG"."WRBTR"                                                                         AS "Amount",
@@ -95,7 +95,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountCreditItem_' || "BSEG"."MANDT" || "BS
        CAST("T052_Intermediate"."ZTAG2" AS BIGINT)                                            AS "VendorPaymentDays2",
        CAST("T052_Intermediate"."ZTAG3" AS BIGINT)                                            AS "VendorPaymentDays3",
        'SAP'                                                                                  AS "SourceSystemType",
-	<%=sourceSystem%>  || "BSEG"."MANDT"                                                         AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "BSEG"."MANDT"                                                      AS "SourceSystemInstance",
        CAST("BSEG"."GJAHR" AS BIGINT)                                                         AS "FiscalYear",
        "BSEG"."BELNR"                                                                         AS "SystemAccountingDocumentNumber",
        "BSEG"."BELNR"                                                                         AS "DatabaseAccountingDocumentNumber",
