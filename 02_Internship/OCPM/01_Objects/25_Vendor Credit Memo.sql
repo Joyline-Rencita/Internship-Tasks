@@ -1,10 +1,10 @@
---                      *****************************     RBKP       *********************************
+                     *****************************     RBKP       *********************************
 
 SELECT <%=sourceSystem%>  || 'VendorCreditMemo_' || "RBKP"."MANDT" || "RBKP"."BELNR" || "RBKP"."GJAHR"  AS "ID",
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
             "RBKP"."CPUTM") AS INTERVAL SECOND)                                                         AS "CreationTime",
-    --'NULL'                                                                                                AS "DeletionTime",
-	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                      AS "CreatedBy",
+    --'NULL'                                                                                             AS "DeletionTime",
+	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                   AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                               AS "CreationExecutionType",
@@ -46,7 +46,7 @@ SELECT <%=sourceSystem%>  || 'VendorCreditMemo_' || "RBKP"."MANDT" || "RBKP"."BE
         ELSE CAST(CONCAT(CAST("RBKP"."ZFBDT" AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
         END                                                                                             AS "DueDate",
     'SAP'                                                                                               AS "SourceSystemType",
-	<%=sourceSystem%>  || "RBKP"."MANDT"                                                                   AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "RBKP"."MANDT"                                                                AS "SourceSystemInstance",
     "RBKP"."BELNR"                                                                                      AS "SystemVendorCreditMemoNumber",
     "RBKP"."BELNR"                                                                                      AS "DatabaseVendorCreditMemoNumber",
     CAST("RBKP"."GJAHR" AS BIGINT)                                                                      AS "FiscalYear",
@@ -61,7 +61,7 @@ WHERE "RBKP"."MANDT" IS NOT NULL
   AND ("RBKP"."XRECH" <> 'X' OR "RBKP"."XRECH" IS NULL)
 
 
---=============================================================================================================================================================
+=============================================================================================================================================================
 
 
 --                        *****************      CDPOS      *****************************
