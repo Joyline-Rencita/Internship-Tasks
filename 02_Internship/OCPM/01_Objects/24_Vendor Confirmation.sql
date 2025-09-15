@@ -1,14 +1,14 @@
 --                        **************************      EKES       *********************************
 
-SELECT <%=sourceSystem%>  || 'VendorConfirmation_' || "EKES"."MANDT" || "EKES"."EBELN" || "EKES"."EBELP" || "EKES"."ETENS" AS "ID",
+SELECT <%=sourceSystem%>  || 'VendorConfirmation_' || "EKES"."MANDT" || "EKES"."EBELN" || "EKES"."EBELP" || "EKES"."ETENS" 		AS "ID",
     CAST("EKES"."ERDAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("EKES"."EZEIT" AS DATE),
-            "EKES"."EZEIT") AS INTERVAL SECOND)                                                                            AS "CreationTime",
+            "EKES"."EZEIT") AS INTERVAL SECOND)                                                                            		AS "CreationTime",
 	<%=sourceSystem%>  || 'NULL'                                                                                                AS "CreatedBy",
-    'NULL'                                                                                                                   AS "CreationExecutionType",
+    'NULL'                                                                                                                   	AS "CreationExecutionType",
 	<%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKES"."MANDT" || "EKES"."EBELN"
-    || "EKES"."EBELP"                                                                                                      AS "PurchaseOrderItem",
-    "EKES"."EBTYP"                                                                                                         AS "ConfirmationCategory",
-    CAST("EKES"."EINDT" AS TIMESTAMP)                                                                                      AS "ConfirmationDeliveryDate",
+    || "EKES"."EBELP"                                                                                                      		AS "PurchaseOrderItem",
+    "EKES"."EBTYP"                                                                                                         		AS "ConfirmationCategory",
+    CAST("EKES"."EINDT" AS TIMESTAMP)                                                                                      		AS "ConfirmationDeliveryDate",
     "EKES"."MENGE"                                                                                                         AS "Quantity",
     "EKPO"."MEINS"                                                                                                         AS "QuantityUnit",
     'SAP'                                                                                                                  AS "SourceSystemType",
