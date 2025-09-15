@@ -7,5 +7,5 @@ SELECT <%=sourceSystem%>  || 'Vendor_' || "LFA1"."MANDT" || "LFA1"."LIFNR"||"LFA
        CASE WHEN "LFA1"."VBUND" IS NULL THEN FALSE ELSE TRUE END           AS "InternalFlag",
        "LFA1"."LIFNR"                                                      AS "Number",
        'SAP'                                                               AS "SourceSystemType",
-	<%=sourceSystem%>  || "LFA1"."MANDT"                                      AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "LFA1"."MANDT"                                   AS "SourceSystemInstance"
 FROM "LFA1" AS "LFA1"
