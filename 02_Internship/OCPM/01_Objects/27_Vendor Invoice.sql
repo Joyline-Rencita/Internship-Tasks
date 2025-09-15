@@ -3,7 +3,7 @@
 SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "RBKP"."MANDT" || "RBKP"."BELNR" || "RBKP"."GJAHR"     AS "ID",
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
             "RBKP"."CPUTM") AS INTERVAL SECOND)                                                         AS "CreationTime",
-    --'NULL'                                                                                                AS "DeletionTime",
+    --'NULL'                                                                                            AS "DeletionTime",
 	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                   AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
@@ -65,8 +65,6 @@ WHERE "RBKP"."MANDT" IS NOT NULL
 ======================================================================================================================================================
 
 
-
-
                         ****************************      CDPOS  *****************************
 
 
@@ -90,7 +88,7 @@ SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "CDPOS"."TABKEY" 				AS "Object
        "CDHDR"."CHANGENR"                                         				AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                      AS "ExecutionType"
+           ELSE 'Manual' END                                      				AS "ExecutionType"
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR"
                    ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
