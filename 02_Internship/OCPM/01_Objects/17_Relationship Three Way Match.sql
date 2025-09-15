@@ -12,10 +12,10 @@ WITH "CTE_RTWM" AS (
            "POItem"."ID"                                 AS "PurchaseOrderItem_ID",
            "VendInvItem"."ID"                            AS "VendorInvoiceItem_ID"
     
-    FROM "o_celonis_IncomingMaterialDocumentItem"        AS "IncomingMatDocItem"
-             INNER JOIN "o_celonis_PurchaseOrderItem"     AS "POItem"
+    FROM "o_celonis_IncomingMaterialDocumentItem"                         AS "IncomingMatDocItem"
+             INNER JOIN "o_celonis_PurchaseOrderItem"                     AS "POItem"
                         ON "IncomingMatDocItem"."PurchaseOrderItem_ID" = "POItem"."ID"
-             INNER JOIN "o_celonis_VendorInvoiceItem"     AS "VendInvItem"
+             INNER JOIN "o_celonis_VendorInvoiceItem"                     AS "VendInvItem"
                         ON "POItem"."ID" = "VendInvItem"."PurchaseOrderItem_ID"
     WHERE "VendInvItem"."IncomingMaterialDocumentItem_ID" IS NULL
       AND "POItem"."InvoiceAfterGoodsReceiptIndicator" IS NULL),
