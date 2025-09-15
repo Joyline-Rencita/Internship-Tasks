@@ -1,4 +1,4 @@
---                 **************************   CTE_BLOCK   *****************************
+                **************************   CTE_BLOCK   *****************************
 
 WITH "CTE_BSEG_PRE"
          AS (SELECT "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR" || "BSEG"."GJAHR" || "BSEG"."BUZEI" AS "TABKEY",
@@ -55,17 +55,17 @@ WITH "CTE_BSEG_PRE"
                                OVER (PARTITION BY "JoinTable"."JoinID" ORDER BY "JoinTable"."UDATE" ASC, "JoinTable"."UTIME" ASC) AS "ReleaseRN"
                         FROM "CTE_JoinTable" AS "JoinTable"
                         WHERE ("JoinTable"."VALUE_OLD" IS NOT NULL AND "JoinTable"."VALUE_NEW" IS NULL)),
-     "CTE_Changes" AS (SELECT "JoinTable"."JoinID"                   AS "ID",
-                              "JoinTable"."JoinTime"                 AS "ChangeTime",
-                              'PaymentBlock'                         AS "ChangeType",
-                              'Block to ' || "JoinTable"."VALUE_NEW" AS "ValueType",
-                              "JoinTable"."VALUE_NEW"                AS "VALUE_NEW",
-                              "JoinTable"."VALUE_OLD"                AS "VALUE_OLD",
-                              "JoinTable"."JoinUserID"               AS "ChangeBy",
-                              "JoinTable"."JoinExecutionType"        AS "ChangeExecutionType",
-                              "JoinTable"."JoinOperationType"        AS "ChangeOperationType",
-                              "JoinTable"."JoinSystemNumber"         AS "ChangeID",
-                              "JoinTable"."JoinID"                   AS "VendorAccountCreditItemID"
+     "CTE_Changes" AS (SELECT "JoinTable"."JoinID"                   		AS "ID",
+                              "JoinTable"."JoinTime"                 		AS "ChangeTime",
+                              'PaymentBlock'                         		AS "ChangeType",
+                              'Block to ' || "JoinTable"."VALUE_NEW" 		AS "ValueType",
+                              "JoinTable"."VALUE_NEW"                		AS "VALUE_NEW",
+                              "JoinTable"."VALUE_OLD"                		AS "VALUE_OLD",
+                              "JoinTable"."JoinUserID"               		AS "ChangeBy",
+                              "JoinTable"."JoinExecutionType"        		AS "ChangeExecutionType",
+                              "JoinTable"."JoinOperationType"        		AS "ChangeOperationType",
+                              "JoinTable"."JoinSystemNumber"         		AS "ChangeID",
+                              "JoinTable"."JoinID"                   		AS "VendorAccountCreditItemID"
                        FROM "CTE_JoinTable" AS "JoinTable"
                        WHERE "JoinTable"."VALUE_OLD" IS NOT NULL
                          AND "JoinTable"."VALUE_NEW" IS NOT NULL),
