@@ -1,4 +1,4 @@
---                    *******************************        RBKP        *****************************************
+                   *******************************        RBKP        *****************************************
 
 SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "RBKP"."MANDT" || "RBKP"."BELNR" || "RBKP"."GJAHR"     AS "ID",
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
@@ -44,14 +44,14 @@ SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "RBKP"."MANDT" || "RBKP"."BELNR
                 CAST(CONCAT(CAST(CAST((CAST("RBKP"."ZFBDT" AS DATE)
                        + "RBKP"."ZBD1T" * INTERVAL '1' DAY) AS DATE) AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
         ELSE CAST(CONCAT(CAST("RBKP"."ZFBDT" AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
-        END                                                                                             AS "DueDate",
-    'SAP'                                                                                               AS "SourceSystemType",
-	<%=sourceSystem%>  || "RBKP"."MANDT"                                                                   AS "SourceSystemInstance",
-    "RBKP"."BELNR"                                                                                      AS "SystemVendorInvoiceNumber",
-    "RBKP"."BELNR"                                                                                      AS "DatabaseVendorInvoiceNumber",
-    CAST("RBKP"."GJAHR" AS BIGINT)                                                                      AS "FiscalYear",
-	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "RBKP"."MANDT" || "RBKP"."LIFNR" || "RBKP"."BUKRS" AS "VendorMasterCompanyCode",
-	<%=sourceSystem%>  || 'Vendor_' || "RBKP"."MANDT" || "RBKP"."LIFNR"                                    AS "Vendor"
+        END                                                                                             	AS "DueDate",
+    'SAP'                                                                                               	AS "SourceSystemType",
+	<%=sourceSystem%>  || "RBKP"."MANDT"                                                                    AS "SourceSystemInstance",
+    "RBKP"."BELNR"                                                                                      	AS "SystemVendorInvoiceNumber",
+    "RBKP"."BELNR"                                                                                      	AS "DatabaseVendorInvoiceNumber",
+    CAST("RBKP"."GJAHR" AS BIGINT)                                                                      	AS "FiscalYear",
+	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "RBKP"."MANDT" || "RBKP"."LIFNR" || "RBKP"."BUKRS"  AS "VendorMasterCompanyCode",
+	<%=sourceSystem%>  || 'Vendor_' || "RBKP"."MANDT" || "RBKP"."LIFNR"                                    	AS "Vendor"
 FROM "RBKP" AS "RBKP"
          LEFT JOIN "USR02" AS "USR02"
                    ON "RBKP"."MANDT" = "USR02"."MANDT"
