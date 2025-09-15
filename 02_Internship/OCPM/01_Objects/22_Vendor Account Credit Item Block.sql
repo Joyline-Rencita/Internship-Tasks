@@ -105,7 +105,7 @@ WITH "CTE_BSEG_PRE"
                                                           AND "BSEG"."BUKRS" = "BKPF"."BUKRS"
                                                           AND "BSEG"."BELNR" = "BKPF"."BELNR"
                                                           AND "BSEG"."GJAHR" = "BKPF"."GJAHR"
-                                            LEFT JOIN "CTE_BlockFromChangelog" AS "Block"
+                                            LEFT JOIN "CTE_BlockFromChangelog" 		AS "Block"
                                                       ON "Block"."BlockID"
                                                           = "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR"
                                                              || "BSEG"."GJAHR" || "BSEG"."BUZEI"
@@ -237,16 +237,16 @@ SELECT <%=sourceSystem%>  || 'VendorAccountCreditItemBlock_' || "Block"."BlockID
            WHEN "Releases"."ReleaseType" IS NOT NULL
                THEN "Releases"."VALUE_NEW"
            ELSE COALESCE("BSEG"."ZLSPR", 'Data cut - no entry in BSEG')
-           END                                                                           AS "LatestBlockReason",
+           END                                                                           	AS "LatestBlockReason",
 	<%=sourceSystem%>  || 'User_' || "Block"."BlockedBy"                                    AS "BlockedBy",
-       "Block"."BlockExecutionType"                                                      AS "BlockExecutionType",
-       "Releases"."ReleaseTime"                                                          AS "ReleaseTime",
-       "Releases"."ReleaseType"                                                          AS "ReleaseType",
-       "Releases"."VALUE_OLD"                                                            AS "ReleaseReason",
+       "Block"."BlockExecutionType"                                                      	AS "BlockExecutionType",
+       "Releases"."ReleaseTime"                                                          	AS "ReleaseTime",
+       "Releases"."ReleaseType"                                                          	AS "ReleaseType",
+       "Releases"."VALUE_OLD"                                                            	AS "ReleaseReason",
 	<%=sourceSystem%>  || 'User_' || "Releases"."ReleasedBy_ID"                             AS "ReleasedBy",
-       "Releases"."ReleaseExecutionType"                                                 AS "ReleaseExecutionType",
+       "Releases"."ReleaseExecutionType"                                                 	AS "ReleaseExecutionType",
 	<%=sourceSystem%>  || 'VendorAccountCreditItem_' || "Block"."VendorAccountCreditItemID" AS "VendorAccountCreditItem",
-       'SAP'                                                                             AS "SourceSystemType"
+       'SAP'                                                                             	AS "SourceSystemType"
 FROM "CTE_Block" AS "Block"
          LEFT JOIN "CTE_Releases" AS "Releases"
                    ON "Block"."BlockID" = "Releases"."ReleasesID"
@@ -259,10 +259,10 @@ WHERE ("BSEG"."KOART" = 'K' AND "BSEG"."SHKZG" = 'H')
 
 
 
---=================================================================================================================================================
+===================================================================================================================================================================
 
 
---                      **************************************     CDPOS       ***********************************
+                     **************************************     CDPOS       ***********************************
 
 
 WITH "CTE_BSEG_PRE"
@@ -322,14 +322,14 @@ WITH "CTE_BSEG_PRE"
                                   WHERE "JoinTable"."VALUE_OLD" IS NULL
                                     AND "JoinTable"."VALUE_NEW" IS NOT NULL),
      "CTE_MinBlock" AS (
-         SELECT "JoinTable"."CHANGENR"                     AS "CHANGENR",
-                "JoinTable"."TABKEY"                       AS "TABKEY",
+         SELECT "JoinTable"."CHANGENR"                     										AS "CHANGENR",
+                "JoinTable"."TABKEY"                       										AS "TABKEY",
                 MIN(TIMESTAMPDIFF(SECOND, "BlockFromChangelog"."BlockTime",
                        CAST("JoinTable"."UDATE" AS DATE)
                                 + COALESCE(CAST(TIMESTAMPDIFF(SECOND, CAST("JoinTable"."UTIME" AS DATE), "JoinTable"."UTIME") AS INTERVAL SECOND),
-                                INTERVAL '86399' SECOND))) AS "LatestBlockSelector"
+                                INTERVAL '86399' SECOND))) 										AS "LatestBlockSelector"
          FROM "CTE_JoinTable" AS "JoinTable"
-                  LEFT JOIN "CTE_BlockFromChangelog" AS "BlockFromChangelog"
+                  LEFT JOIN "CTE_BlockFromChangelog" 											AS "BlockFromChangelog"
                             ON "JoinTable"."MANDANT" = "BlockFromChangelog"."MANDANT"
                                 AND "JoinTable"."OBJECTCLAS" = "BlockFromChangelog"."OBJECTCLAS"
                                 AND "JoinTable"."OBJECTID" = "BlockFromChangelog"."OBJECTID"
@@ -387,4 +387,4 @@ FROM "CTE_JoinTable" AS "JoinTable"
 WHERE "JoinTable"."VALUE_OLD" IS NOT NULL
   AND "JoinTable"."VALUE_NEW" IS NOT NULL
   AND (("BSEG"."KOART" = 'K' AND "BSEG"."SHKZG" = 'H')
-    OR ("BSEG"."KOART" IS NULL AND "BSEG"."SHKZG" IS NULL))
+  OR ("BSEG"."KOART" IS NULL AND "BSEG"."SHKZG" IS NULL))
