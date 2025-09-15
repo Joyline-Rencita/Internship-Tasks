@@ -1,17 +1,17 @@
 WITH "CTE_RTWM" AS (
-    SELECT "IncomingMatDocItem"."ID" AS "IncomingMaterialDocumentItem_ID",
-           "POItem"."ID"             AS "PurchaseOrderItem_ID",
-           "VendInvItem"."ID"        AS "VendorInvoiceItem_ID"
-    FROM "o_celonis_IncomingMaterialDocumentItem" AS "IncomingMatDocItem"
+    SELECT "IncomingMatDocItem"."ID"                  AS "IncomingMaterialDocumentItem_ID",
+           "POItem"."ID"                              AS "PurchaseOrderItem_ID",
+           "VendInvItem"."ID"                         AS "VendorInvoiceItem_ID"
+    FROM "o_celonis_IncomingMaterialDocumentItem"     AS "IncomingMatDocItem"
              INNER JOIN "o_celonis_VendorInvoiceItem" AS "VendInvItem"
                         ON "IncomingMatDocItem"."ID" = "VendInvItem"."IncomingMaterialDocumentItem_ID"
              INNER JOIN "o_celonis_PurchaseOrderItem" AS "POItem"
                         ON "VendInvItem"."PurchaseOrderItem_ID" = "POItem"."ID"
     UNION
-    SELECT "IncomingMatDocItem"."ID" AS "IncomingMaterialDocumentItem_ID",
-           "POItem"."ID"             AS "PurchaseOrderItem_ID",
-           "VendInvItem"."ID"        AS "VendorInvoiceItem_ID"
-    FROM "o_celonis_IncomingMaterialDocumentItem" AS "IncomingMatDocItem"
+    SELECT "IncomingMatDocItem"."ID"                     AS "IncomingMaterialDocumentItem_ID",
+           "POItem"."ID"                                 AS "PurchaseOrderItem_ID",
+           "VendInvItem"."ID"                            AS "VendorInvoiceItem_ID"
+    FROM "o_celonis_IncomingMaterialDocumentItem"        AS "IncomingMatDocItem"
              INNER JOIN "o_celonis_PurchaseOrderItem" AS "POItem"
                         ON "IncomingMatDocItem"."PurchaseOrderItem_ID" = "POItem"."ID"
              INNER JOIN "o_celonis_VendorInvoiceItem" AS "VendInvItem"
