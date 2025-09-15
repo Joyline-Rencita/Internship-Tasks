@@ -31,11 +31,11 @@ WITH "CTE_RTWM" AS (
                              NULL                                          AS "PurchaseOrderItem_ID",
                              "VendorInvoiceItem_ID"                        AS "VendorInvoiceItem_ID"
                       FROM "CTE_RTWM"),
-   "CTE_RTWM_2" AS (SELECT NULL                 AS "IncomingMaterialDocumentItem_ID",
-                             "POItem"."ID"      AS "PurchaseOrderItem_ID",
-                             "VendInvItem"."ID" AS "VendorInvoiceItem_ID"
-                      FROM "o_celonis_VendorInvoiceItem" AS "VendInvItem"
-                               INNER JOIN "o_celonis_PurchaseOrderItem" AS "POItem"
+   "CTE_RTWM_2" AS (SELECT NULL                                             AS "IncomingMaterialDocumentItem_ID",
+                             "POItem"."ID"                                  AS "PurchaseOrderItem_ID",
+                             "VendInvItem"."ID"                             AS "VendorInvoiceItem_ID"
+                      FROM "o_celonis_VendorInvoiceItem"                    AS "VendInvItem"
+                               INNER JOIN "o_celonis_PurchaseOrderItem"     AS "POItem"
                                           ON "VendInvItem"."PurchaseOrderItem_ID" = "POItem"."ID"
                       WHERE "VendInvItem"."IncomingMaterialDocumentItem_ID" IS NULL
                         AND "POItem"."InvoiceAfterGoodsReceiptIndicator" IS NULL
