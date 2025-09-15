@@ -4,7 +4,7 @@ SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "RBKP"."MANDT" || "RBKP"."BELNR
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
             "RBKP"."CPUTM") AS INTERVAL SECOND)                                                         AS "CreationTime",
     --'NULL'                                                                                                AS "DeletionTime",
-	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                      AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                   AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                               AS "CreationExecutionType",
@@ -62,32 +62,32 @@ WHERE "RBKP"."MANDT" IS NOT NULL
 
 
 
---======================================================================================================================================================
+======================================================================================================================================================
 
 
 
 
---                        ****************************      CDPOS  *****************************
+                        ****************************      CDPOS  *****************************
 
 
-SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "CDPOS"."TABKEY" 				AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 				AS "ID",
        CAST("CDHDR"."UDATE" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)                  AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                  				AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'MWSKZ1' THEN 'TaxCode'
            WHEN "CDPOS"."FNAME" = 'ZTERM' THEN 'PaymentTerms'
-           END                                                    AS "Attribute",
+           END                                                    				AS "Attribute",
        CASE
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
-           ELSE "CDPOS"."VALUE_OLD" END                           AS "OldValue",
+           ELSE "CDPOS"."VALUE_OLD" END                           				AS "OldValue",
        CASE
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
-           ELSE "CDPOS"."VALUE_NEW" END                           AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"         AS "ChangedBy",
-       "CDHDR"."TCODE"                                            AS "OperationType",
-       "CDHDR"."CHANGENR"                                         AS "OperationID",
+           ELSE "CDPOS"."VALUE_NEW" END                           				AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"         				AS "ChangedBy",
+       "CDHDR"."TCODE"                                            				AS "OperationType",
+       "CDHDR"."CHANGENR"                                         				AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                      AS "ExecutionType"
