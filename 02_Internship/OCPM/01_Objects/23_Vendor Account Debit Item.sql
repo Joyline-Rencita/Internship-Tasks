@@ -76,9 +76,9 @@ SELECT <%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSE
         WHEN "BKPF"."XREVERSAL" = '2' THEN 'Reversal Document'
         WHEN "BSEG"."BSCHL" = 21 AND "BKPF"."TCODE" = 'MR8M' THEN 'Reversal Document'
         WHEN "RBKP"."STBLG" IS NOT NULL THEN 'Reversed Document'
-        END                                                          AS "ReversalIndicator",
-    "BSEG"."BUZEI"                                                   AS "SystemAccountingDocumentItemNumber",
-    "BSEG"."BUZEI"                                                   AS "DatabaseAccountingDocumentItemNumber",
+        END                                                          		AS "ReversalIndicator",
+    "BSEG"."BUZEI"                                                   		AS "SystemAccountingDocumentItemNumber",
+    "BSEG"."BUZEI"                                                   		AS "DatabaseAccountingDocumentItemNumber",
     CASE
         WHEN "BSEG"."BSCHL" = 21 THEN 'CreditMemoItem'
         WHEN "BSEG"."BSCHL" = 22 THEN 'ReverseInvoiceItem'
@@ -89,7 +89,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSE
         WHEN "BSEG"."BSCHL" = 28 THEN 'PaymentClearings'
         WHEN "BSEG"."BSCHL" = 29 THEN 'SpecialG/LDebit'
         ELSE 'OtherCreditItem'
-        END                                                          AS "VendorAccountTransactionType",
+        END                                                          		AS "VendorAccountTransactionType",
     CASE
         WHEN "BSEG"."ZBD3T" > 0
             THEN
@@ -99,7 +99,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSE
             THEN
                 CAST(CONCAT(CAST(CAST((CAST("BSEG"."ZFBDT" AS DATE)
                        + "BSEG"."ZBD1T" * INTERVAL '1' DAY) AS DATE) AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
-        END                                                          AS "CashDiscountDueDate",
+        END                                                          		AS "CashDiscountDueDate",
     CASE
         WHEN "BSEG"."ZBD3T" > 0
             THEN
@@ -115,11 +115,11 @@ SELECT <%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSE
                 CAST(CONCAT(CAST(CAST((CAST("BSEG"."ZFBDT" AS DATE)
                        + "BSEG"."ZBD1T" * INTERVAL '1' DAY) AS DATE) AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
         ELSE CAST(CONCAT(CAST("BSEG"."ZFBDT" AS VARCHAR), ' 23:59:59') AS TIMESTAMP)
-        END                                                          AS "DueDate",
+        END                                                          		AS "DueDate",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "BSEG"."MANDT"
-    || "BSEG"."LIFNR" || "BSEG"."BUKRS"                              AS "VendorMasterCompanyCode",
+    || "BSEG"."LIFNR" || "BSEG"."BUKRS"                              		AS "VendorMasterCompanyCode",
 	<%=sourceSystem%>  || 'VendorCreditMemo' || '_' || "RBKP"."MANDT" || "RBKP"."BELNR"
-    || "RBKP"."GJAHR"                                                AS "VendorCreditMemo"
+    || "RBKP"."GJAHR"                                                		AS "VendorCreditMemo"
 FROM "BSEG" AS "BSEG"
          LEFT JOIN "BKPF" AS "BKPF"
                    ON "BSEG"."MANDT" = "BKPF"."MANDT"
