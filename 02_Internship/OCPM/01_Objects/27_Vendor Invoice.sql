@@ -89,6 +89,7 @@ SELECT <%=sourceSystem%>  || 'VendorInvoice_' || "CDPOS"."TABKEY" 						AS "Obje
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                      						AS "ExecutionType"
+					   
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR"
                    ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
