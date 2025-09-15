@@ -13,12 +13,12 @@ SELECT <%=sourceSystem%>  || 'VendorConfirmation_' || "EKES"."MANDT" || "EKES"."
     "EKPO"."MEINS"                                                                                                         		AS "QuantityUnit",
     'SAP'                                                                                                                  		AS "SourceSystemType",
 	<%=sourceSystem%>  || "EKES"."MANDT"                                                                                      	AS "SourceSystemInstance",
-    "EKES"."EBELN"                                                                                                         AS "SystemPurchaseOrderNumber",
-    "EKES"."EBELP"                                                                                                         AS "SystemPurchaseOrderItemNumber",
-    "EKES"."ETENS"                                                                                                         AS "SystemPurchaseOrderVendorConfirmationNumber",
-    "EKES"."EBELN"                                                                                                         AS "DatabasePurchaseOrderNumber",
-    "EKES"."EBELP"                                                                                                         AS "DatabasePurchaseOrderItemNumber",
-    "EKES"."ETENS"                                                                                                         AS "DatabasePurchaseOrderVendorConfirmationNumber",
+    "EKES"."EBELN"                                                                                                         		AS "SystemPurchaseOrderNumber",
+    "EKES"."EBELP"                                                                                                         		AS "SystemPurchaseOrderItemNumber",
+    "EKES"."ETENS"                                                                                                         		AS "SystemPurchaseOrderVendorConfirmationNumber",
+    "EKES"."EBELN"                                                                                                         		AS "DatabasePurchaseOrderNumber",
+    "EKES"."EBELP"                                                                                                         		AS "DatabasePurchaseOrderItemNumber",
+    "EKES"."ETENS"                                                                                                         		AS "DatabasePurchaseOrderVendorConfirmationNumber",
 	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                                       	AS "Vendor"
 FROM "EKES" AS "EKES"
          LEFT JOIN "EKKO" AS "EKKO"
@@ -33,7 +33,7 @@ WHERE "EKES"."MANDT" IS NOT NULL
 
 
 
---==========================================================================================================================================================
+===================================================================================================================================================================
 
 
 
