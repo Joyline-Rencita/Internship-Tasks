@@ -32,19 +32,19 @@ WITH "CTE_T052_Intermediate" AS (SELECT "BKPF"."MANDT",
                                                         <= CAST("T052"."ZTAGG" AS INT)
                                                            OR CAST("T052"."ZTAGG" AS INT) = 0))
 SELECT <%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR" || "BSEG"."GJAHR"
-    || "BSEG"."BUZEI"                                                AS "ID",
+    || "BSEG"."BUZEI"                                                		AS "ID",
     CAST("BKPF"."CPUDT" AS DATE)
            + CAST(TIMESTAMPDIFF(SECOND, CAST("BKPF"."CPUTM" AS DATE),
-           "BKPF"."CPUTM") AS INTERVAL SECOND)                       AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"   AS "CreatedBy",
+           "BKPF"."CPUTM") AS INTERVAL SECOND)                       		AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"   	AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                            AS "CreationExecutionType",
-    "BKPF"."BLART"                                                   AS "DocumentType",
-    "T003T"."LTEXT"                                                  AS "DocumentTypeText",
-    CAST("BKPF"."BLDAT" AS TIMESTAMP)                                AS "DocumentDate",
-    "BSEG"."ZLSCH"                                                   AS "PaymentMethod",
-    "BKPF"."XBLNR"                                                   AS "ReferenceDocumentNumber",
+        ELSE 'Manual' END                                            		AS "CreationExecutionType",
+    "BKPF"."BLART"                                                   		AS "DocumentType",
+    "T003T"."LTEXT"                                                  		AS "DocumentTypeText",
+    CAST("BKPF"."BLDAT" AS TIMESTAMP)                                		AS "DocumentDate",
+    "BSEG"."ZLSCH"                                                   		AS "PaymentMethod",
+    "BKPF"."XBLNR"                                                   		AS "ReferenceDocumentNumber",
     CAST("BSEG"."ZFBDT" AS TIMESTAMP)                                AS "BaseLineDate",
     "BSEG"."ZBD1T"                                                   AS "PaymentDays1",
     "BSEG"."ZBD2T"                                                   AS "PaymentDays2",
