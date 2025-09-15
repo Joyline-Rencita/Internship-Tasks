@@ -40,15 +40,15 @@ WITH "CTE_RTWM" AS (
                       WHERE "VendInvItem"."IncomingMaterialDocumentItem_ID" IS NULL
                         AND "POItem"."InvoiceAfterGoodsReceiptIndicator" IS NULL
                       EXCEPT
-                      SELECT NULL                   AS "IncomingMaterialDocumentItem_ID",
-                             "PurchaseOrderItem_ID" AS "PurchaseOrderItem_ID",
-                             "VendorInvoiceItem_ID" AS "VendorInvoiceItem_ID"
+                      SELECT NULL                                           AS "IncomingMaterialDocumentItem_ID",
+                             "PurchaseOrderItem_ID"                         AS "PurchaseOrderItem_ID",
+                             "VendorInvoiceItem_ID"                         AS "VendorInvoiceItem_ID"
                       FROM "CTE_RTWM"),
-   "CTE_RTWM_3" AS (SELECT "IncomingMatDocItem"."ID" AS "IncomingMaterialDocumentItem_ID",
-                             "POItem"."ID"           AS "PurchaseOrderItem_ID",
-                             NULL                    AS "VendorInvoiceItem_ID"
-                      FROM "o_celonis_IncomingMaterialDocumentItem" AS "IncomingMatDocItem"
-                               INNER JOIN "o_celonis_PurchaseOrderItem" AS "POItem"
+   "CTE_RTWM_3" AS (SELECT "IncomingMatDocItem"."ID"                         AS "IncomingMaterialDocumentItem_ID",
+                             "POItem"."ID"                                   AS "PurchaseOrderItem_ID",
+                             NULL                                            AS "VendorInvoiceItem_ID"
+                      FROM "o_celonis_IncomingMaterialDocumentItem"          AS "IncomingMatDocItem"
+                               INNER JOIN "o_celonis_PurchaseOrderItem"      AS "POItem"
                                           ON "IncomingMatDocItem"."PurchaseOrderItem_ID" = "POItem"."ID"
                       EXCEPT
                       SELECT "IncomingMaterialDocumentItem_ID" AS "IncomingMaterialDocumentItem_ID",
