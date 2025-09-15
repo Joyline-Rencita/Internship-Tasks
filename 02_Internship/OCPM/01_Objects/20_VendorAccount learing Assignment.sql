@@ -1,4 +1,4 @@
-                        *****************       CTE_CLEARING POINT       ************************
+                        *****************       CTE_CLEARING_POINT       ************************
 
 WITH "CTE_ClearingPointer" AS (SELECT DISTINCT "BSEG"."MANDT", "BSEG"."BUKRS", "BSEG"."AUGBL", "BSEG"."AUGGJ", "BSEG"."AUGDT"
                                FROM "BSEG" AS "BSEG"
@@ -51,16 +51,16 @@ WHERE "BSEG"."KOART" = 'K'
   AND "BSEG"."AUGBL" IS NOT NULL
   AND "BSEG"."SHKZG" = 'H'
 
--- ============================================================================================================================================================
+==================================================================================================================================================================
 
 
---                  ************************         BSEG  -> VendorAccountDebitItems    ***************************
+                  ************************         BSEG  -> VendorAccountDebitItems    ***************************
 
 
 SELECT <%=sourceSystem%>  || 'VendorAccountClearingAssignment_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."AUGBL"
-       || "BSEG"."AUGGJ"                   AS "ID",
+       || "BSEG"."AUGGJ"                   	AS "ID",
 	<%=sourceSystem%>  || 'VendorAccountDebitItem_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR"
-       || "BSEG"."GJAHR" || "BSEG"."BUZEI" AS "VendorAccountDebitItems"
+       || "BSEG"."GJAHR" || "BSEG"."BUZEI" 	AS "VendorAccountDebitItems"
 FROM "BSEG" AS "BSEG"
 WHERE "BSEG"."KOART" = 'K'
   AND "BSEG"."AUGBL" IS NOT NULL
