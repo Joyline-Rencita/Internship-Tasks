@@ -1,9 +1,9 @@
---        *****************************************        RSEG        **************************************
+        *****************************************        RSEG        **************************************
 
 SELECT <%=sourceSystem%>  || 'VendorCreditMemoItem_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR" || "RSEG"."BUZEI" AS "ID",
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
             "RBKP"."CPUTM") AS INTERVAL SECOND)                                                                              AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                                           AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                                        AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                                                    AS "CreationExecutionType",
@@ -14,7 +14,7 @@ SELECT <%=sourceSystem%>  || 'VendorCreditMemoItem_' || "RSEG"."MANDT" || "RSEG"
     "RBKP"."WAERS"                                                                                                           AS "Currency",
     "RSEG"."WRBTR"                                                                                                           AS "Amount",
     "RBKP"."VGART"                                                                                                           AS "TransactionType",
-	<%=sourceSystem%>  || 'VendorCreditMemo_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR"                             AS "Header",
+	<%=sourceSystem%>  || 'VendorCreditMemo_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR"                          AS "Header",
     'SAP'                                                                                                                    AS "SourceSystemType",
 	<%=sourceSystem%>  || "RSEG"."MANDT"                                                                                        AS "SourceSystemInstance",
     CAST("RSEG"."GJAHR" AS BIGINT)                                                                                           AS "FiscalYear",
