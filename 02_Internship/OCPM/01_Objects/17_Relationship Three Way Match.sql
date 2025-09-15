@@ -51,13 +51,13 @@ WITH "CTE_RTWM" AS (
                                INNER JOIN "o_celonis_PurchaseOrderItem"      AS "POItem"
                                           ON "IncomingMatDocItem"."PurchaseOrderItem_ID" = "POItem"."ID"
                       EXCEPT
-                      SELECT "IncomingMaterialDocumentItem_ID" AS "IncomingMaterialDocumentItem_ID",
-                             "PurchaseOrderItem_ID"            AS "PurchaseOrderItem_ID",
-                             NULL                              AS "VendorInvoiceItem_ID"
+                      SELECT "IncomingMaterialDocumentItem_ID"                 AS "IncomingMaterialDocumentItem_ID",
+                             "PurchaseOrderItem_ID"                            AS "PurchaseOrderItem_ID",
+                             NULL                                              AS "VendorInvoiceItem_ID"
                       FROM "CTE_RTWM"),
-   "CTE_UNION" AS (SELECT "CTE_RTWM"."IncomingMaterialDocumentItem_ID" AS "IncomingMaterialDocumentItem_ID",
-                            "CTE_RTWM"."PurchaseOrderItem_ID"          AS "PurchaseOrderItem_ID",
-                            "CTE_RTWM"."VendorInvoiceItem_ID"          AS "VendorInvoiceItem_ID"
+   "CTE_UNION" AS (SELECT "CTE_RTWM"."IncomingMaterialDocumentItem_ID"         AS "IncomingMaterialDocumentItem_ID",
+                            "CTE_RTWM"."PurchaseOrderItem_ID"                  AS "PurchaseOrderItem_ID",
+                            "CTE_RTWM"."VendorInvoiceItem_ID"                  AS "VendorInvoiceItem_ID"
                      FROM "CTE_RTWM"
                      UNION ALL
                      SELECT "CTE_RTWM_1"."IncomingMaterialDocumentItem_ID" AS "IncomingMaterialDocumentItem_ID",
