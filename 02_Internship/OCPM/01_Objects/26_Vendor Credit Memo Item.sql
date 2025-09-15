@@ -26,7 +26,7 @@ SELECT <%=sourceSystem%>  || 'VendorCreditMemoItem_' || "RSEG"."MANDT" || "RSEG"
 	<%=sourceSystem%>  || 'Plant_' || "RSEG"."MANDT" || "RSEG"."WERKS"                                                       AS "Plant",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "RSEG"."MANDT" || "RSEG"."LIFNR"
     || "RSEG"."BUKRS"                                                                                                        AS "VendorMasterCompanyCode",
-	<%=sourceSystem%>  || 'Vendor_' || "RSEG"."MANDT" || "RSEG"."LIFNR"                                                         AS "Vendor",
+	<%=sourceSystem%>  || 'Vendor_' || "RSEG"."MANDT" || "RSEG"."LIFNR"                                                      AS "Vendor",
     CASE
         WHEN "RBKP"."VGART" = 'RD' AND "RBKP"."STBLG" IS NOT NULL THEN 'Reversed Document'
         WHEN "RBKP"."VGART" = 'RS' AND "RBKP"."STBLG" IS NOT NULL THEN 'Reversal Document'
