@@ -147,7 +147,7 @@ SELECT <%=sourceSystem%>  || 'VendorAccountCreditItem_' || "BSEG"."MANDT" || "BS
        CASE
            WHEN "BKPF"."AWTYP" = 'RMRP' THEN TRUE
            ELSE FALSE END                                                                     AS "PurchaseOrderRelated",
-	<%=sourceSystem%>  || 'Material_' || "BSEG"."MANDT" || "BSEG"."MATNR"                        AS "Material",
+	<%=sourceSystem%>  || 'Material_' || "BSEG"."MANDT" || "BSEG"."MATNR"                     AS "Material",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "BSEG"."MANDT"
            || "BSEG"."LIFNR" || "BSEG"."BUKRS"                                                AS "VendorMasterCompanyCode"
 FROM "CTE_BSEG_FILTERED" AS "BSEG"
@@ -179,10 +179,10 @@ FROM "CTE_BSEG_FILTERED" AS "BSEG"
                        AND "BKPF"."AWKEY" = "RBKP"."BELNR" || "RBKP"."GJAHR"
 
 
--- ==============================================================================================================================================
+ =================================================================================================================================================================
 
 
---                *********************          CDPOS          ***************************** 
+               *********************          CDPOS          ***************************** 
 
 
 SELECT <%=sourceSystem%>  || 'VendorAccountCreditItem_' || "CDPOS"."TABKEY" AS "ObjectID",
