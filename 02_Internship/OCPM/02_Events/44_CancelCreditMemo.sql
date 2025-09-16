@@ -14,12 +14,13 @@ WHERE "CreditMemoCancellation"."CreationTime" IS NOT NULL
 
 
 SELECT DISTINCT
-                "Event"."ID"  AS "ID",
-                "Object"."ID" AS "CreditMemoItems"
-FROM "e_celonis_CancelCreditMemo" AS "Event"
-         LEFT JOIN "o_celonis_CreditMemoCancellationItem" AS "CreditMemoCancellationItem"
+                "Event"."ID"                AS "ID",
+                "Object"."ID"               AS "CreditMemoItems"
+       
+FROM "e_celonis_CancelCreditMemo"        AS "Event"
+         LEFT JOIN "o_celonis_CreditMemoCancellationItem"   AS "CreditMemoCancellationItem"
                    ON "Event"."CreditMemoCancellation_ID" = "CreditMemoCancellationItem"."Header_ID"
-         LEFT JOIN "o_celonis_CreditMemoItem" AS "Object"
+         LEFT JOIN "o_celonis_CreditMemoItem"               AS "Object"
                    ON "CreditMemoCancellationItem"."CreditMemoItem_ID" = "Object"."ID"
 WHERE TIMESTAMPDIFF(SECOND, "Event"."Time", "Object"."CreationTime") <= 5
   AND "Object"."ID" IS NOT NULL
