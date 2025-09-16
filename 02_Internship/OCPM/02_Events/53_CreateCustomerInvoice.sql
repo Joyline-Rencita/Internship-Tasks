@@ -33,11 +33,11 @@ WHERE TIMESTAMPDIFF(SECOND, "Event"."Time", "Object"."CreationTime") <= 5
 
 
 SELECT DISTINCT
-       "Event"."ID"  AS "ID",
-       "Object"."ID" AS "DeliveryItems"
-FROM (SELECT "Event"."ID"               AS "ID",
-             "Event"."Time"             AS "Time",
-             "CustomerInvoiceItem"."ID" AS "CustomerInvoiceItem_Id"
+       "Event"."ID"                              AS "ID",
+       "Object"."ID"                             AS "DeliveryItems"
+FROM (SELECT "Event"."ID"                        AS "ID",
+             "Event"."Time"                      AS "Time",
+             "CustomerInvoiceItem"."ID"          AS "CustomerInvoiceItem_Id"
       FROM "e_celonis_CreateCustomerInvoice" AS "Event"
                LEFT JOIN (SELECT "Object"."Header_ID"    AS "Header_ID",
                                  "Object"."ID"           AS "ID",
@@ -46,13 +46,13 @@ FROM (SELECT "Event"."ID"               AS "ID",
                           ORDER BY "Object"."Header_ID") AS "CustomerInvoiceItem"
                          ON "Event"."CustomerInvoice_ID" = "CustomerInvoiceItem"."Header_ID"
       ORDER BY "CustomerInvoiceItem"."ID") AS "Event"
-         LEFT JOIN (SELECT "CustomerInvoiceItem_DeliveryItems"."ID" AS "CustomerInvoiceItem_DeliveryItems_ID",
-                           "Object"."CreationTime"                  AS "CreationTime",
-                           "Object"."ID"                            AS "ID"
-                    FROM (SELECT "CustomerInvoiceItem_DeliveryItems"."ID"               AS "ID",
-                                 "CustomerInvoiceItem_DeliveryItems"."DeliveryItems_ID" AS "DeliveryItems_ID"
-                          FROM "r_o_celonis_CustomerInvoiceItem__DeliveryItems" AS "CustomerInvoiceItem_DeliveryItems"
-                          ORDER BY "CustomerInvoiceItem_DeliveryItems"."DeliveryItems_ID") AS "CustomerInvoiceItem_DeliveryItems"
+         LEFT JOIN (SELECT "CustomerInvoiceItem_DeliveryItems"."ID"                            AS "CustomerInvoiceItem_DeliveryItems_ID",
+                           "Object"."CreationTime"                                             AS "CreationTime",
+                           "Object"."ID"                                                       AS "ID"
+                    FROM (SELECT "CustomerInvoiceItem_DeliveryItems"."ID"                      AS "ID",
+                                 "CustomerInvoiceItem_DeliveryItems"."DeliveryItems_ID"        AS "DeliveryItems_ID"
+                          FROM "r_o_celonis_CustomerInvoiceItem__DeliveryItems"                AS "CustomerInvoiceItem_DeliveryItems"
+                          ORDER BY "CustomerInvoiceItem_DeliveryItems"."DeliveryItems_ID")     AS "CustomerInvoiceItem_DeliveryItems"
                              LEFT JOIN "o_celonis_DeliveryItem" AS "Object"
                                        ON "CustomerInvoiceItem_DeliveryItems"."DeliveryItems_ID" = "Object"."ID"
                     ORDER BY "CustomerInvoiceItem_DeliveryItems"."ID") AS "Object"
@@ -71,10 +71,10 @@ FROM (SELECT "Event"."ID"                                     AS "ID",
              "Event"."Time"                                   AS "Time",
              "CustomerInvoiceItem_Header"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
       FROM "e_celonis_CreateCustomerInvoice" AS "Event"
-               LEFT JOIN (SELECT "Object"."Header_ID"         AS "Header_ID",
-                                 "Object"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
-                          FROM "o_celonis_CustomerInvoiceItem" AS "Object"
-                          ORDER BY "Object"."Header_ID") AS "CustomerInvoiceItem_Header"
+               LEFT JOIN (SELECT "Object"."Header_ID"           AS "Header_ID",
+                                 "Object"."SalesOrderItem_ID"   AS "SalesOrderItem_ID"
+                          FROM "o_celonis_CustomerInvoiceItem"  AS "Object"
+                          ORDER BY "Object"."Header_ID")        AS "CustomerInvoiceItem_Header"
                          ON "Event"."CustomerInvoice_ID" = "CustomerInvoiceItem_Header"."Header_ID"
       ORDER BY "CustomerInvoiceItem_Header"."SalesOrderItem_ID") AS "Event"
          LEFT JOIN "o_celonis_SalesOrderItem" AS "Object"
