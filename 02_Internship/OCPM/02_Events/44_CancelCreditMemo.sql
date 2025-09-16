@@ -1,8 +1,9 @@
-SELECT 'CancelCreditMemo' || '_' || "CreditMemoCancellation"."ID" AS "ID",
-       "CreditMemoCancellation"."ID"                              AS "CreditMemoCancellation",
-       "CreditMemoCancellation"."CreationTime"                    AS "Time",
-       "CreditMemoCancellation"."CreatedBy_ID"                    AS "ExecutedBy",
-       "CreditMemoCancellation"."CreationExecutionType"           AS "ExecutionType"
+SELECT 'CancelCreditMemo' || '_' || "CreditMemoCancellation"."ID"        AS "ID",
+       "CreditMemoCancellation"."ID"                                     AS "CreditMemoCancellation",
+       "CreditMemoCancellation"."CreationTime"                           AS "Time",
+       "CreditMemoCancellation"."CreatedBy_ID"                           AS "ExecutedBy",
+       "CreditMemoCancellation"."CreationExecutionType"                  AS "ExecutionType"
+       
 FROM "o_celonis_CreditMemoCancellation" AS "CreditMemoCancellation"
 WHERE "CreditMemoCancellation"."CreationTime" IS NOT NULL
 
