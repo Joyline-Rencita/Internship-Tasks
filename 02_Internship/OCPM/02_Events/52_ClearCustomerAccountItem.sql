@@ -8,7 +8,7 @@ WHERE "CustomerAccountClearingAssignment"."CreationTime" IS NOT NULL
 
 =======================================================================================================================================================================
 
-                            Relationships =>  CustomerAccountClearingAssignment
+                            Relationships =>  CustomerAccountCreditItem
 
 SELECT "Event"."ID"  AS "ID",
        "Object"."ID" AS "CustomerAccountCreditItems"
@@ -23,8 +23,7 @@ WHERE "Object"."ID" IS NOT NULL
 
 =======================================================================================================================================================================
 
-                            Relationships =>  CustomerAccountClearingAssignment
-
+                            Relationships =>  CustomerAccountDebitItem
 
 SELECT DISTINCT "Event"."ID"  AS "ID",
                 "Object"."ID" AS "CustomerAccountDebitItems"
