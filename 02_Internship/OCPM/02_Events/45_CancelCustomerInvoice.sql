@@ -3,6 +3,7 @@ SELECT 'CancelCustomerInvoice' || '_' || "CustomerInvoiceCancellation"."ID" AS "
        "CustomerInvoiceCancellation"."CreationTime"                         AS "Time",
        "CustomerInvoiceCancellation"."CreatedBy_ID"                         AS "ExecutedBy",
        "CustomerInvoiceCancellation"."CreationExecutionType"                AS "ExecutionType"
+       
 FROM "o_celonis_CustomerInvoiceCancellation" AS "CustomerInvoiceCancellation"
 WHERE "CustomerInvoiceCancellation"."CreationTime" IS NOT NULL
 
@@ -11,8 +12,9 @@ WHERE "CustomerInvoiceCancellation"."CreationTime" IS NOT NULL
 
                           Relationships ==>  Cancel Customer Invoice
 
-SELECT DISTINCT "Event"."ID"  AS "ID",
-                "Object"."ID" AS "CustomerInvoiceCancellationItems"
+SELECT DISTINCT "Event"."ID"         AS "ID",
+                "Object"."ID"        AS "CustomerInvoiceCancellationItems"
+       
 FROM "e_celonis_CancelCustomerInvoice" AS "Event"
          LEFT JOIN "o_celonis_CustomerInvoiceCancellation" AS "CustomerInvoiceCancellation"
                    ON "Event"."CustomerInvoiceCancellation_ID" = "CustomerInvoiceCancellation"."ID"
