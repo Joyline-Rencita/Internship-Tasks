@@ -12,14 +12,16 @@ WHERE "CustomerInvoice"."CreationTime" IS NOT NULL
                                           Relationships =>   Customer Invoice Items
 
 SELECT DISTINCT
-                "Event"."ID"  AS "ID",
-                "Object"."ID" AS "CustomerInvoiceItems"
+                "Event"."ID"                              AS "ID",
+                "Object"."ID"                             AS "CustomerInvoiceItems"
+       
 FROM "e_celonis_CreateCustomerInvoice" AS "Event"
-         LEFT JOIN (SELECT "Object"."Header_ID"    AS "Header_ID",
-                           "Object"."ID"           AS "ID",
-                           "Object"."CreationTime" AS "CreationTime"
-                    FROM "o_celonis_CustomerInvoiceItem" AS "Object"
-                    ORDER BY "Object"."Header_ID") AS "Object"
+       
+         LEFT JOIN (SELECT "Object"."Header_ID"           AS "Header_ID",
+                           "Object"."ID"                  AS "ID",
+                           "Object"."CreationTime"        AS "CreationTime"
+                    FROM "o_celonis_CustomerInvoiceItem"  AS "Object"
+                    ORDER BY "Object"."Header_ID")        AS "Object"
                    ON "Event"."CustomerInvoice_ID" = "Object"."Header_ID"
 WHERE TIMESTAMPDIFF(SECOND, "Event"."Time", "Object"."CreationTime") <= 5
   AND "Object"."ID" IS NOT NULL
