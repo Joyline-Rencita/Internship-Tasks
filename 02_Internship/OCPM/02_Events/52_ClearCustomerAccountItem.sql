@@ -23,3 +23,16 @@ WHERE "Object"."ID" IS NOT NULL
 
 =======================================================================================================================================================================
 
+                            Relationships =>  CustomerAccountClearingAssignment
+
+
+SELECT DISTINCT "Event"."ID"  AS "ID",
+                "Object"."ID" AS "CustomerAccountDebitItems"
+FROM "e_celonis_ClearCustomerAccountItem" AS "Event"
+         LEFT JOIN "o_celonis_CustomerAccountClearingAssignment" AS "Clearing"
+                   ON "Event"."CustomerAccountClearingAssignment_ID" = "Clearing"."ID"
+         LEFT JOIN "r_o_celonis_CustomerAccountClearingAssignment__CustomerAccountDebitItems" AS "r_DebitItem"
+                   ON "Clearing"."ID" = "r_DebitItem"."ID"
+         LEFT JOIN "o_celonis_CustomerAccountDebitItem" AS "Object"
+                   ON "r_DebitItem"."CustomerAccountDebitItems_ID" = "Object"."ID"
+WHERE "Object"."ID" IS NOT NULL
