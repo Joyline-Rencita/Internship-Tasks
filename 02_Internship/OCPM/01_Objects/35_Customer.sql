@@ -11,7 +11,8 @@ SELECT <%=sourceSystem%>  || 'Customer_' || "KNA1"."MANDT" || "KNA1"."KUNNR" AS 
     NULL                                                                     AS "AddressLine2",
     "KNA1"."KUNNR"                                                           AS "Number",
     'SAP'                                                                    AS "SourceSystemType",
-	<%=sourceSystem%>  || "KNA1"."MANDT"                                        AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "KNA1"."MANDT"                                     AS "SourceSystemInstance"
+					   
 FROM "KNA1" AS "KNA1"
 WHERE "KNA1"."MANDT" IS NOT NULL
 
@@ -22,12 +23,12 @@ WHERE "KNA1"."MANDT" IS NOT NULL
                   ************************          CHANGES-KNA1      **************************
 
 
-SELECT <%=sourceSystem%>  || 'Customer_' || "KNA1"."MANDT" || "KNA1"."KUNNR" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'Customer_' || "KNA1"."MANDT" || "KNA1"."KUNNR" 	AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                            AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                            	AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)                             AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                             	AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'LAND1' THEN 'Country'
            WHEN "CDPOS"."FNAME" = 'NAME1' THEN 'Name'
@@ -36,19 +37,20 @@ SELECT <%=sourceSystem%>  || 'Customer_' || "KNA1"."MANDT" || "KNA1"."KUNNR" AS 
            WHEN "CDPOS"."FNAME" = 'REGIO' THEN 'Region'
            WHEN "CDPOS"."FNAME" = 'STRAS' THEN 'AddressLine1'
            WHEN "CDPOS"."FNAME" = 'VBUND' THEN 'InternalTradingPartner'
-           END                                                               AS "Attribute",
+           END                                                               	AS "Attribute",
        CASE
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
-           ELSE "CDPOS"."VALUE_OLD" END                                      AS "OldValue",
+           ELSE "CDPOS"."VALUE_OLD" END                                      	AS "OldValue",
        CASE
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
-           ELSE "CDPOS"."VALUE_NEW" END                                      AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                    AS "ChangedBy",
-       "CDHDR"."TCODE"                                                       AS "OperationType",
-       "CDHDR"."CHANGENR"                                                    AS "OperationID",
+           ELSE "CDPOS"."VALUE_NEW" END                                      	AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"                    	AS "ChangedBy",
+       "CDHDR"."TCODE"                                                       	AS "OperationType",
+       "CDHDR"."CHANGENR"                                                    	AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                 AS "ExecutionType"
+           ELSE 'Manual' END                                                 	AS "ExecutionType"
+					   
 FROM "KNA1" AS "KNA1"
          LEFT JOIN "CDPOS" AS "CDPOS" ON
             "KNA1"."MANDT" = "CDPOS"."MANDANT"
