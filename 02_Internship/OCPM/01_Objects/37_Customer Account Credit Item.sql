@@ -10,12 +10,12 @@ SELECT <%=sourceSystem%>  || 'CustomerAccountCreditItem_' || "BSEG"."MANDT" || "
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                                                                                 	AS "CreationExecutionType",
 	<%=sourceSystem%>  || CASE
-           WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '11' THEN 'CreditMemo_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END AS "CreditMemo",
+           WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '11' THEN 'CreditMemo_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END 	AS "CreditMemo",
 	<%=sourceSystem%>  || CASE
            WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '12'
-               THEN 'CustomerInvoiceCancellation_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END                                   AS "CustomerInvoiceCancellation",
+               THEN 'CustomerInvoiceCancellation_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END                                   	AS "CustomerInvoiceCancellation",
        'CustomerAccountCreditHead_' || "BKPF"."MANDT" || "BKPF"."BUKRS" || "BKPF"."BELNR"
-       || "BKPF"."GJAHR"                                                                                                     AS "CustomerAccountHead",
+       || "BKPF"."GJAHR"                                                                                                     	AS "CustomerAccountHead",
        CASE
            WHEN "BSEG"."BSCHL" = '11' THEN 'CreditMemo'
            WHEN "BSEG"."BSCHL" = '12' THEN 'CustomerInvoiceCancellation'
@@ -40,13 +40,13 @@ SELECT <%=sourceSystem%>  || 'CustomerAccountCreditItem_' || "BSEG"."MANDT" || "
            WHEN "BKPF"."XREVERSAL" = '1' THEN 'Reversed Document'
            WHEN "BKPF"."XREVERSAL" = '2' THEN 'Reversal Document' END                                                        AS "ReversalIndicator",
        'SAP'                                                                                                                 AS "SourceSystemType",
-	<%=sourceSystem%>  || "BSEG"."MANDT"                                                                                        AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "BSEG"."MANDT"                                                                                     AS "SourceSystemInstance",
        "BSEG"."BUZEI"                                                                                                        AS "SystemAccountingDocumentItemNumber",
        "BSEG"."BELNR"                                                                                                        AS "DatabaseAccountingDocumentNumber",
        "BSEG"."BUZEI"                                                                                                        AS "DatabaseAccountingDocumentItemNumber",
        "BSEG"."BUKRS"                                                                                                        AS "CompanyCode",
        CAST("BSEG"."GJAHR" AS BIGINT)                                                                                        AS "FiscalYear",
-	<%=sourceSystem%>  || 'Customer_' || "BSEG"."MANDT" || "BSEG"."KUNNR"                                                       AS "Customer",
+	<%=sourceSystem%>  || 'Customer_' || "BSEG"."MANDT" || "BSEG"."KUNNR"                                                    AS "Customer",
 	<%=sourceSystem%>  || 'CustomerMasterCompanyCode_' || "BSEG"."MANDT" || "BSEG"."KUNNR"
        || "BSEG"."BUKRS"                                                                                                     AS "CustomerMasterCompanyCode"
 FROM "BSEG" AS "BSEG"
