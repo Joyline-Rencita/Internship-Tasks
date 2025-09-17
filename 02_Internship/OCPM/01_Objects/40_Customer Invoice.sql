@@ -1,10 +1,10 @@
                 ****************************        VBRK           ***********************************
 
-SELECT <%=sourceSystem%>  || 'CustomerInvoice_' || "VBRK"."MANDT" || "VBRK"."VBELN" AS "ID",
+SELECT <%=sourceSystem%>  || 'CustomerInvoice_' || "VBRK"."MANDT" || "VBRK"."VBELN" 	AS "ID",
     CAST("VBRK"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("VBRK"."ERZET" AS DATE),
-            "VBRK"."ERZET") AS INTERVAL SECOND)                                     AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "VBRK"."MANDT" || "VBRK"."ERNAM"                  AS "CreatedBy",
+            "VBRK"."ERZET") AS INTERVAL SECOND)                                     	AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "VBRK"."MANDT" || "VBRK"."ERNAM"                   AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                           AS "CreationExecutionType",
