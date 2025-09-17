@@ -1,21 +1,21 @@
                   ***********************        BSEG      **************************
 
 SELECT <%=sourceSystem%>  || 'CustomerAccountDebitItem_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR" || "BSEG"."GJAHR"
-    || "BSEG"."BUZEI"                                                              AS "ID",
+    || "BSEG"."BUZEI"                                                              		AS "ID",
     CAST("BKPF"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("BKPF"."CPUTM" AS DATE),
-            "BKPF"."CPUTM") AS INTERVAL SECOND)                                    AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"                 AS "CreatedBy",
+            "BKPF"."CPUTM") AS INTERVAL SECOND)                                    		AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"                 	AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                          AS "CreationExecutionType",
+        ELSE 'Manual' END                                                          		AS "CreationExecutionType",
 	<%=sourceSystem%>  || CASE
         WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '01'
-            THEN 'CustomerInvoice_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END        AS "CustomerInvoice",
+            THEN 'CustomerInvoice_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END        		AS "CustomerInvoice",
 	<%=sourceSystem%>  || CASE
         WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '02'
-            THEN 'CreditMemoCancellation_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END AS "CreditMemoCancellation",
+            THEN 'CreditMemoCancellation_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END 		AS "CreditMemoCancellation",
     'CustomerAccountDebitHead_' || "BKPF"."MANDT" || "BKPF"."BUKRS" || "BKPF"."BELNR"
-    || "BKPF"."GJAHR"                                                              AS "CustomerAccountHead",
+    || "BKPF"."GJAHR"                                                              		AS "CustomerAccountHead",
     CASE
         WHEN "BSEG"."BSCHL" = '01' THEN 'CustomerInvoice'
         WHEN "BSEG"."BSCHL" = '02' THEN 'ReverseCreditMemo'
@@ -47,13 +47,13 @@ SELECT <%=sourceSystem%>  || 'CustomerAccountDebitItem_' || "BSEG"."MANDT" || "B
         WHEN "BKPF"."XREVERSAL" = '1' THEN 'Reversed Document'
         WHEN "BKPF"."XREVERSAL" = '2' THEN 'Reversal Document' END                 AS "ReversalIndicator",
     'SAP'                                                                          AS "SourceSystemType",
-	<%=sourceSystem%>  || "BSEG"."MANDT"                                              AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "BSEG"."MANDT"                                           AS "SourceSystemInstance",
     "BSEG"."BUZEI"                                                                 AS "SystemAccountingDocumentItemNumber",
     "BSEG"."BELNR"                                                                 AS "DatabaseAccountingDocumentNumber",
     "BSEG"."BUZEI"                                                                 AS "DatabaseAccountingDocumentItemNumber",
     "BSEG"."BUKRS"                                                                 AS "CompanyCode",
     CAST("BSEG"."GJAHR" AS BIGINT)                                                 AS "FiscalYear",
-	<%=sourceSystem%>  || 'Customer_' || "BSEG"."MANDT" || "BSEG"."KUNNR"             AS "Customer",
+	<%=sourceSystem%>  || 'Customer_' || "BSEG"."MANDT" || "BSEG"."KUNNR"          AS "Customer",
 	<%=sourceSystem%>  || 'CustomerMasterCompanyCode_' || "BSEG"."MANDT" || "BSEG"."KUNNR"
     || "BSEG"."BUKRS"                                                              AS "CustomerMasterCompanyCode"
 FROM "BSEG" AS "BSEG"
