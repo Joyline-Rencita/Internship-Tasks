@@ -278,16 +278,16 @@ SELECT <%=sourceSystem%>  || 'CustomerBlock_' || "Block"."BlockID" || '_' || "Bl
                THEN "TVFST"."VTEXT"
            WHEN "Block"."BlockType" = 'DeliveryBlock'
                THEN "TVLST"."VTEXT"
-       END                                                     AS "LatestBlockReasonText",
-	<%=sourceSystem%>  || 'User_' || "Block"."BlockedBy"          AS "BlockedBy",
-       "Block"."BlockExecutionType"                            AS "BlockExecutionType",
-       "Releases"."ReleaseTime"                                AS "ReleaseTime",
-       "Releases"."ReleaseType"                                AS "ReleaseType",
-       "Releases"."VALUE_OLD"                                  AS "ReleaseReason",
-	<%=sourceSystem%>  || 'User_' || "Releases"."ReleasedBy_ID"   AS "ReleasedBy",
-       "Releases"."ReleaseExecutionType"                       AS "ReleaseExecutionType",
-	<%=sourceSystem%>  || 'Customer_' || "Block"."CustomerID"     AS "Customer",
-       'SAP'                                                   AS "SourceSystemType"
+       END                                                     	AS "LatestBlockReasonText",
+	<%=sourceSystem%>  || 'User_' || "Block"."BlockedBy"        AS "BlockedBy",
+       "Block"."BlockExecutionType"                            	AS "BlockExecutionType",
+       "Releases"."ReleaseTime"                                	AS "ReleaseTime",
+       "Releases"."ReleaseType"                                	AS "ReleaseType",
+       "Releases"."VALUE_OLD"                                  	AS "ReleaseReason",
+	<%=sourceSystem%>  || 'User_' || "Releases"."ReleasedBy_ID" AS "ReleasedBy",
+       "Releases"."ReleaseExecutionType"                       	AS "ReleaseExecutionType",
+	<%=sourceSystem%>  || 'Customer_' || "Block"."CustomerID"   AS "Customer",
+       'SAP'                                                   	AS "SourceSystemType"
 FROM "CTE_Block" AS "Block"
      LEFT JOIN "CTE_Releases" AS "Releases"
                ON "Block"."BlockID" = "Releases"."ReleasesID"
