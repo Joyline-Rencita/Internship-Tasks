@@ -227,7 +227,9 @@ SELECT <%=sourceSystem%>  || 'CurrencyConversion_' || "CONVERSION_ALL"."ID" AS "
        "CONVERSION_ALL"."ToDate"                                            AS "ToDate",
        "CONVERSION_ALL"."Rate"                                              AS "Rate",
        "CONVERSION_ALL"."SourceSystemType"                                  AS "SourceSystemType",
-	<%=sourceSystem%>  || "CONVERSION_ALL"."SourceSystemInstance"              AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "CONVERSION_ALL"."SourceSystemInstance"           AS "SourceSystemInstance",
        "CONVERSION_ALL"."ExchangeRateType"                                  AS "ExchangeRateType",
        "CONVERSION_ALL"."ConversionType"                                    AS "ConversionType"
+			  
 FROM "CTE_CONVERSION_ALL" AS "CONVERSION_ALL"
+
