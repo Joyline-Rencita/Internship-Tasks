@@ -2,13 +2,13 @@
 					
 
 SELECT <%=sourceSystem%>  || 'CustomerAccountCreditItem_' || "BSEG"."MANDT" || "BSEG"."BUKRS" || "BSEG"."BELNR" || "BSEG"."GJAHR"
-       || "BSEG"."BUZEI"                                                                                                     AS "ID",
+       || "BSEG"."BUZEI"                                                                                                     	AS "ID",
        CAST("BKPF"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("BKPF"."CPUTM" AS DATE),
-            "BKPF"."CPUTM") AS INTERVAL SECOND)                                                                              AS "CreationTime",
+            "BKPF"."CPUTM") AS INTERVAL SECOND)                                                                              	AS "CreationTime",
 	<%=sourceSystem%>  || 'User_' || "BKPF"."MANDT" || "BKPF"."USNAM"                                                           AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                                                                 AS "CreationExecutionType",
+           ELSE 'Manual' END                                                                                                 	AS "CreationExecutionType",
 	<%=sourceSystem%>  || CASE
            WHEN "BKPF"."AWTYP" = 'VBRK' AND "BSEG"."BSCHL" = '11' THEN 'CreditMemo_' || "BKPF"."MANDT" || "BKPF"."AWKEY" END AS "CreditMemo",
 	<%=sourceSystem%>  || CASE
