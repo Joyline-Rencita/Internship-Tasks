@@ -1,4 +1,4 @@
-	***************************          VBRK      ***********************************
+	***************************          VBRK      	***********************************
 
 SELECT <%=sourceSystem%>  || 'CreditMemo_' || "VBRK"."MANDT" || "VBRK"."VBELN" 		AS "ID",
     CAST("VBRK"."ERDAT" AS DATE)
