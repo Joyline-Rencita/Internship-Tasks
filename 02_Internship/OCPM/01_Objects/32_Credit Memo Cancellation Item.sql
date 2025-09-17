@@ -1,9 +1,9 @@
         ***********************        VBRP        ************************
 
-SELECT <%=sourceSystem%>  || 'CreditMemoCancellationItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" AS "ID",
+SELECT <%=sourceSystem%>  || 'CreditMemoCancellationItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" 	AS "ID",
     CAST("VBRP"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("VBRP"."ERZET" AS DATE),
-            "VBRP"."ERZET") AS INTERVAL SECOND)                                                                  AS "CreationTime",
+            "VBRP"."ERZET") AS INTERVAL SECOND)                                                                  	AS "CreationTime",
 	<%=sourceSystem%>  || 'User_' || "VBRP"."MANDT" || "VBRP"."ERNAM"                                               AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
