@@ -1,9 +1,9 @@
---               ***********************************              RSEG            **********************************
+              ***********************************              RSEG            **********************************
 
 SELECT <%=sourceSystem%>  || 'VendorInvoiceItem_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR" || "RSEG"."BUZEI" AS "ID",
     CAST("RBKP"."CPUDT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("RBKP"."CPUTM" AS DATE),
             "RBKP"."CPUTM") AS INTERVAL SECOND)                                                                           AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                                        AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "RBKP"."MANDT" || "RBKP"."USNAM"                                                     AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                                                 AS "CreationExecutionType",
@@ -14,9 +14,9 @@ SELECT <%=sourceSystem%>  || 'VendorInvoiceItem_' || "RSEG"."MANDT" || "RSEG"."B
     "RBKP"."WAERS"                                                                                                        AS "Currency",
     "RSEG"."WRBTR"                                                                                                        AS "Amount",
     "RBKP"."VGART"                                                                                                        AS "TransactionType",
-	<%=sourceSystem%>  || 'VendorInvoice_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR"                             AS "Header",
+	<%=sourceSystem%>  || 'VendorInvoice_' || "RSEG"."MANDT" || "RSEG"."BELNR" || "RSEG"."GJAHR"                          AS "Header",
     'SAP'                                                                                                                 AS "SourceSystemType",
-	<%=sourceSystem%>  || "RSEG"."MANDT"                                                                                     AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "RSEG"."MANDT"                                                                                  AS "SourceSystemInstance",
     CAST("RSEG"."GJAHR" AS BIGINT)                                                                                        AS "FiscalYear",
     "RSEG"."BELNR"                                                                                                        AS "SystemVendorInvoiceNumber",
     "RSEG"."BUZEI"                                                                                                        AS "SystemVendorInvoiceItemNumber",
@@ -24,11 +24,11 @@ SELECT <%=sourceSystem%>  || 'VendorInvoiceItem_' || "RSEG"."MANDT" || "RSEG"."B
     "RSEG"."BUZEI"                                                                                                        AS "DatabaseVendorInvoiceItemNumber",
 	<%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "RSEG"."MANDT" || "RSEG"."LFBNR" || "RSEG"."LFGJA"
     || "RSEG"."LFPOS"                                                                                                     AS "IncomingMaterialDocumentItem",
-	<%=sourceSystem%>  || 'Material_' || "RSEG"."MANDT" || "RSEG"."MATNR"                                                    AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "RSEG"."MANDT" || "RSEG"."WERKS"                                                       AS "Plant",
+	<%=sourceSystem%>  || 'Material_' || "RSEG"."MANDT" || "RSEG"."MATNR"                                                 AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "RSEG"."MANDT" || "RSEG"."WERKS"                                                    AS "Plant",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "RSEG"."MANDT" || "RSEG"."LIFNR"
     || "RSEG"."BUKRS"                                                                                                     AS "VendorMasterCompanyCode",
-	<%=sourceSystem%>  || 'Vendor_' || "RSEG"."MANDT" || "RSEG"."LIFNR"                                                      AS "Vendor"
+	<%=sourceSystem%>  || 'Vendor_' || "RSEG"."MANDT" || "RSEG"."LIFNR"                                                   AS "Vendor"
 FROM "RSEG" AS "RSEG"
          LEFT JOIN "RBKP" AS "RBKP"
                    ON "RSEG"."MANDT" = "RBKP"."MANDT"
