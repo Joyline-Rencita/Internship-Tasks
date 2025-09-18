@@ -47,15 +47,6 @@ Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, a
 
 SO Backlog Val :    Total value of sales orders not yet fulfilled or invoiced.
 
--- SUM(
---   CASE
---     WHEN "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Completed'
---     AND "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Invoiced'
---     THEN "o_celonis_SalesOrderItem"."NetAmount"
---     ELSE 0
---   END
--- )
-
 SUM(
   CASE
     WHEN ISNULL("o_celonis_DeliveryItem"."SalesOrderItem_ID") = 1
