@@ -66,21 +66,6 @@ SUM(
 )
 
 
---     CORRECT QUERY WITH BLOCKAGE CONDITION
--- SUM(
---     CASE
---         WHEN "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Completed'
---         AND "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Invoiced'
---         AND (
---             ISNULL("o_celonis_SalesOrderBlock"."SalesOrder_ID") = 0
---             OR ISNULL("o_celonis_SalesOrderItemBlock"."SalesOrderItem_ID") = 0
---         )
---         THEN "o_celonis_SalesOrderItem"."NetAmount"
---         ELSE 0
---     END
--- )
-
-
 Avg Delivery Lead Time :  Average number of days between order creation and delivery to customer.
 
 AVG(
