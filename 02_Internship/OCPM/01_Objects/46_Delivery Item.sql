@@ -16,12 +16,12 @@ SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN"
     "LIPS"."VOLUM"                                                                                 		AS "Volume",
     "LIPS"."VOLEH"                                                                                 		AS "VolumeUnit",
     "LIPS"."LGORT"                                                                                 		AS "StorageLocation",
-    'SAP'                                                                                          AS "SourceSystemType",
-	<%=sourceSystem%>  || "LIPS"."MANDT"                                                              AS "SourceSystemInstance",
-    "LIPS"."VBELN"                                                                                 AS "SystemDeliveryNumber",
-    "LIPS"."POSNR"                                                                                 AS "SystemDeliveryItemNumber",
-    "LIPS"."VBELN"                                                                                 AS "DatabaseDeliveryNumber",
-    "LIPS"."POSNR"                                                                                 AS "DatabaseDeliveryItemNumber",
+    'SAP'                                                                                          		AS "SourceSystemType",
+	<%=sourceSystem%>  || "LIPS"."MANDT"                                                              	AS "SourceSystemInstance",
+    "LIPS"."VBELN"                                                                                 		AS "SystemDeliveryNumber",
+    "LIPS"."POSNR"                                                                                 		AS "SystemDeliveryItemNumber",
+    "LIPS"."VBELN"                                                                                 		AS "DatabaseDeliveryNumber",
+    "LIPS"."POSNR"                                                                                 		AS "DatabaseDeliveryItemNumber",
 	<%=sourceSystem%>  || CASE
         WHEN "LIPS"."VGTYP" IN ('C', 'I') THEN
             'SalesOrderItem_' || "LIPS"."MANDT" || "LIPS"."VGBEL" || "LIPS"."VGPOS"
