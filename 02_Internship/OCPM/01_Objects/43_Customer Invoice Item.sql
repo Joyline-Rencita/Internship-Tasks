@@ -1,13 +1,13 @@
               ***********************         VBRP      ****************************
 
-SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" AS "ID",
+SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" 	AS "ID",
     CAST("VBRP"."ERDAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("VBRP"."ERZET" AS DATE),
-            "VBRP"."ERZET") AS INTERVAL SECOND)                                                           AS "CreationTime",
-	<%=sourceSystem%>  || 'CustomerInvoice_' || "VBRP"."MANDT" || "VBRP"."VBELN"                             AS "Header",
-	<%=sourceSystem%>  || 'User_' || "VBRP"."MANDT" || "VBRP"."ERNAM"                                        AS "CreatedBy",
+            "VBRP"."ERZET") AS INTERVAL SECOND)                                                           	AS "CreationTime",
+	<%=sourceSystem%>  || 'CustomerInvoice_' || "VBRP"."MANDT" || "VBRP"."VBELN"                            AS "Header",
+	<%=sourceSystem%>  || 'User_' || "VBRP"."MANDT" || "VBRP"."ERNAM"                                       AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                                                 AS "CreationExecutionType",
+        ELSE 'Manual' END                                                                                 	AS "CreationExecutionType",
     'SAP'                                                                                                 AS "SourceSystemType",
 	<%=sourceSystem%>  || "VBRP"."MANDT"                                                                     AS "SourceSystemInstance",
     "VBRP"."VBELN"                                                                                        AS "SystemCustomerInvoiceNumber",
