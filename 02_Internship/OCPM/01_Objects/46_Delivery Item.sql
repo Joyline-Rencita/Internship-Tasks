@@ -25,9 +25,9 @@ SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN"
 	<%=sourceSystem%>  || CASE
         WHEN "LIPS"."VGTYP" IN ('C', 'I') THEN
             'SalesOrderItem_' || "LIPS"."MANDT" || "LIPS"."VGBEL" || "LIPS"."VGPOS"
-        END                                                                                        AS "SalesOrderItem",
-	<%=sourceSystem%>  || 'Material_' || "LIPS"."MANDT" || "LIPS"."MATNR"                             AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "LIPS"."MANDT" || "LIPS"."WERKS"                                AS "Plant"
+        END                                                                                        		AS "SalesOrderItem",
+	<%=sourceSystem%>  || 'Material_' || "LIPS"."MANDT" || "LIPS"."MATNR"                             	AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "LIPS"."MANDT" || "LIPS"."WERKS"                                	AS "Plant"
 FROM "LIPS" AS "LIPS"
          LEFT JOIN "LIKP" AS "LIKP"
                    ON "LIPS"."MANDT" = "LIKP"."MANDT"
@@ -43,6 +43,7 @@ WHERE "LIPS"."MANDT" IS NOT NULL
 
 
                   **********************          CDPOS      ***************************
+							
 
 SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "CDPOS"."TABKEY" AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
