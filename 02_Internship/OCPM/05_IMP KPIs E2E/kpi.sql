@@ -28,3 +28,18 @@ AVG(
   END
 )
 
+
+Cust OTIF Rate :
+  
+(
+  COUNT(
+    CASE
+      WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
+        AND "o_celonis_Delivery"."Customer_ID" = "o_celonis_SalesOrder"."Customer_ID"
+        -- AND "o_celonis_Delivery"."SystemDeliveryNumber" = "o_celonis_SalesOrder"."SystemSalesOrderNumber"
+      THEN "o_celonis_SalesOrder"."ID"
+    END
+  )
+  /
+  COUNT("o_celonis_SalesOrder"."ID")
+)
