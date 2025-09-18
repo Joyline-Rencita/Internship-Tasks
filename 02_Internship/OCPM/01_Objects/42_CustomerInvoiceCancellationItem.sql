@@ -1,8 +1,8 @@
                       **************************            VBRP          ***************************
 
-SELECT <%=sourceSystem%>  || 'CustomerInvoiceCancellationItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" AS "ID",
+SELECT <%=sourceSystem%>  || 'CustomerInvoiceCancellationItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" 	AS "ID",
     CAST("VBRP"."ERDAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("VBRP"."ERZET" AS DATE),
-            "VBRP"."ERZET") AS INTERVAL SECOND)                                                                       AS "CreationTime",
+            "VBRP"."ERZET") AS INTERVAL SECOND)                                                                       	AS "CreationTime",
 	<%=sourceSystem%>  || 'CustomerInvoiceCancellation_' || "VBRP"."MANDT" || "VBRP"."VBELN"                             AS "Header",
 	<%=sourceSystem%>  || 'User_' || "VBRP"."MANDT" || "VBRP"."ERNAM"                                                    AS "CreatedBy",
     CASE
