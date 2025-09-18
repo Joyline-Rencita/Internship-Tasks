@@ -1,19 +1,19 @@
                 ********************        LIPK      *****************************
 
-SELECT <%=sourceSystem%>  || 'Delivery_' || "LIKP"."MANDT" || "LIKP"."VBELN" AS "ID",
+SELECT <%=sourceSystem%>  || 'Delivery_' || "LIKP"."MANDT" || "LIKP"."VBELN" 				AS "ID",
     CAST("LIKP"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("LIKP"."ERZET" AS DATE),
-            "LIKP"."ERZET") AS INTERVAL SECOND)                              AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "LIKP"."MANDT" || "LIKP"."ERNAM"           AS "CreatedBy",
+            "LIKP"."ERZET") AS INTERVAL SECOND)                              				AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "LIKP"."MANDT" || "LIKP"."ERNAM"           			AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                    AS "CreationExecutionType",
-    "LIKP"."LFART"                                                           AS "DeliveryType",
+        ELSE 'Manual' END                                                    				AS "CreationExecutionType",
+    "LIKP"."LFART"                                                           				AS "DeliveryType",
     CAST("LIKP"."KODAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("LIKP"."KOUHR" AS DATE),
-                    "LIKP"."KOUHR") AS INTERVAL SECOND)                      AS "PickingDate",
+                    "LIKP"."KOUHR") AS INTERVAL SECOND)                      				AS "PickingDate",
     CAST("LIKP"."PODAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("LIKP"."POTIM" AS DATE),
-                    "LIKP"."POTIM") AS INTERVAL SECOND)                      AS "ProofOfDeliveryDate",
-    CAST("LIKP"."LFDAT" AS TIMESTAMP)                                        AS "DeliveryDate",
+                    "LIKP"."POTIM") AS INTERVAL SECOND)                      				AS "ProofOfDeliveryDate",
+    CAST("LIKP"."LFDAT" AS TIMESTAMP)                                        				AS "DeliveryDate",
     "LIKP"."NTGEW"                                                           AS "NetWeight",
     "LIKP"."BTGEW"                                                           AS "GrossWeight",
     "LIKP"."GEWEI"                                                           AS "WeightUnit",
