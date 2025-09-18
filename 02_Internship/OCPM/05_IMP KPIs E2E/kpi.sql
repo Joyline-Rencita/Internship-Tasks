@@ -29,7 +29,7 @@ AVG(
 )
 
 
-Cust OTIF Rate :
+Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, and without errors.
   
 (
   COUNT(
