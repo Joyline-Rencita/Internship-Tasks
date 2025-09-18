@@ -16,14 +16,14 @@ SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP".
     "VBRP"."POSNR"                                                                                        	AS "DatabaseCustomerInvoiceItemNumber",
     "VBRP"."VRKME"                                                                                        	AS "QuantityUnit",
     "VBRK"."WAERK"                                                                                        	AS "Currency",
-    "VBRP"."FKIMG"                                                                                        AS "InvoicedQuantity",
-    "VBRP"."NETWR"                                                                                        AS "NetAmount",
+    "VBRP"."FKIMG"                                                                                        	AS "InvoicedQuantity",
+    "VBRP"."NETWR"                                                                                        	AS "NetAmount",
     CASE
         WHEN "VBRP"."NETWR" = 0 AND "VBRP"."FKIMG" = 0 THEN 0
         ELSE "VBRP"."NETWR" / "VBRP"."FKIMG" END                                                          	AS "NetUnitPrice",
-	<%=sourceSystem%>  || 'Material_' || "VBRP"."MANDT" || "VBRP"."MATNR"                                    AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "VBRP"."MANDT" || "VBRP"."WERKS"                                       AS "Plant",
-	<%=sourceSystem%>  || 'SalesOrderItem_' || "VBRP"."MANDT" || "VBRP"."AUBEL" || "VBRP"."AUPOS"            AS "SalesOrderItem"
+	<%=sourceSystem%>  || 'Material_' || "VBRP"."MANDT" || "VBRP"."MATNR"                                   AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "VBRP"."MANDT" || "VBRP"."WERKS"                                      AS "Plant",
+	<%=sourceSystem%>  || 'SalesOrderItem_' || "VBRP"."MANDT" || "VBRP"."AUBEL" || "VBRP"."AUPOS"           AS "SalesOrderItem"
 FROM "VBRP" AS "VBRP"
          LEFT JOIN "VBRK" AS "VBRK"
                    ON "VBRP"."MANDT" = "VBRK"."MANDT"
@@ -46,8 +46,8 @@ WHERE "VBRP"."MANDT" IS NOT NULL
 					***********************			VBRP - 1 		************************
 
 
-SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" AS "ID",
-	<%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN" || "LIPS"."POSNR"              AS "DeliveryItems"
+SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP"."VBELN" || "VBRP"."POSNR" 	   AS "ID",
+	<%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN" || "LIPS"."POSNR"                AS "DeliveryItems"
 FROM (SELECT "VBRP"."MANDT" AS "MANDT",
              "VBRP"."VGBEL" AS "VGBEL",
              "VBRP"."VGPOS" AS "VGPOS",
