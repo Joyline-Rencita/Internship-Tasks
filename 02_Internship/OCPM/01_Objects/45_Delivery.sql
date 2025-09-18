@@ -39,12 +39,12 @@ WHERE "LIKP"."MANDT" IS NOT NULL
                       ****************************          CDPOS        *********************************
 
 
-SELECT <%=sourceSystem%>  || 'Delivery_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'Delivery_' || "CDPOS"."TABKEY" 		AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-           || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"        AS "ID",
+           || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"        		AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)             AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)             		AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'BTGEW' THEN 'TotalWeight'
            WHEN "CDPOS"."FNAME" = 'BZIRK' THEN 'SalesDistrict'
@@ -59,14 +59,14 @@ SELECT <%=sourceSystem%>  || 'Delivery_' || "CDPOS"."TABKEY" AS "ObjectID",
            WHEN "CDPOS"."FNAME" = 'VOLEH' THEN 'VolumeUnit'
            WHEN "CDPOS"."FNAME" = 'VOLUM' THEN 'Volume'
            WHEN "CDPOS"."FNAME" = 'KOSTK' THEN 'PickingStatus'
-           END                                               AS "Attribute",
+           END                                               		AS "Attribute",
        CASE
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
-           ELSE "CDPOS"."VALUE_OLD" END                      AS "OldValue",
+           ELSE "CDPOS"."VALUE_OLD" END                      		AS "OldValue",
        CASE
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
-           ELSE "CDPOS"."VALUE_NEW" END                      AS "NewValue",
-       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    AS "ChangedBy",
+           ELSE "CDPOS"."VALUE_NEW" END                      		AS "NewValue",
+       'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    		AS "ChangedBy",
        "CDHDR"."TCODE"                                       AS "OperationType",
        "CDHDR"."CHANGENR"                                    AS "OperationID",
        CASE
