@@ -45,7 +45,7 @@ Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, a
 )
 
 
-SO Backlog Val :
+SO Backlog Val :    Total value of sales orders not yet fulfilled or invoiced.
 
 -- SUM(
 --   CASE
