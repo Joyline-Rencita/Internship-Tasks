@@ -23,8 +23,8 @@ SELECT <%=sourceSystem%>  || 'Delivery_' || "LIKP"."MANDT" || "LIKP"."VBELN" 			
 	<%=sourceSystem%>  || "LIKP"."MANDT"                                        			AS "SourceSystemInstance",
     "LIKP"."VBELN"                                                           				AS "SystemDeliveryNumber",
     "LIKP"."VBELN"                                                           				AS "DatabaseDeliveryNumber",
-	<%=sourceSystem%>  || 'Customer_' || "LIKP"."MANDT" || "LIKP"."KUNNR"       AS "Customer",
-    CAST("LIKP"."WADAT" AS TIMESTAMP)                                        AS "ExpectedGoodsIssueDate"
+	<%=sourceSystem%>  || 'Customer_' || "LIKP"."MANDT" || "LIKP"."KUNNR"       			AS "Customer",
+    CAST("LIKP"."WADAT" AS TIMESTAMP)                                        				AS "ExpectedGoodsIssueDate"
 FROM "LIKP" AS "LIKP"
          LEFT JOIN "USR02" AS "USR02"
                    ON "LIKP"."MANDT" = "USR02"."MANDT"
