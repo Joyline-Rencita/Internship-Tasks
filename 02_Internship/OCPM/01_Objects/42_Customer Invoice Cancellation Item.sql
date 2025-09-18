@@ -12,10 +12,10 @@ SELECT <%=sourceSystem%>  || 'CustomerInvoiceCancellationItem_' || "VBRP"."MANDT
 	<%=sourceSystem%>  || "VBRP"."MANDT"                                                                                AS "SourceSystemInstance",
     "VBRP"."VBELN"                                                                                                    	AS "SystemCustomerInvoiceCancellationNumber",
     "VBRP"."POSNR"                                                                                                    	AS "SystemCustomerInvoiceCancellationItemNumber",
-    "VBRP"."VBELN"                                                                                                    AS "DatabaseCustomerInvoiceCancellationNumber",
-    "VBRP"."POSNR"                                                                                                    AS "DatabaseCustomerInvoiceCancellationItemNumber",
-	<%=sourceSystem%>  || 'Material_' || "VBRP"."MANDT" || "VBRP"."MATNR"                                                AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "VBRP"."MANDT" || "VBRP"."WERKS"                                                   AS "Plant"
+    "VBRP"."VBELN"                                                                                                    	AS "DatabaseCustomerInvoiceCancellationNumber",
+    "VBRP"."POSNR"                                                                                                    	AS "DatabaseCustomerInvoiceCancellationItemNumber",
+	<%=sourceSystem%>  || 'Material_' || "VBRP"."MANDT" || "VBRP"."MATNR"                                               AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "VBRP"."MANDT" || "VBRP"."WERKS"                                                  AS "Plant"
 FROM "VBRP" AS "VBRP"
          LEFT JOIN "VBRK" AS "VBRK"
                    ON "VBRP"."MANDT" = "VBRK"."MANDT"
