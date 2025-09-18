@@ -1,4 +1,4 @@
-Cust Order Cycle Time :
+Cust Order Cycle Time :  Average time taken from Sales Order creation to Invoice posting.
 
   ROUND(
   AVG(
