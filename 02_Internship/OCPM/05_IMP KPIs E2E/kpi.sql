@@ -43,3 +43,49 @@ Cust OTIF Rate :
   /
   COUNT("o_celonis_SalesOrder"."ID")
 )
+
+
+SO Backlog Val :
+
+-- SUM(
+--   CASE
+--     WHEN "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Completed'
+--     AND "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Invoiced'
+--     THEN "o_celonis_SalesOrderItem"."NetAmount"
+--     ELSE 0
+--   END
+-- )
+
+SUM(
+  CASE
+    WHEN ISNULL("o_celonis_DeliveryItem"."SalesOrderItem_ID") = 1
+    AND ISNULL("o_celonis_SalesOrderItem"."RejectionReason") = 1
+    THEN "o_celonis_SalesOrderItem"."NetAmount"
+    ELSE 0
+  END
+)
+
+
+--     CORRECT QUERY WITH BLOCKAGE CONDITION
+-- SUM(
+--     CASE
+--         WHEN "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Completed'
+--         AND "o_celonis_SalesOrderItem"."ProcessingStatus" != 'Invoiced'
+--         AND (
+--             ISNULL("o_celonis_SalesOrderBlock"."SalesOrder_ID") = 0
+--             OR ISNULL("o_celonis_SalesOrderItemBlock"."SalesOrderItem_ID") = 0
+--         )
+--         THEN "o_celonis_SalesOrderItem"."NetAmount"
+--         ELSE 0
+--     END
+-- )
+
+
+Avg Delivery Lead Time :
+
+AVG(
+  DAYS_BETWEEN(
+    "o_celonis_Delivery"."ExpectedGoodsIssueDate",
+    "o_celonis_SalesOrder"."CreationTime"
+  )
+) * 100
