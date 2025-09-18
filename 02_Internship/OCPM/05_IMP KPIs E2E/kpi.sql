@@ -81,7 +81,7 @@ SUM(
 -- )
 
 
-Avg Delivery Lead Time :
+Avg Delivery Lead Time :  Average number of days between order creation and delivery to customer.
 
 AVG(
   DAYS_BETWEEN(
