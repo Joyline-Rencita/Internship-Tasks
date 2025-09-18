@@ -19,7 +19,7 @@ Cust Order Cycle Time :  Average time taken from Sales Order creation to Invoice
 )
 
 
-Cust OTD Rate :
+Cust OTD Rate :    Percentage of customer deliveries completed on or before the requested delivery date.
 
 AVG(
   CASE WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
