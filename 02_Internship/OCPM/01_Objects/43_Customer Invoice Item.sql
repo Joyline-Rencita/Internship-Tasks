@@ -8,11 +8,11 @@ SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP".
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                                 	AS "CreationExecutionType",
-    'SAP'                                                                                                 AS "SourceSystemType",
-	<%=sourceSystem%>  || "VBRP"."MANDT"                                                                     AS "SourceSystemInstance",
-    "VBRP"."VBELN"                                                                                        AS "SystemCustomerInvoiceNumber",
-    "VBRP"."POSNR"                                                                                        AS "SystemCustomerInvoiceItemNumber",
-    "VBRP"."VBELN"                                                                                        AS "DatabaseCustomerInvoiceNumber",
+    'SAP'                                                                                                 	AS "SourceSystemType",
+	<%=sourceSystem%>  || "VBRP"."MANDT"                                                                    AS "SourceSystemInstance",
+    "VBRP"."VBELN"                                                                                        	AS "SystemCustomerInvoiceNumber",
+    "VBRP"."POSNR"                                                                                        	AS "SystemCustomerInvoiceItemNumber",
+    "VBRP"."VBELN"                                                                                        	AS "DatabaseCustomerInvoiceNumber",
     "VBRP"."POSNR"                                                                                        AS "DatabaseCustomerInvoiceItemNumber",
     "VBRP"."VRKME"                                                                                        AS "QuantityUnit",
     "VBRK"."WAERK"                                                                                        AS "Currency",
@@ -20,7 +20,7 @@ SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP".
     "VBRP"."NETWR"                                                                                        AS "NetAmount",
     CASE
         WHEN "VBRP"."NETWR" = 0 AND "VBRP"."FKIMG" = 0 THEN 0
-        ELSE "VBRP"."NETWR" / "VBRP"."FKIMG" END                                                          AS "NetUnitPrice",
+        ELSE "VBRP"."NETWR" / "VBRP"."FKIMG" END                                                          	AS "NetUnitPrice",
 	<%=sourceSystem%>  || 'Material_' || "VBRP"."MANDT" || "VBRP"."MATNR"                                    AS "Material",
 	<%=sourceSystem%>  || 'Plant_' || "VBRP"."MANDT" || "VBRP"."WERKS"                                       AS "Plant",
 	<%=sourceSystem%>  || 'SalesOrderItem_' || "VBRP"."MANDT" || "VBRP"."AUBEL" || "VBRP"."AUPOS"            AS "SalesOrderItem"
