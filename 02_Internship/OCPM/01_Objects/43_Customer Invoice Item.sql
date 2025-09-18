@@ -13,9 +13,9 @@ SELECT <%=sourceSystem%>  || 'CustomerInvoiceItem_' || "VBRP"."MANDT" || "VBRP".
     "VBRP"."VBELN"                                                                                        	AS "SystemCustomerInvoiceNumber",
     "VBRP"."POSNR"                                                                                        	AS "SystemCustomerInvoiceItemNumber",
     "VBRP"."VBELN"                                                                                        	AS "DatabaseCustomerInvoiceNumber",
-    "VBRP"."POSNR"                                                                                        AS "DatabaseCustomerInvoiceItemNumber",
-    "VBRP"."VRKME"                                                                                        AS "QuantityUnit",
-    "VBRK"."WAERK"                                                                                        AS "Currency",
+    "VBRP"."POSNR"                                                                                        	AS "DatabaseCustomerInvoiceItemNumber",
+    "VBRP"."VRKME"                                                                                        	AS "QuantityUnit",
+    "VBRK"."WAERK"                                                                                        	AS "Currency",
     "VBRP"."FKIMG"                                                                                        AS "InvoicedQuantity",
     "VBRP"."NETWR"                                                                                        AS "NetAmount",
     CASE
