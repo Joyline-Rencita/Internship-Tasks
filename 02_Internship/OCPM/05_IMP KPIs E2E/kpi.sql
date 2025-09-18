@@ -19,3 +19,12 @@ Cust Order Cycle Time :
 )
 
 
+Cust OTD Rate :
+
+AVG(
+  CASE WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
+  THEN 1.0
+  ELSE 0.0
+  END
+)
+
