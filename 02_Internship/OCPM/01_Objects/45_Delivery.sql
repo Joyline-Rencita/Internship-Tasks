@@ -21,8 +21,8 @@ SELECT <%=sourceSystem%>  || 'Delivery_' || "LIKP"."MANDT" || "LIKP"."VBELN" 			
     "LIKP"."VOLEH"                                                           				AS "VolumeUnit",
     'SAP'                                                                    				AS "SourceSystemType",
 	<%=sourceSystem%>  || "LIKP"."MANDT"                                        			AS "SourceSystemInstance",
-    "LIKP"."VBELN"                                                           AS "SystemDeliveryNumber",
-    "LIKP"."VBELN"                                                           AS "DatabaseDeliveryNumber",
+    "LIKP"."VBELN"                                                           				AS "SystemDeliveryNumber",
+    "LIKP"."VBELN"                                                           				AS "DatabaseDeliveryNumber",
 	<%=sourceSystem%>  || 'Customer_' || "LIKP"."MANDT" || "LIKP"."KUNNR"       AS "Customer",
     CAST("LIKP"."WADAT" AS TIMESTAMP)                                        AS "ExpectedGoodsIssueDate"
 FROM "LIKP" AS "LIKP"
