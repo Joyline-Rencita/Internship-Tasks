@@ -8,10 +8,10 @@ SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN"
 	<%=sourceSystem%>  || 'User_' || "LIPS"."MANDT" || "LIPS"."ERNAM"                                 	AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                                          AS "CreationExecutionType",
-    "LIPS"."LFIMG"                                                                                 AS "Quantity",
-    "LIPS"."VRKME"                                                                                 AS "QuantityUnit",
-    "LIPS"."NTGEW"                                                                                 AS "NetWeight",
+        ELSE 'Manual' END                                                                          		AS "CreationExecutionType",
+    "LIPS"."LFIMG"                                                                                 		AS "Quantity",
+    "LIPS"."VRKME"                                                                                 		AS "QuantityUnit",
+    "LIPS"."NTGEW"                                                                                 		AS "NetWeight",
     "LIPS"."GEWEI"                                                                                 AS "WeightUnit",
     "LIPS"."VOLUM"                                                                                 AS "Volume",
     "LIPS"."VOLEH"                                                                                 AS "VolumeUnit",
