@@ -1,11 +1,11 @@
                         ************************        LIPS         *******************************
 
-SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN" || "LIPS"."POSNR" AS "ID",
+SELECT <%=sourceSystem%>  || 'DeliveryItem_' || "LIPS"."MANDT" || "LIPS"."VBELN" || "LIPS"."POSNR" 		AS "ID",
     CAST("LIPS"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("LIPS"."ERZET" AS DATE),
-            "LIPS"."ERZET") AS INTERVAL SECOND)                                                    AS "CreationTime",
-	<%=sourceSystem%>  || 'Delivery_' || "LIPS"."MANDT" || "LIPS"."VBELN"                             AS "Header",
-	<%=sourceSystem%>  || 'User_' || "LIPS"."MANDT" || "LIPS"."ERNAM"                                 AS "CreatedBy",
+            "LIPS"."ERZET") AS INTERVAL SECOND)                                                    		AS "CreationTime",
+	<%=sourceSystem%>  || 'Delivery_' || "LIPS"."MANDT" || "LIPS"."VBELN"                             	AS "Header",
+	<%=sourceSystem%>  || 'User_' || "LIPS"."MANDT" || "LIPS"."ERNAM"                                 	AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                          AS "CreationExecutionType",
