@@ -70,3 +70,20 @@ WHERE TIMESTAMPDIFF(SECOND, "Event"."Time", "Object"."CreationTime") <= 5
                                     RELATIONSHIPS ->    SALES ORDER ITEMS
 
 
+SELECT DISTINCT
+                "Event"."ID"  AS "ID",
+                "Object"."ID" AS "SalesOrderItems"
+FROM (SELECT "Event"."ID"                                     AS "ID",
+             "Event"."Time"                                   AS "Time",
+             "CustomerInvoiceItem_Header"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
+      FROM "e_celonis_CreateCustomerInvoice" AS "Event"
+               LEFT JOIN (SELECT "Object"."Header_ID"         AS "Header_ID",
+                                 "Object"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
+                          FROM "o_celonis_CustomerInvoiceItem" AS "Object"
+                          ORDER BY "Object"."Header_ID") AS "CustomerInvoiceItem_Header"
+                         ON "Event"."CustomerInvoice_ID" = "CustomerInvoiceItem_Header"."Header_ID"
+      ORDER BY "CustomerInvoiceItem_Header"."SalesOrderItem_ID") AS "Event"
+         LEFT JOIN "o_celonis_SalesOrderItem" AS "Object"
+                   ON "Event"."SalesOrderItem_ID" = "Object"."ID"
+WHERE TIMESTAMPDIFF(SECOND, "Event"."Time", "Object"."CreationTime") <= 5
+  AND "Object"."ID" IS NOT NULL
