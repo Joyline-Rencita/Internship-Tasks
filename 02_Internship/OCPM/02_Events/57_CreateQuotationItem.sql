@@ -1,3 +1,5 @@
+             ***********************           EVENT              ***************************
+
 SELECT 'CreateQuotationItem' || '_' || "QuotationItem"."ID" AS "ID",
        "QuotationItem"."ID"                                 AS "QuotationItem",
        "QuotationItem"."CreationTime"                       AS "Time",
