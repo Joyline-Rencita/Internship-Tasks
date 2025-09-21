@@ -6,9 +6,10 @@ SELECT 'CreateSalesOrderItem' || '_' || "SalesOrderItem"."ID" AS "ID",
        "SalesOrderItem"."CreationTime"                        AS "Time",
        "SalesOrderItem"."CreatedBy_ID"                        AS "ExecutedBy",
        "SalesOrderItem"."CreationExecutionType"               AS "ExecutionType"
-FROM (SELECT "SalesOrderItem"."ID"                    AS ID,
-             "SalesOrderItem"."Header_ID"             AS HEADER_ID,
-             "SalesOrderItem"."CreationTime"          AS CREATIONTIME,
+                  
+FROM (SELECT "SalesOrderItem"."ID"                            AS ID,
+             "SalesOrderItem"."Header_ID"                     AS HEADER_ID,
+             "SalesOrderItem"."CreationTime"                  AS CREATIONTIME,
              "SalesOrderItem"."CreatedBy_ID"          AS CREATEDBY_ID,
              "SalesOrderItem"."CreationExecutionType" AS CREATIONEXECUTIONTYPE
       FROM "o_celonis_SalesOrderItem" AS "SalesOrderItem"
