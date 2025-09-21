@@ -1,3 +1,5 @@
+                            ***********************           EVENT              ***************************
+
 SELECT 'CreateDeliveryItem' || '_' || "DeliveryItem"."ID" AS "ID",
        "DeliveryItem"."ID"                                AS "DeliveryItem",
        "SalesOrderItem"."ID"                              AS "SalesOrderItem",
