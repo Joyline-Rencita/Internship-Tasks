@@ -1,3 +1,5 @@
+                        ***********************           EVENT              ***************************
+
 SELECT 'CreateQuotationHeader' || '_' || "Quotation"."ID" AS "ID",
        "Quotation"."ID"                                   AS "Quotation",
        "Quotation"."CreationTime"                         AS "Time",
