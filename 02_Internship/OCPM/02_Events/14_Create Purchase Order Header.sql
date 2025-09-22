@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'CreatePurchaseOrderHeader' || '_' || "PurchaseOrder"."ID" AS "ID",
        "PurchaseOrder"."ID"                                       AS "PurchaseOrder",
        "PurchaseOrder"."CreationTime"                             AS "Time",
