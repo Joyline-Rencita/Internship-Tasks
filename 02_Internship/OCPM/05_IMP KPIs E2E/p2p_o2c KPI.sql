@@ -6,7 +6,6 @@ Cust Order Cycle Time :  Average time taken from Sales Order creation to Invoice
     "o_celonis_CustomerInvoiceItem"."CreationTime"  
   )
 )
-  
 --   ROUND(
 --   AVG(
 --     CASE
