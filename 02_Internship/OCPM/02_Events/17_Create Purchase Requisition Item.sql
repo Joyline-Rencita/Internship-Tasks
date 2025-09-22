@@ -14,6 +14,8 @@ WHERE "PurchaseRequisition"."CreationTime" IS NOT NULL
 
 ======================================================================================================================================================================
 
+                                 RELATIONSHIP -> PURCHASE ORDER ITEMS
+
 SELECT DISTINCT "Event"."ID"  AS "ID",
                 "Object"."ID" AS "PurchaseOrderItems"
 FROM "e_celonis_CreatePurchaseRequisitionItem" AS "Event"
