@@ -1,3 +1,5 @@
+                             *********************    EVENT     **************************
+
 SELECT 'ChangeContractItem' || '_' || "ContractItem_Changes"."ID" AS "ID",
        "ContractItem"."ID"                                        AS "ContractItem",
        "ContractItem_Changes"."Time"                              AS "Time",
