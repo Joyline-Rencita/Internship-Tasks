@@ -1,30 +1,35 @@
 Cust Order Cycle Time :  Average time taken from Sales Order creation to Invoice posting.
 
-  ROUND(
   AVG(
-    CASE
-      WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" IS NOT NULL
-       AND "o_celonis_SalesOrder"."CreationTime" IS NOT NULL
-       AND DAYS_BETWEEN(
-             "o_celonis_SalesOrder"."RequestedDeliveryDate",
-             "o_celonis_SalesOrder"."CreationTime"
-           ) >= 0
-      THEN DAYS_BETWEEN(
-             "o_celonis_SalesOrder"."RequestedDeliveryDate",
-             "o_celonis_SalesOrder"."CreationTime"
-           )
-    END
-  ),
-  1
+  DAYS_BETWEEN(
+    "o_celonis_SalesOrder"."CreationTime", 
+    "o_celonis_CustomerInvoiceItem"."CreationTime"  
+  )
 )
-
+  
+--   ROUND(
+--   AVG(
+--     CASE
+--       WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" IS NOT NULL
+--        AND "o_celonis_SalesOrder"."CreationTime" IS NOT NULL
+--        AND DAYS_BETWEEN(
+--              "o_celonis_SalesOrder"."RequestedDeliveryDate",
+--              "o_celonis_SalesOrder"."CreationTime"
+--            ) >= 0
+--       THEN DAYS_BETWEEN(
+--              "o_celonis_SalesOrder"."RequestedDeliveryDate",
+--              "o_celonis_SalesOrder"."CreationTime"
+--            )
+--     END
+--   ),
+--   1
+-- )
 
 Cust OTD Rate :    Percentage of customer deliveries completed on or before the requested delivery date.
 
 AVG(
   CASE WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
-  THEN 1.0
-  ELSE 0.0
+  THEN 1.0   ELSE 0.0
   END
 )
 
