@@ -12,7 +12,7 @@ FROM "o_celonis_PurchaseRequisitionItem" AS "PurchaseRequisition"
 WHERE "PurchaseRequisition"."CreationTime" IS NOT NULL
 
 
-==================================================================================================================================
+======================================================================================================================================================================
 
 SELECT DISTINCT "Event"."ID"  AS "ID",
                 "Object"."ID" AS "PurchaseOrderItems"
