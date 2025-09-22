@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'ApprovePurchaseOrder' || '_' || "PurchaseOrder_Changes"."ID" AS "ID",
        "PurchaseOrder"."ID"                                          AS "PurchaseOrder",
        "PurchaseOrder_Changes"."Time"                                AS "Time",
