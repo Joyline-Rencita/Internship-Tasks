@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'PostReturnGoodsReceipt' || '_' || "OutgoingMaterialDocumentItem"."ID" AS "ID",
        "OutgoingMaterialDocumentItem"."ID"                                    AS "OutgoingMaterialDocumentItem",
        "OutgoingMaterialDocumentItem"."CreationTime"                          AS "Time",
