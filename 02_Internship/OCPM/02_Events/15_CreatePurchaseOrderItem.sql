@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'CreatePurchaseOrderItem' || '_' || "PurchaseOrderItem"."ID" AS "ID",
        "PurchaseOrderItem"."ID"                                     AS "PurchaseOrderItem",
        "PurchaseOrder"."ID"                                         AS "PurchaseOrder",
