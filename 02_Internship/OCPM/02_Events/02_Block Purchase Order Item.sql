@@ -1,3 +1,5 @@
+                    *********************    EVENT     **************************
+
 SELECT 'BlockPurchaseOrderItem' || '_' || "PurchaseOrderItem_Changes"."ID" AS "ID",
        "PurchaseOrderItem"."ID"                                            AS "PurchaseOrderItem",
        "PurchaseOrderItem_Changes"."Time"                                  AS "Time",
