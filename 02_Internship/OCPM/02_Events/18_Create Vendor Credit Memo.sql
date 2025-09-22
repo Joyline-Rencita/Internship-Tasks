@@ -1,3 +1,5 @@
+
+
 SELECT 'CreateVendorCreditMemo' || '_' || "VendorCreditMemo"."ID" AS "ID",
        "VendorCreditMemo"."ID"                                    AS "VendorCreditMemo",
        "VendorCreditMemo"."CreationTime"                          AS "Time",
