@@ -75,8 +75,8 @@ AVG(
 Invoices Paid On Time :  Percentage of customer invoices paid within agreed payment terms.
   COUNT(
   CASE
-    WHEN "o_celonis_CustomerInvoice"."Customer_Invoice_TPT"
-         <= CASE
+    WHEN "o_celonis_CustomerInvoice"."Customer_Invoice_TPT"   <= 
+            CASE
               WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'D016' THEN 30.0
               WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'NT00' THEN 45.0
               WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'NT45' THEN 45.0
@@ -97,3 +97,5 @@ COUNT(
   END
 )
 * 100
+
+
