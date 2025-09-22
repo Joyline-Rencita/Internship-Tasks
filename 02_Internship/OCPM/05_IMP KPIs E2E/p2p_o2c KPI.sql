@@ -120,3 +120,14 @@ SUM(
       THEN 0.0
       ELSE "o_celonis_VendorAccountCreditItem"."ConvertedDocumentValue"
     END)
+
+  
+DSO (Days Sales Outstanding) :
+SUM(
+  DAYS_BETWEEN(
+    ROUND_DAY("o_celonis_CustomerInvoice"."CreationTime"),
+    ROUND_DAY(TODAY())
+  ) * "o_celonis_CustomerInvoiceItem"."NetAmount"
+)
+/
+SUM("o_celonis_CustomerInvoiceItem"."NetAmount")
