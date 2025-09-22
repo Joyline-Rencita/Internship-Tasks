@@ -1,3 +1,5 @@
+                             *********************    EVENT     **************************
+
 SELECT 'ChangePurchaseOrderScheduleLine' || '_' || "PurchaseOrderScheduleLine_Changes"."ID" AS "ID",
        "PurchaseOrderScheduleLine_Changes"."ObjectID"                                       AS "PurchaseOrderScheduleLine",
        "PurchaseOrderScheduleLine_Changes"."Time"                                           AS "Time",
