@@ -46,3 +46,13 @@ WHERE "Object"."ID" IS NOT NULL
 
 ====================================================================================================================================================================
 
+                                RELATIONSHIPS -> VENDOR CREDIT MEMO ITEMS
+
+SELECT DISTINCT "Event"."ID"  AS "ID",
+                "Object"."ID" AS "VendorCreditMemoItems"
+FROM "e_celonis_CreateVendorCreditMemo" AS "Event"
+         LEFT JOIN "o_celonis_VendorCreditMemo" AS "VendorCreditMemo"
+                   ON "Event"."VendorCreditMemo_ID" = "VendorCreditMemo"."ID"
+         LEFT JOIN "o_celonis_VendorCreditMemoItem" AS "Object"
+                   ON "VendorCreditMemo"."ID" = "Object"."Header_ID"
+WHERE "Object"."ID" IS NOT NULL
