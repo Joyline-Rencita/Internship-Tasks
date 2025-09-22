@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'ChangeVendorConfirmation' || '_' || "VendorConfirmation_Changes"."ID" AS "ID",
        "VendorConfirmation"."ID"                                              AS "VendorConfirmation",
        "VendorConfirmation_Changes"."Time"                                    AS "Time",
