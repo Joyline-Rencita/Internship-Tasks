@@ -1,3 +1,5 @@
+                      *********************    EVENT     **************************
+
 SELECT 'ChangePurchaseRequisitionItem' || '_' || "PurchaseRequisitionItem_Changes"."ID" AS "ID",
        "PurchaseRequisitionItem"."ID"                                                   AS "PurchaseRequisitionItem",
        "PurchaseRequisitionItem_Changes"."Time"                                         AS "Time",
