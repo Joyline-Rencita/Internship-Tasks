@@ -12,7 +12,7 @@ WITH "CTE_EKBE" AS (SELECT DISTINCT "EKBE"."MANDT",
 SELECT <%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."MBLNR" || "MSEG"."MJAHR" || "MSEG"."ZEILE" AS "ID",
     CAST("MSEG"."CPUDT_MKPF" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("MSEG"."CPUTM_MKPF" AS DATE),
             "MSEG"."CPUTM_MKPF") AS INTERVAL SECOND)                                                                                 AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "MSEG"."MANDT" || "MSEG"."USNAM_MKPF"                                                              AS "CreatedBy",
+	<%=sourceSystem%>  || 'User_' || "MSEG"."MANDT" || "MSEG"."USNAM_MKPF"                                                           AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                                                                            AS "CreationExecutionType",
