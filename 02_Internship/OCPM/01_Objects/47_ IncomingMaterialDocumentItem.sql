@@ -46,11 +46,11 @@ SELECT <%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" |
 	<%=sourceSystem%>  || 'VendorInvoice_' || "MSEG"."MANDT" || "MSEG"."LFBNR" || "MSEG"."LFBJA"                                     AS "VendorInvoice",
 	<%=sourceSystem%>  || 'OutgoingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."SMBLN" || "MSEG"."SJAHR"
     || "MSEG"."SMBLP"                                                                                                                AS "ReversedOutgoingGood",
-	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                                 AS "Vendor",
-	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                               AS "Material",
+	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                              AS "Vendor",
+	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                            AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "MSEG"."MANDT" || "MSEG"."MATNR"
     || "MSEG"."WERKS"                                                                                                                AS "MaterialMasterPlant",
-	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                                  AS "Plant"
+	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                               AS "Plant"
 FROM "MSEG" AS "MSEG"
          LEFT JOIN "CTE_EKBE" AS "EKBE"
                    ON "MSEG"."MANDT" = "EKBE"."MANDT"
