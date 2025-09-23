@@ -44,20 +44,20 @@ FROM "MARA" AS "MARA"
                       **********************        CDPOS        **********************
 
 
-SELECT <%=sourceSystem%>  || 'Material_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'Material_' || "CDPOS"."TABKEY" 		AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"            AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"            		AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)             AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)             		AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'MATKL' THEN 'MaterialGroup'
            WHEN "CDPOS"."FNAME" = 'MBRSH' THEN 'IndustrySector'
            WHEN "CDPOS"."FNAME" = 'MTART' THEN 'MaterialType'
-           END                                               AS "Attribute",
+           END                                               		AS "Attribute",
        CASE
            WHEN "CDPOS"."VALUE_OLD" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_OLD"), '-', ''))
-           ELSE "CDPOS"."VALUE_OLD" END                      AS "OldValue",
+           ELSE "CDPOS"."VALUE_OLD" END                      		AS "OldValue",
        CASE
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
            ELSE "CDPOS"."VALUE_NEW" END                      AS "NewValue",
