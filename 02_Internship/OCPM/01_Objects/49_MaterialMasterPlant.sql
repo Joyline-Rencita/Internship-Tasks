@@ -37,7 +37,7 @@ SELECT <%=sourceSystem%>  || 'MaterialMasterPlant_' || "MARC"."MANDT" || "MARC".
     "T001"."WAERS"                                                                                        AS "BaseCurrency",
     "MARA"."MEINS"                                                                                        AS "BaseQuantityUnit",
     'SAP'                                                                                                 AS "SourceSystemType",
-	<%=sourceSystem%>  || "MARC"."MANDT"                                                                     AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "MARC"."MANDT"                                                                  AS "SourceSystemInstance"
 FROM "MARC" AS "MARC"
          LEFT JOIN "T001W" AS "T001W"
                    ON "MARC"."MANDT" = "T001W"."MANDT"
