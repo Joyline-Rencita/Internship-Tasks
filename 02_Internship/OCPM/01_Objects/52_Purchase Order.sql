@@ -94,12 +94,12 @@ WHERE "EKKO"."MANDT" IS NOT NULL
 							***********************			CDPOS			**************************
 						  
 
-SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" 	AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"                 	AS "ID",
        CAST("CDHDR"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
-            "CDHDR"."UTIME") AS INTERVAL SECOND)                  AS "Time",
+            "CDHDR"."UTIME") AS INTERVAL SECOND)                  	AS "Time",
        CASE
            WHEN "CDPOS"."FNAME" = 'FRGKE' THEN 'ReleaseIndicator'
            WHEN "CDPOS"."FNAME" = 'FRGZU' THEN 'ApprovalLevel'
@@ -107,7 +107,7 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "CDPOS"."TABKEY" AS "ObjectID",
            WHEN "CDPOS"."FNAME" = 'LOEKZ' THEN 'DeletionIndicator'
            WHEN "CDPOS"."FNAME" = 'WAERS' THEN 'Currency'
            WHEN "CDPOS"."FNAME" = 'ZTERM' THEN 'PaymentTerms'
-           END                                                    AS "Attribute",
+           END                                                    	AS "Attribute",
        CASE
            WHEN "CDPOS"."FNAME" = 'FRGZU' THEN
                CASE
