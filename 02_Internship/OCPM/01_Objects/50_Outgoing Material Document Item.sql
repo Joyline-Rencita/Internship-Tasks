@@ -51,8 +51,8 @@ SELECT <%=sourceSystem%>  || 'OutgoingMaterialDocumentItem_' || "MSEG"."MANDT" |
 	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                            AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "MSEG"."MANDT" || "MSEG"."MATNR"
     || "MSEG"."WERKS"                                                                                                                AS "MaterialMasterPlant",
-	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                                  AS "Plant",
-	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                                 AS "Vendor"
+	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                               AS "Plant",
+	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                              AS "Vendor"
 FROM "MSEG" AS "MSEG"
          LEFT JOIN "CTE_EKBE" AS "EKBE"
                    ON "MSEG"."MANDT" = "EKBE"."MANDT"
