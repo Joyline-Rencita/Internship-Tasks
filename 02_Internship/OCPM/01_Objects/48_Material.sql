@@ -16,7 +16,7 @@ SELECT <%=sourceSystem%>  || 'Material_' || "MARA"."MANDT" || "MARA"."MATNR" AS 
             THEN "MARM"."MEINH"
         END                                                                  AS "StockKeepingUnit",
     'SAP'                                                                    AS "SourceSystemType",
-	<%=sourceSystem%>  || "MARA"."MANDT"                                        AS "SourceSystemInstance"
+	<%=sourceSystem%>  || "MARA"."MANDT"                                     AS "SourceSystemInstance"
 FROM "MARA" AS "MARA"
          LEFT JOIN "MAKT" AS "MAKT"
                    ON "MARA"."MANDT" = "MAKT"."MANDT"
