@@ -29,10 +29,10 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN
            ELSE 'Manual' END                                                                             	AS "CreationExecutionType",
        "EKKO"."LOEKZ"                                                                                    	AS "DeletionIndicator",
 	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                    	AS "Vendor",
-	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT" || "EKKO"."LIFNR" || "EKKO"."BUKRS" AS "VendorMasterCompanyCode",
-       "EKKO"."WAERS"                                                                                    AS "Currency",
-       "EKKO"."ZTERM"                                                                                    AS "PaymentTerms",
-	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")      AS "ApprovedBy",
+	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT" || "EKKO"."LIFNR" || "EKKO"."BUKRS" 	AS "VendorMasterCompanyCode",
+       "EKKO"."WAERS"                                                                                    	AS "Currency",
+       "EKKO"."ZTERM"                                                                                    	AS "PaymentTerms",
+	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")      	AS "ApprovedBy",
        CASE
            WHEN "EKKO"."FRGZU" IS NULL THEN 0
            WHEN "EKKO"."FRGZU" = 'X' THEN 1
