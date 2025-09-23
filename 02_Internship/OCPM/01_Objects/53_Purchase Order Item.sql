@@ -46,11 +46,11 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."E
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
            ELSE 'Manual' END                                                                            	AS "CreationExecutionType",
 	<%=sourceSystem%>  || 'PurchaseOrder_' || "EKPO"."MANDT" || "EKPO"."EBELN"                             	AS "Header",
-       "EKPO"."NETWR"                                                                                   AS "NetAmount",
-       "EKPO"."NETPR" / COALESCE("EKPO"."PEINH", 1)                                                     AS "NetUnitPrice",
-       "EKPO"."MENGE"                                                                                   AS "Quantity",
-       "EKPO"."MEINS"                                                                                   AS "QuantityUnit",
-	<%=sourceSystem%>  || 'ContractItem_' || "EKPO"."MANDT" || "EKPO"."KONNR" || "EKPO"."KTPNR"            AS "ContractItem",
+       "EKPO"."NETWR"                                                                                   	AS "NetAmount",
+       "EKPO"."NETPR" / COALESCE("EKPO"."PEINH", 1)                                                     	AS "NetUnitPrice",
+       "EKPO"."MENGE"                                                                                   	AS "Quantity",
+       "EKPO"."MEINS"                                                                                   	AS "QuantityUnit",
+	<%=sourceSystem%>  || 'ContractItem_' || "EKPO"."MANDT" || "EKPO"."KONNR" || "EKPO"."KTPNR"            	AS "ContractItem",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "EKPO"."MANDT" || "EKPO"."MATNR"
        || "EKPO"."WERKS"                                                                                AS "MaterialMasterPlant",
 	<%=sourceSystem%>  || 'Material_' || "EKPO"."MANDT" || "EKPO"."MATNR"                                  AS "Material",
