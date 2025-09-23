@@ -45,10 +45,10 @@ SELECT <%=sourceSystem%>  || 'OutgoingMaterialDocumentItem_' || "MSEG"."MANDT" |
     "MSEG"."ZEILE"                                                                                                                   AS "DatabaseOutgoingMaterialDocumentItemNumber",
 	<%=sourceSystem%>  || 'DeliveryItem_' || "MSEG"."MANDT" || "MSEG"."VBELN_IM"
     || "MSEG"."VBELP_IM"                                                                                                             AS "DeliveryItem",
-	<%=sourceSystem%>  || 'SalesOrderItem_' || "MSEG"."MANDT" || "MSEG"."KDAUF" || "MSEG"."KDPOS"                                       AS "SalesOrderItem",
+	<%=sourceSystem%>  || 'SalesOrderItem_' || "MSEG"."MANDT" || "MSEG"."KDAUF" || "MSEG"."KDPOS"                                    AS "SalesOrderItem",
 	<%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."SMBLN" || "MSEG"."SJAHR"
     || "MSEG"."SMBLP"                                                                                                                AS "ReversedIncomingGood",
-	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                               AS "Material",
+	<%=sourceSystem%>  || 'Material_' || "MSEG"."MANDT" || "MSEG"."MATNR"                                                            AS "Material",
 	<%=sourceSystem%>  || 'MaterialMasterPlant_' || "MSEG"."MANDT" || "MSEG"."MATNR"
     || "MSEG"."WERKS"                                                                                                                AS "MaterialMasterPlant",
 	<%=sourceSystem%>  || 'Plant_' || "MSEG"."MANDT" || "MSEG"."WERKS"                                                                  AS "Plant",
