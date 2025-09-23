@@ -17,18 +17,18 @@ WITH "CTE_Changes" AS (SELECT "CDPOS"."MANDANT",
                          AND "CDPOS"."TABNAME" = 'EKKO'
                          AND "CDPOS"."FNAME" = 'KEY'
                          AND "CDPOS"."CHNGIND" = 'I')
-SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN"                        AS "ID",
+SELECT <%=sourceSystem%>  || 'PurchaseOrder_' || "EKKO"."MANDT" || "EKKO"."EBELN"                        	AS "ID",
        COALESCE(
             CAST("Changes"."UDATE" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes"."UTIME" AS DATE),
             "Changes"."UTIME") AS INTERVAL SECOND),
-            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                          AS "CreationTime",
+            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                            AS "CreationTime",
 	<%=sourceSystem%>  || 'User_' || "EKKO"."MANDT" || COALESCE("Changes"."USERNAME", "EKKO"."ERNAM")      AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                                             AS "CreationExecutionType",
-       "EKKO"."LOEKZ"                                                                                    AS "DeletionIndicator",
-	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                    AS "Vendor",
+           ELSE 'Manual' END                                                                             	AS "CreationExecutionType",
+       "EKKO"."LOEKZ"                                                                                    	AS "DeletionIndicator",
+	<%=sourceSystem%>  || 'Vendor_' || "EKKO"."MANDT" || "EKKO"."LIFNR"                                    	AS "Vendor",
 	<%=sourceSystem%>  || 'VendorMasterCompanyCode_' || "EKKO"."MANDT" || "EKKO"."LIFNR" || "EKKO"."BUKRS" AS "VendorMasterCompanyCode",
        "EKKO"."WAERS"                                                                                    AS "Currency",
        "EKKO"."ZTERM"                                                                                    AS "PaymentTerms",
