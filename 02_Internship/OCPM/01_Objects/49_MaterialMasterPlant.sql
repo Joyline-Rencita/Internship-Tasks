@@ -6,8 +6,8 @@ SELECT <%=sourceSystem%>  || 'MaterialMasterPlant_' || "MARC"."MANDT" || "MARC".
     CAST("MARC"."MMSTD" AS TIMESTAMP)                                                                     AS "ValidityPeriodStartDate",
     CAST("MARC"."AUSDT" AS TIMESTAMP)                                                                     AS "ValidityPeriodEndDate",
     "MARC"."PLIFZ"                                                                                        AS "PlannedDeliveryTimeDays",
-	<%=sourceSystem%>  || 'Material_' || "MARC"."MANDT" || "MARC"."MATNR"                                    AS "Material",
-	<%=sourceSystem%>  || 'Plant_' || "MARC"."MANDT" || "MARC"."WERKS"                                       AS "Plant",
+	<%=sourceSystem%>  || 'Material_' || "MARC"."MANDT" || "MARC"."MATNR"                                 AS "Material",
+	<%=sourceSystem%>  || 'Plant_' || "MARC"."MANDT" || "MARC"."WERKS"                                    AS "Plant",
     CAST("MARC"."EISBE" AS BIGINT)                                                                        AS "SafetyStockLevel",
     "MARC"."NFMAT"                                                                                        AS "FollowUpMaterial",
     CASE
