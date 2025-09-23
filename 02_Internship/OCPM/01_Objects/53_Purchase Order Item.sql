@@ -75,9 +75,9 @@ SELECT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."E
        "EKKO"."WAERS"                                                                                   	AS "Currency",
        'SAP'                                                                                            	AS "SourceSystemType",
 	<%=sourceSystem%>  || "EKPO"."MANDT"                                                                   	AS "SourceSystemInstance",
-       "T161T"."BATXT"                                                                                  AS "PurchasingDocumentType",
-       CAST("EKPO"."UEBTO" AS VARCHAR(255))                                                             AS "ToleranceLimit",
-       "EKPO"."WEBRE"                                                                                   AS "InvoiceAfterGoodsReceiptIndicator"
+       "T161T"."BATXT"                                                                                  	AS "PurchasingDocumentType",
+       CAST("EKPO"."UEBTO" AS VARCHAR(255))                                                             	AS "ToleranceLimit",
+       "EKPO"."WEBRE"                                                                                   	AS "InvoiceAfterGoodsReceiptIndicator"
 FROM "EKPO" AS "EKPO"
          LEFT JOIN "EKKO" AS "EKKO"
                    ON "EKPO"."MANDT" = "EKKO"."MANDT"
