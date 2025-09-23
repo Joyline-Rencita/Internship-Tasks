@@ -34,18 +34,18 @@ WITH "CTE_Changes_EKPO" AS (SELECT "CDPOS"."MANDANT",
                              AND "CDPOS"."TABNAME" = 'EKKO'
                              AND "CDPOS"."FNAME" = 'KEY'
                              AND "CDPOS"."CHNGIND" = 'I')
-SELECT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP" AS "ID",
+SELECT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP" ``AS "ID",
        COALESCE(
             CAST("Changes_EKPO"."UDATE" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes_EKPO"."UTIME" AS DATE), "Changes_EKPO"."UTIME") AS INTERVAL SECOND),
             CAST("Changes_EKKO"."UDATE" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("Changes_EKKO"."UTIME" AS DATE), "Changes_EKKO"."UTIME") AS INTERVAL SECOND),
-            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                         AS "CreationTime",
-       "EKPO"."LOEKZ"                                                                                   AS "DeletionIndicator",
+            CAST("EKKO"."AEDAT" AS DATE) + INTERVAL '1' SECOND)                                         	AS "CreationTime",
+       "EKPO"."LOEKZ"                                                                                   	AS "DeletionIndicator",
 	<%=sourceSystem%>  || 'User_' || "EKPO"."MANDT" || COALESCE("Changes_EKPO"."USERNAME", "Changes_EKKO"."USERNAME",
-                                             "EKKO"."ERNAM")                                            AS "CreatedBy",
+                                             "EKKO"."ERNAM")                                            	AS "CreatedBy",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                                                            AS "CreationExecutionType",
-	<%=sourceSystem%>  || 'PurchaseOrder_' || "EKPO"."MANDT" || "EKPO"."EBELN"                             AS "Header",
+           ELSE 'Manual' END                                                                            	AS "CreationExecutionType",
+	<%=sourceSystem%>  || 'PurchaseOrder_' || "EKPO"."MANDT" || "EKPO"."EBELN"                             	AS "Header",
        "EKPO"."NETWR"                                                                                   AS "NetAmount",
        "EKPO"."NETPR" / COALESCE("EKPO"."PEINH", 1)                                                     AS "NetUnitPrice",
        "EKPO"."MENGE"                                                                                   AS "Quantity",
