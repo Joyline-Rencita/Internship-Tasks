@@ -36,14 +36,14 @@ SELECT <%=sourceSystem%>  || 'IncomingMaterialDocumentItem_' || "MSEG"."MANDT" |
     "EKBE"."WRBTR"                                                                                                                   AS "Amount",
     "EKBE"."WAERS"                                                                                                                   AS "Currency",
     'SAP'                                                                                                                            AS "SourceSystemType",
-	<%=sourceSystem%>  || "MSEG"."MANDT"                                                                                                AS "SourceSystemInstance",
+	<%=sourceSystem%>  || "MSEG"."MANDT"                                                                                             AS "SourceSystemInstance",
     "MSEG"."MBLNR"                                                                                                                   AS "SystemIncomingMaterialDocumentNumber",
     "MSEG"."ZEILE"                                                                                                                   AS "SystemIncomingMaterialDocumentItemNumber",
     "MSEG"."MBLNR"                                                                                                                   AS "DatabaseIncomingMaterialDocumentNumber",
     "MSEG"."ZEILE"                                                                                                                   AS "DatabaseIncomingMaterialDocumentItemNumber",
 	<%=sourceSystem%>  || 'PurchaseOrderItem_' || "MSEG"."MANDT" || "MSEG"."EBELN"
     || "MSEG"."EBELP"                                                                                                                AS "PurchaseOrderItem",
-	<%=sourceSystem%>  || 'VendorInvoice_' || "MSEG"."MANDT" || "MSEG"."LFBNR" || "MSEG"."LFBJA"                                        AS "VendorInvoice",
+	<%=sourceSystem%>  || 'VendorInvoice_' || "MSEG"."MANDT" || "MSEG"."LFBNR" || "MSEG"."LFBJA"                                     AS "VendorInvoice",
 	<%=sourceSystem%>  || 'OutgoingMaterialDocumentItem_' || "MSEG"."MANDT" || "MSEG"."SMBLN" || "MSEG"."SJAHR"
     || "MSEG"."SMBLP"                                                                                                                AS "ReversedOutgoingGood",
 	<%=sourceSystem%>  || 'Vendor_' || "MSEG"."MANDT" || "MSEG"."LIFNR"                                                                 AS "Vendor",
