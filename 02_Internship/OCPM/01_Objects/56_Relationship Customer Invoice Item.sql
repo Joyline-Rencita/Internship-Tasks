@@ -40,9 +40,9 @@ WITH
      "CTE_OutgoingMaterialDocumentItem" AS (SELECT *
                                             FROM (SELECT "S"."OutgoingMaterialDocumentItem_ID",
                                                          "S"."OutgoingMaterialDocumentItem_DeliveryItem_ID",
-                                                         "T"."SalesOrderItem_ID" AS "OutgoingMaterialDocumentItem_SalesOrderItem_ID"
-                                                  FROM (SELECT "S"."ID"              AS "OutgoingMaterialDocumentItem_ID",
-                                                               "T"."DeliveryItem_ID" AS "OutgoingMaterialDocumentItem_DeliveryItem_ID",
+                                                         "T"."SalesOrderItem_ID"                               AS "OutgoingMaterialDocumentItem_SalesOrderItem_ID"
+                                                  FROM (SELECT "S"."ID"                                        AS "OutgoingMaterialDocumentItem_ID",
+                                                               "T"."DeliveryItem_ID"                           AS "OutgoingMaterialDocumentItem_DeliveryItem_ID",
                                                                "S"."SalesOrderItem_ID"
                                                         FROM (SELECT "S"."ID",
                                                                      "S"."DeliveryItem_ID"   AS "DeliveryItem_ID",
