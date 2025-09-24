@@ -1,10 +1,10 @@
                     ***************************        VBAK      *********************************
 
-SELECT <%=sourceSystem%>  || 'Quotation_' || "VBAK"."MANDT" || "VBAK"."VBELN" AS "ID",
+SELECT <%=sourceSystem%>  || 'Quotation_' || "VBAK"."MANDT" || "VBAK"."VBELN" 	AS "ID",
     CAST("VBAK"."ERDAT" AS DATE)
             + CAST(TIMESTAMPDIFF(SECOND, CAST("VBAK"."ERZET" AS DATE),
-            "VBAK"."ERZET") AS INTERVAL SECOND)                               AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "VBAK"."MANDT" || "VBAK"."ERNAM"            AS "CreatedBy",
+            "VBAK"."ERZET") AS INTERVAL SECOND)                               	AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "VBAK"."MANDT" || "VBAK"."ERNAM"           AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                     AS "CreationExecutionType",
