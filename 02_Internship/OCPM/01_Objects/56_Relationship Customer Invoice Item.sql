@@ -1,6 +1,5 @@
                       ****************************      CTE_UNION      ******************************
 
-
 WITH
      "CTE_SalesOrderItem" AS (SELECT "S"."ID" AS "SalesOrderItem_ID"
                               FROM "o_celonis_SalesOrderItem" AS "S"),
