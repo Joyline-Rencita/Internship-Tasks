@@ -208,7 +208,7 @@ WHERE "EKPO"."BSTYP" = 'F'
 
 
 WITH "CTE_TMP_MaterialContract" AS
-         (SELECT "EKPO"."MANDT" || "EKPO"."EBELN"                      AS "ID",
+         (SELECT "EKPO"."MANDT" || "EKPO"."EBELN"                      		AS "ID",
                  "EKPO"."MANDT",
                  "EKPO"."WERKS",
                  "EKKO"."WAERS",
@@ -221,12 +221,12 @@ WITH "CTE_TMP_MaterialContract" AS
                                  AND "EKPO"."EBELN" = "EKKO"."EBELN"
           WHERE "EKPO"."BSTYP" = 'K')
 SELECT DISTINCT <%=sourceSystem%>  || 'PurchaseOrderItem_' || "EKPO"."MANDT" || "EKPO"."EBELN" || "EKPO"."EBELP" AS "ID",
-	<%=sourceSystem%>  || 'Contract_' || "TMP_MaterialContract"."ID"                                                AS "RecommendedMaterialContracts"
+	<%=sourceSystem%>  || 'Contract_' || "TMP_MaterialContract"."ID"         AS "RecommendedMaterialContracts"
 FROM "EKPO" AS "EKPO"
-         LEFT JOIN "EKKO" AS "EKKO"
+         LEFT JOIN "EKKO" 	AS "EKKO"
                    ON "EKPO"."MANDT" = "EKKO"."MANDT"
                        AND "EKPO"."EBELN" = "EKKO"."EBELN"
-         LEFT JOIN "CTE_TMP_MaterialContract" AS "TMP_MaterialContract"
+         LEFT JOIN "CTE_TMP_MaterialContract" 		AS "TMP_MaterialContract"
                     ON "EKPO"."WERKS" = "TMP_MaterialContract"."WERKS"
                         AND "EKKO"."WAERS" = "TMP_MaterialContract"."WAERS"
                         AND "EKPO"."MATNR" = "TMP_MaterialContract"."MATNR"
