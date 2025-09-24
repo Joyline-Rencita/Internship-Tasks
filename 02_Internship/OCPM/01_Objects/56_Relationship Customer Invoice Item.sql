@@ -56,12 +56,12 @@ WITH
                                                                      ON "S"."SalesOrderItem_ID" = "T"."SalesOrderItem_ID") AS "T"
                                             WHERE "T"."OutgoingMaterialDocumentItem_DeliveryItem_ID" IS NOT NULL
                                                OR "T"."OutgoingMaterialDocumentItem_SalesOrderItem_ID" IS NOT NULL),
-     "CTE_DI_SOI" AS (SELECT "S"."ID"                AS "DeliveryItem_ID",
-                             "S"."SalesOrderItem_ID" AS "DeliveryItem_SalesOrderItem_ID"
-                      FROM "o_celonis_DeliveryItem" AS "S"
+     "CTE_DI_SOI" AS (SELECT "S"."ID"                                                                            AS "DeliveryItem_ID",
+                             "S"."SalesOrderItem_ID"                                                             AS "DeliveryItem_SalesOrderItem_ID"
+                      FROM "o_celonis_DeliveryItem"   AS "S"
                       WHERE "S"."SalesOrderItem_ID" IS NOT NULL),
-     "CTE_INV_DI" AS (SELECT "S"."ID"               AS "CustomerInvoiceItem_ID",
-                             "S"."DeliveryItems_ID" AS "CustomerInvoiceItem_DeliveryItems_ID"
+     "CTE_INV_DI" AS (SELECT "S"."ID"                                                                            AS "CustomerInvoiceItem_ID",
+                             "S"."DeliveryItems_ID"                                                              AS "CustomerInvoiceItem_DeliveryItems_ID"
                       FROM "r_o_celonis_CustomerInvoiceItem__DeliveryItems" AS "S"
                                INNER JOIN "CTE_CustomerInvoiceItem" AS "L"
                                           ON "S"."ID" = "L"."CustomerInvoiceItem_ID"),
