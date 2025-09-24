@@ -15,8 +15,8 @@ WITH
                                                      ON "S"."SalesOrderItem_ID" = "T"."SalesOrderItem_ID")  AS "T"
                             ORDER BY 1),
      "CTE_CustomerInvoiceItem" AS (SELECT *
-                                   FROM (SELECT "S"."ID"                AS "CustomerInvoiceItem_ID",
-                                                "T"."SalesOrderItem_ID" AS "CustomerInvoiceItem_SalesOrderItem_ID"
+                                   FROM (SELECT "S"."ID"                                                     AS "CustomerInvoiceItem_ID",
+                                                "T"."SalesOrderItem_ID"                                      AS "CustomerInvoiceItem_SalesOrderItem_ID"
                                          FROM (SELECT "S"."ID",
                                                       "S"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
                                                FROM "o_celonis_CustomerInvoiceItem" AS "S"
