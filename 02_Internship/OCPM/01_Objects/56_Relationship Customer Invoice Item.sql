@@ -45,9 +45,9 @@ WITH
                                                                "T"."DeliveryItem_ID"                           AS "OutgoingMaterialDocumentItem_DeliveryItem_ID",
                                                                "S"."SalesOrderItem_ID"
                                                         FROM (SELECT "S"."ID",
-                                                                     "S"."DeliveryItem_ID"   AS "DeliveryItem_ID",
-                                                                     "S"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
-                                                              FROM "o_celonis_OutgoingMaterialDocumentItem" AS "S"
+                                                                     "S"."DeliveryItem_ID"                      AS "DeliveryItem_ID",
+                                                                     "S"."SalesOrderItem_ID"                    AS "SalesOrderItem_ID"
+                                                              FROM "o_celonis_OutgoingMaterialDocumentItem"     AS "S"
                                                               ORDER BY 2) AS "S"
                                                                  LEFT JOIN "CTE_DeliveryItem" AS "T"
                                                                            ON "S"."DeliveryItem_ID" = "T"."DeliveryItem_ID"
