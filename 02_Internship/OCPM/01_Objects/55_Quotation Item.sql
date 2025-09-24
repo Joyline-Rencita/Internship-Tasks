@@ -9,9 +9,9 @@ SELECT <%=sourceSystem%>  || 'QuotationItem_' || "VBAP"."MANDT" || "VBAP"."VBELN
 	<%=sourceSystem%>  || 'User_' || "VBAP"."MANDT" || "VBAP"."ERNAM"                                  	AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                                           AS "CreationExecutionType",
-    'SAP'                                                                                           AS "SourceSystemType",
-	<%=sourceSystem%>  || "VBAP"."MANDT"                                                               AS "SourceSystemInstance"
+        ELSE 'Manual' END                                                                           	AS "CreationExecutionType",
+    'SAP'                                                                                           	AS "SourceSystemType",
+	<%=sourceSystem%>  || "VBAP"."MANDT"                                                               	AS "SourceSystemInstance"
 FROM "VBAP" AS "VBAP"
          LEFT JOIN "VBAK" AS "VBAK"
                    ON "VBAP"."MANDT" = "VBAK"."MANDT"
