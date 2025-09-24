@@ -25,11 +25,12 @@ WITH
                                                             ON "S"."SalesOrderItem_ID" = "T"."SalesOrderItem_ID") AS "T"
                                    ORDER BY 1),
      "CTE_CustomerInvoiceItem__DeliveryItems"
-         AS (SELECT "S"."CustomerInvoiceItem_ID" AS "CustomerInvoiceItem_ID",
-                    "R"."DeliveryItem_ID"        AS "CustomerInvoiceItem_DeliveryItems_ID"
+         AS (SELECT "S"."CustomerInvoiceItem_ID"                                                              AS "CustomerInvoiceItem_ID",
+                    "R"."DeliveryItem_ID"                                                                     AS "CustomerInvoiceItem_DeliveryItems_ID"
              FROM (SELECT "S"."ID",
                           "S"."DeliveryItems_ID",
                           "L"."CustomerInvoiceItem_ID"
+                        
                    FROM "r_o_celonis_CustomerInvoiceItem__DeliveryItems" AS "S"
                             INNER JOIN "CTE_CustomerInvoiceItem" AS "L"
                                        ON "S"."ID" = "L"."CustomerInvoiceItem_ID"
