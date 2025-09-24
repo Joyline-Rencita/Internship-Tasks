@@ -5,14 +5,14 @@ WITH
      "CTE_SalesOrderItem" AS (SELECT "S"."ID" AS "SalesOrderItem_ID"
                               FROM "o_celonis_SalesOrderItem" AS "S"),
      "CTE_DeliveryItem" AS (SELECT *
-                            FROM (SELECT "S"."ID"                AS "DeliveryItem_ID",
-                                         "T"."SalesOrderItem_ID" AS "DeliveryItem_SalesOrderItem_ID"
+                            FROM (SELECT "S"."ID"                                                          AS "DeliveryItem_ID",
+                                         "T"."SalesOrderItem_ID"                                           AS "DeliveryItem_SalesOrderItem_ID"
                                   FROM (SELECT "S"."ID",
-                                               "S"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
+                                               "S"."SalesOrderItem_ID"                                     AS "SalesOrderItem_ID"
                                         FROM "o_celonis_DeliveryItem" AS "S"
                                         ORDER BY 2) AS "S"
                                            LEFT JOIN "CTE_SalesOrderItem" AS "T"
-                                                     ON "S"."SalesOrderItem_ID" = "T"."SalesOrderItem_ID") AS "T"
+                                                     ON "S"."SalesOrderItem_ID" = "T"."SalesOrderItem_ID")  AS "T"
                             ORDER BY 1),
      "CTE_CustomerInvoiceItem" AS (SELECT *
                                    FROM (SELECT "S"."ID"                AS "CustomerInvoiceItem_ID",
