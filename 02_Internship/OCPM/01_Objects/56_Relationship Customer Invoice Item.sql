@@ -112,9 +112,9 @@ WITH
                                               ON "S"."ID" = "INV_DI"."CustomerInvoiceItem_ID"
                                                  AND "S"."SalesOrderItem_ID" IS NOT NULL),
      "CTE_L3" AS (SELECT "DI_SOI"."CustomerInvoiceItem_ID"                                AS "CustomerInvoiceItem_ID",
-                         "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
-                         "SalesOrderItem"."SalesOrderItem_ID"       AS "SalesOrderItem_ID",
-                         "DI_SOI"."OutgoingMaterialDocumentItem_ID" AS "OutgoingMaterialDocumentItem_ID"
+                         "DI_SOI"."DeliveryItem_ID"                                       AS "DeliveryItem_ID",
+                         "SalesOrderItem"."SalesOrderItem_ID"                             AS "SalesOrderItem_ID",
+                         "DI_SOI"."OutgoingMaterialDocumentItem_ID"                       AS "OutgoingMaterialDocumentItem_ID"
                   FROM (SELECT "INV_DI"."CustomerInvoiceItem_ID"          AS "CustomerInvoiceItem_ID",
                                "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
                                "DI_SOI"."DeliveryItem_SalesOrderItem_ID",
