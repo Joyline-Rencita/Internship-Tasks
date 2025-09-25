@@ -141,9 +141,9 @@ WITH
                          "OGM_DI"."OutgoingMaterialDocumentItem_ID"                       AS "OutgoingMaterialDocumentItem_ID"
                   FROM (SELECT "SalesOrderItem"."CustomerInvoiceItem_ID"                  AS "CustomerInvoiceItem_ID",
                                "DI_SOI"."DeliveryItem_ID"                                 AS "DeliveryItem_ID",
-                               "SalesOrderItem"."SalesOrderItem_ID"      AS "SalesOrderItem_ID"
-                        FROM (SELECT "INV_SOI"."CustomerInvoiceItem_ID"   AS "CustomerInvoiceItem_ID",
-                                     "SalesOrderItem"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
+                               "SalesOrderItem"."SalesOrderItem_ID"                       AS "SalesOrderItem_ID"
+                        FROM (SELECT "INV_SOI"."CustomerInvoiceItem_ID"                   AS "CustomerInvoiceItem_ID",
+                                     "SalesOrderItem"."SalesOrderItem_ID"                 AS "SalesOrderItem_ID"
                               FROM (SELECT *
                                     FROM "CTE_INV_SOI_ExDI" AS "INV_SOI"
                                     ORDER BY "INV_SOI"."CustomerInvoiceItem_SalesOrderItem_ID") AS "INV_SOI"
