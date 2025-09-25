@@ -115,10 +115,10 @@ WITH
                          "DI_SOI"."DeliveryItem_ID"                                       AS "DeliveryItem_ID",
                          "SalesOrderItem"."SalesOrderItem_ID"                             AS "SalesOrderItem_ID",
                          "DI_SOI"."OutgoingMaterialDocumentItem_ID"                       AS "OutgoingMaterialDocumentItem_ID"
-                  FROM (SELECT "INV_DI"."CustomerInvoiceItem_ID"          AS "CustomerInvoiceItem_ID",
-                               "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
+                  FROM (SELECT "INV_DI"."CustomerInvoiceItem_ID"                          AS "CustomerInvoiceItem_ID",
+                               "DI_SOI"."DeliveryItem_ID"                                 AS "DeliveryItem_ID",
                                "DI_SOI"."DeliveryItem_SalesOrderItem_ID",
-                               "OGM_DI"."OutgoingMaterialDocumentItem_ID" AS "OutgoingMaterialDocumentItem_ID"
+                               "OGM_DI"."OutgoingMaterialDocumentItem_ID"                 AS "OutgoingMaterialDocumentItem_ID"
                         FROM (SELECT *
                               FROM "CTE_INV_DI" AS "INV_DI"
                               ORDER BY "CustomerInvoiceItem_DeliveryItems_ID") AS "INV_DI"
@@ -135,6 +135,7 @@ WITH
                                       ON "DI_SOI"."DeliveryItem_SalesOrderItem_ID"
                                          = "SalesOrderItem"."SalesOrderItem_ID"
                   UNION ALL
+                        
                   SELECT "DI_SOI"."CustomerInvoiceItem_ID"          AS "CustomerInvoiceItem_ID",
                          "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
                          "DI_SOI"."SalesOrderItem_ID"               AS "SalesOrderItem_ID",
