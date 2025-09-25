@@ -104,14 +104,14 @@ WITH
                              GROUP BY "DeliveryItem_SalesOrderItem_ID"
                              HAVING COUNT(*) > 1
                              ORDER BY 1),
-     "CTE_INV_DI_SOI" AS (SELECT "S"."ID"                                        AS "CustomerInvoiceItem_ID",
-                                 "S"."SalesOrderItem_ID"                         AS "CustomerInvoiceItem_SalesOrderItem_ID",
-                                 "INV_DI"."CustomerInvoiceItem_DeliveryItems_ID" AS "CustomerInvoiceItem_DeliveryItems_ID"
+     "CTE_INV_DI_SOI" AS (SELECT "S"."ID"                                                  AS "CustomerInvoiceItem_ID",
+                                 "S"."SalesOrderItem_ID"                                   AS "CustomerInvoiceItem_SalesOrderItem_ID",
+                                 "INV_DI"."CustomerInvoiceItem_DeliveryItems_ID"           AS "CustomerInvoiceItem_DeliveryItems_ID"
                           FROM "o_celonis_CustomerInvoiceItem" AS "S"
                                    INNER JOIN "CTE_INV_DI" AS "INV_DI"
                                               ON "S"."ID" = "INV_DI"."CustomerInvoiceItem_ID"
                                                  AND "S"."SalesOrderItem_ID" IS NOT NULL),
-     "CTE_L3" AS (SELECT "DI_SOI"."CustomerInvoiceItem_ID"          AS "CustomerInvoiceItem_ID",
+     "CTE_L3" AS (SELECT "DI_SOI"."CustomerInvoiceItem_ID"                                AS "CustomerInvoiceItem_ID",
                          "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
                          "SalesOrderItem"."SalesOrderItem_ID"       AS "SalesOrderItem_ID",
                          "DI_SOI"."OutgoingMaterialDocumentItem_ID" AS "OutgoingMaterialDocumentItem_ID"
