@@ -84,8 +84,8 @@ WITH
                                      LEFT JOIN "CTE_OGM_DI" AS "OMG_DI"
                                                ON "S"."ID" = "OMG_DI"."OutgoingMaterialDocumentItem_ID"
                             WHERE "OMG_DI"."OutgoingMaterialDocumentItem_ID" IS NULL),
-     "CTE_OGM_DI_ExSOI" AS (SELECT "OMG_DI"."OutgoingMaterialDocumentItem_ID"              AS "OutgoingMaterialDocumentItem_ID",
-                                   "OMG_DI"."OutgoingMaterialDocumentItem_DeliveryItem_ID" AS "OutgoingMaterialDocumentItem_DeliveryItem_ID"
+     "CTE_OGM_DI_ExSOI" AS (SELECT "OMG_DI"."OutgoingMaterialDocumentItem_ID"                                     AS "OutgoingMaterialDocumentItem_ID",
+                                   "OMG_DI"."OutgoingMaterialDocumentItem_DeliveryItem_ID"                        AS "OutgoingMaterialDocumentItem_DeliveryItem_ID"
                             FROM "CTE_OGM_DI" AS "OMG_DI"
                                      LEFT JOIN "CTE_OGM_SI" AS "S"
                                                ON "OMG_DI"."OutgoingMaterialDocumentItem_ID" = "S"."ID"
@@ -93,9 +93,9 @@ WITH
      "CTE_DI_ExSOI" AS (SELECT "S"."ID" AS "DeliveryItem_ID"
                         FROM "o_celonis_DeliveryItem" AS "S"
                         WHERE "S"."SalesOrderItem_ID" IS NULL),
-     "CTE_OGM_DEL_AND_SOI" AS (SELECT "S"."ID"                AS "OutgoingMaterialDocumentItem_ID",
-                                      "S"."DeliveryItem_ID"   AS "OutgoingMaterialDocumentItem_DeliveryItem_ID",
-                                      "S"."SalesOrderItem_ID" AS "OutgoingMaterialDocumentItem_SalesOrderItem_ID"
+     "CTE_OGM_DEL_AND_SOI" AS (SELECT "S"."ID"                                             AS "OutgoingMaterialDocumentItem_ID",
+                                      "S"."DeliveryItem_ID"                                AS "OutgoingMaterialDocumentItem_DeliveryItem_ID",
+                                      "S"."SalesOrderItem_ID"                              AS "OutgoingMaterialDocumentItem_SalesOrderItem_ID"
                                FROM "o_celonis_OutgoingMaterialDocumentItem" AS "S"
                                WHERE "S"."DeliveryItem_ID" IS NOT NULL
                                  AND "S"."SalesOrderItem_ID" IS NOT NULL),
@@ -128,8 +128,7 @@ WITH
                                  INNER JOIN (SELECT *
                                              FROM "CTE_OGM_DI" AS "OGM_DI"
                                              ORDER BY "OGM_DI"."OutgoingMaterialDocumentItem_DeliveryItem_ID") AS "OGM_DI"
-                                            ON "DI_SOI"."DeliveryItem_ID"
-                                               = "OGM_DI"."OutgoingMaterialDocumentItem_DeliveryItem_ID"
+                                             ON "DI_SOI"."DeliveryItem_ID" = "OGM_DI"."OutgoingMaterialDocumentItem_DeliveryItem_ID"
                         ORDER BY "DI_SOI"."DeliveryItem_SalesOrderItem_ID") AS "DI_SOI"
                            INNER JOIN "CTE_SalesOrderItem" AS "SalesOrderItem"
                                       ON "DI_SOI"."DeliveryItem_SalesOrderItem_ID"
