@@ -135,12 +135,12 @@ WITH
                                          = "SalesOrderItem"."SalesOrderItem_ID"
                   UNION ALL
                         
-                  SELECT "DI_SOI"."CustomerInvoiceItem_ID"          AS "CustomerInvoiceItem_ID",
-                         "DI_SOI"."DeliveryItem_ID"                 AS "DeliveryItem_ID",
-                         "DI_SOI"."SalesOrderItem_ID"               AS "SalesOrderItem_ID",
-                         "OGM_DI"."OutgoingMaterialDocumentItem_ID" AS "OutgoingMaterialDocumentItem_ID"
-                  FROM (SELECT "SalesOrderItem"."CustomerInvoiceItem_ID" AS "CustomerInvoiceItem_ID",
-                               "DI_SOI"."DeliveryItem_ID"                AS "DeliveryItem_ID",
+                  SELECT "DI_SOI"."CustomerInvoiceItem_ID"                                AS "CustomerInvoiceItem_ID",
+                         "DI_SOI"."DeliveryItem_ID"                                       AS "DeliveryItem_ID",
+                         "DI_SOI"."SalesOrderItem_ID"                                     AS "SalesOrderItem_ID",
+                         "OGM_DI"."OutgoingMaterialDocumentItem_ID"                       AS "OutgoingMaterialDocumentItem_ID"
+                  FROM (SELECT "SalesOrderItem"."CustomerInvoiceItem_ID"                  AS "CustomerInvoiceItem_ID",
+                               "DI_SOI"."DeliveryItem_ID"                                 AS "DeliveryItem_ID",
                                "SalesOrderItem"."SalesOrderItem_ID"      AS "SalesOrderItem_ID"
                         FROM (SELECT "INV_SOI"."CustomerInvoiceItem_ID"   AS "CustomerInvoiceItem_ID",
                                      "SalesOrderItem"."SalesOrderItem_ID" AS "SalesOrderItem_ID"
