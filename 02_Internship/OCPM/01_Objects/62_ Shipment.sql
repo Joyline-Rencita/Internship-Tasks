@@ -1,12 +1,12 @@
                 ******************************      VTTK      ************************************
 
-SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" AS "ID",
+SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 						AS "ID",
     CAST("VTTK"."ERDAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("VTTK"."ERZET" AS DATE),
-            "VTTK"."ERZET") AS INTERVAL SECOND)                              AS "CreationTime",
-	<%=sourceSystem%>  || 'User_' || "VTTK"."MANDT" || "VTTK"."ERNAM"           AS "CreatedBy",
+            "VTTK"."ERZET") AS INTERVAL SECOND)                              						AS "CreationTime",
+	<%=sourceSystem%>  || 'User_' || "VTTK"."MANDT" || "VTTK"."ERNAM"           					AS "CreatedBy",
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-        ELSE 'Manual' END                                                    AS "CreationExecutionType",
+        ELSE 'Manual' END                                                    						AS "CreationExecutionType",
     'SAP'                                                                    AS "SourceSystemType",
 	<%=sourceSystem%>  || "VTTK"."MANDT"                                        AS "SourceSystemInstance",
     "VTTK"."TKNUM"                                                           AS "SystemShipmentNumber",
