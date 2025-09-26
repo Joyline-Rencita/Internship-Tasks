@@ -11,11 +11,11 @@ SELECT <%=sourceSystem%>  || 'ShipmentItem_' || "VTTP"."MANDT" || "VTTP"."TKNUM"
            ELSE 'Manual' END                                                                         AS "CreationExecutionType",
        'SAP'                                                                                       	 AS "SourceSystemType",
 	<%=sourceSystem%>  || "VTTP"."MANDT"                                                             AS "SourceSystemInstance",
-       CAST("VTTP"."TKNUM" AS VARCHAR(255))                                                        AS "SystemShipmentNumber",
-       CAST("VTTP"."TPNUM" AS VARCHAR(255))                                                        AS "SystemShipmentItemNumber",
-       CAST("VTTP"."TKNUM" AS VARCHAR(255))                                                        AS "DatabaseShipmentNumber",
-       CAST("VTTP"."TPNUM" AS VARCHAR(255))                                                        AS "DatabaseShipmentItemNumber",
-	<%=sourceSystem%>  || 'Delivery_' || "VTTP"."MANDT" || "VTTP"."VBELN"                             AS "Delivery"
+       CAST("VTTP"."TKNUM" AS VARCHAR(255))                                                        	 AS "SystemShipmentNumber",
+       CAST("VTTP"."TPNUM" AS VARCHAR(255))                                                          AS "SystemShipmentItemNumber",
+       CAST("VTTP"."TKNUM" AS VARCHAR(255))                                                          AS "DatabaseShipmentNumber",
+       CAST("VTTP"."TPNUM" AS VARCHAR(255))                                                          AS "DatabaseShipmentItemNumber",
+	<%=sourceSystem%>  || 'Delivery_' || "VTTP"."MANDT" || "VTTP"."VBELN"                            AS "Delivery"
 FROM "VTTP" AS "VTTP"
          LEFT JOIN "USR02" AS "USR02"
                    ON "VTTP"."MANDT" = "USR02"."MANDT"
