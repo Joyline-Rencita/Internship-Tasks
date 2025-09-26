@@ -199,4 +199,8 @@ END
 * 100
 
 
-14.  
+14.  SO linked with POs :
+
+count("o_celonis_SalesOrderItem"."ID")
+
+15 . 
