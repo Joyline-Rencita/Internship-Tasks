@@ -7,9 +7,9 @@ SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 			
     CASE
         WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
         ELSE 'Manual' END                                                    						AS "CreationExecutionType",
-    'SAP'                                                                    AS "SourceSystemType",
-	<%=sourceSystem%>  || "VTTK"."MANDT"                                        AS "SourceSystemInstance",
-    "VTTK"."TKNUM"                                                           AS "SystemShipmentNumber",
+    'SAP'                                                                    						AS "SourceSystemType",
+	<%=sourceSystem%>  || "VTTK"."MANDT"                                        					AS "SourceSystemInstance",
+    "VTTK"."TKNUM"                                                           						AS "SystemShipmentNumber",
     "VTTK"."TKNUM"                                                           AS "DatabaseShipmentNumber",
     "VTTK"."SHTYP"                                                           AS "ShippingType",
     "VTTK"."VSBED"                                                           AS "ShippingConditions",
