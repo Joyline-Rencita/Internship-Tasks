@@ -32,6 +32,7 @@ SELECT <%=sourceSystem%>  || 'CustomerAccountCreditItem_' || "BSEG"."MANDT" || "
        "BKPF"."WAERS"                                                                                                        AS "Currency",
        "BKPF"."BLART"                                                                                                        AS "DocumentType",
        CAST("BKPF"."BLDAT" AS TIMESTAMP)                                                                                     AS "DocumentDate",
+	   CAST("BKPF"."BUDAT" AS TIMESTAMP)                                                                                     AS "InvoicePostingDate",				
        CAST("BSEG"."AUGDT" AS TIMESTAMP)                                                                                     AS "ClearingDate",
        "BSEG"."WSKTO"                                                                                                        AS "CashDiscountTakenAmount",
        "BSEG"."SKFBT"                                                                                                        AS "CashDiscountEligibleAmount",
