@@ -38,14 +38,16 @@ AVG(
     CASE
       WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
         AND "o_celonis_Delivery"."Customer_ID" = "o_celonis_SalesOrder"."Customer_ID"
-        -- AND "o_celonis_Delivery"."SystemDeliveryNumber" = "o_celonis_SalesOrder"."SystemSalesOrderNumber"
+        AND "o_celonis_SalesOrderItem"."OrderedQuantity" = "o_celonis_DeliveryItem"."Quantity"
+        -- On-time delivery check
+        -- Customer match
+        -- Complete delivery check: Delivered quantity >= Ordered quantity
       THEN "o_celonis_SalesOrder"."ID"
     END
   )
   /
   COUNT("o_celonis_SalesOrder"."ID")
-)
-
+) * 100
 
 SO Backlog Val :    Total value of sales orders not yet fulfilled or invoiced.
 
