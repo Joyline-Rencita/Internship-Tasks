@@ -296,7 +296,7 @@ ROUND(
 )
 
 
-23. 
+23. Orders Delayed Due to Internal Issues Rate :
 
 (
   COUNT(
