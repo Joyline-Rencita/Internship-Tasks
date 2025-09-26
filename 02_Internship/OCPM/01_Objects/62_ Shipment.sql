@@ -12,8 +12,8 @@ SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 			
     "VTTK"."TKNUM"                                                           						AS "SystemShipmentNumber",
     "VTTK"."TKNUM"                                                           						AS "DatabaseShipmentNumber",
     "VTTK"."SHTYP"                                                           						AS "ShippingType",
-    "VTTK"."VSBED"                                                           AS "ShippingConditions",
-    "VTTK"."ROUTE"                                                           AS "ShipmentRoute"
+    "VTTK"."VSBED"                                                           						AS "ShippingConditions",
+    "VTTK"."ROUTE"                                                           						AS "ShipmentRoute"
 
   FROM "VTTK" AS "VTTK"
          LEFT JOIN "USR02" AS "USR02"
@@ -25,9 +25,9 @@ SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 			
 
                   *****************************        CDPOS      *********************************
 
-SELECT <%=sourceSystem%>  || 'Shipment_' || "CDPOS"."TABKEY" AS "ObjectID",
+SELECT <%=sourceSystem%>  || 'Shipment_' || "CDPOS"."TABKEY" 							AS "ObjectID",
 	<%=sourceSystem%>  || "CDPOS"."TABKEY" || "CDPOS"."TABNAME" || "CDPOS"."FNAME"
-       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"            AS "ID",
+       || "CDPOS"."CHANGENR" || "CDPOS"."CHNGIND"            							AS "ID",
        CAST("CDHDR"."UDATE" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("CDHDR"."UTIME" AS DATE),
             "CDHDR"."UTIME") AS INTERVAL SECOND)             AS "Time",
        CASE
