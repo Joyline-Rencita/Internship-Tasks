@@ -140,3 +140,12 @@ SUM(
   /
   SUM("o_celonis_CustomerAccountCreditItem"."Amount")
 )
+
+10. 
+
+AVG(
+  DAYS_BETWEEN(
+    "o_celonis_SalesOrder"."CreationTime",
+    "o_celonis_Delivery"."DeliveryDate"
+  )
+)
