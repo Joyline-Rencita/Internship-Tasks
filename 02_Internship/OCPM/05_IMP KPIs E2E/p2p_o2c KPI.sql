@@ -15,8 +15,23 @@ AVG(
   END
 )
 
+  Alternative Approach
+(
+  SUM(
+    CASE 
+      WHEN "o_celonis_Delivery"."DeliveryDate" <= "o_celonis_SalesOrder"."RequestedDeliveryDate"
+      THEN 1.0
+      ELSE 0.0
+    END
+  )
+  /
+  COUNT(
+    "o_celonis_Delivery"."ID"
+  )
+) * 100
 
-Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, and without errors.
+
+3.  Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, and without errors.
   
 (
   COUNT(
