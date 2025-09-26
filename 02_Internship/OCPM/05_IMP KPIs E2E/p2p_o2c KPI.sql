@@ -49,19 +49,24 @@ AVG(
   COUNT("o_celonis_SalesOrder"."ID")
 ) * 100
 
-SO Backlog Val :    Total value of sales orders not yet fulfilled or invoiced.
-
+4. SO Backlog Val :    Total value of sales orders not yet fulfilled or invoiced.
+-- Condition 1: Sum NetAmount for Sales Order Items that are NOT delivered
 SUM(
-  CASE
-    WHEN ISNULL("o_celonis_DeliveryItem"."SalesOrderItem_ID") = 1
-    AND ISNULL("o_celonis_SalesOrderItem"."RejectionReason") = 1
-    THEN "o_celonis_SalesOrderItem"."NetAmount"
+  CASE                         -- If there is NO matching SalesOrderItem_ID in DeliveryItem, it means NOT delivered
+    WHEN ISNULL("o_celonis_DeliveryItem"."SalesOrderItem_ID") = 1 THEN "o_celonis_SalesOrderItem"."NetAmount"
+    ELSE 0
+  END
+)
++
+-- Condition 2: Sum NetAmount for Sales Order Items that are NOT invoiced
+SUM(
+  CASE                        -- If there is NO matching SalesOrderItem_ID in CustomerInvoiceItem, it means NOT invoiced
+    WHEN ISNULL("o_celonis_CustomerInvoiceItem"."SalesOrderItem_ID") = 1 THEN "o_celonis_SalesOrderItem"."NetAmount"
     ELSE 0
   END
 )
 
-
-Avg Delivery Lead Time :  Average number of days between order creation and delivery to customer.
+5.  Avg Delivery Lead Time :  Average number of days between order creation and delivery to customer.
 
 AVG(
   DAYS_BETWEEN(
@@ -71,7 +76,8 @@ AVG(
 ) * 100
 
 
-Invoices Paid On Time :  Percentage of customer invoices paid within agreed payment terms.
+6.  Invoices Paid On Time :  Percentage of customer invoices paid within agreed payment terms.
+  
   COUNT(
   CASE
     WHEN "o_celonis_CustomerInvoice"."Customer_Invoice_TPT"   <= 
