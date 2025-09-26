@@ -108,6 +108,7 @@ AVG(
 
 
 8. DPO (Days Payable Outstanding) :
+  
 SUM(
   CASE
     WHEN "o_celonis_VendorAccountCreditItem"."isRelevantAndCleared"= 0.0
@@ -125,6 +126,7 @@ SUM(
 
   
 9.  DSO (Days Sales Outstanding) :
+  
 (
   SUM(
     CASE
