@@ -207,4 +207,13 @@ count("o_celonis_SalesOrderItem"."ID")
 
 SUM ( "o_celonis_SalesOrderItem"."NetAmount" )
 
-16. 
+16. PO Backlog Value :
+
+SUM(
+  CASE WHEN "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate" is null
+  AND "o_celonis_PurchaseOrderScheduleLine"."PurchaseOrderItem_ID" = "o_celonis_PurchaseOrderItem"."ID"
+  THEN ( "o_celonis_PurchaseOrderItem"."NetAmount")
+   END
+)
+
+17.  
