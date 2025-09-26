@@ -125,11 +125,16 @@ SUM(
 
   
 9.  DSO (Days Sales Outstanding) :
-SUM(
-  DAYS_BETWEEN(
-    ROUND_DAY("o_celonis_CustomerInvoice"."CreationTime"),
-    ROUND_DAY(TODAY())
-  ) * "o_celonis_CustomerInvoiceItem"."NetAmount"
+(
+  SUM(
+    CASE
+      WHEN "o_celonis_CustomerAccountCreditItem"."ClearingDate" IS NOT NULL
+        AND "o_celonis_CustomerAccountCreditItem"."BaselineDate" IS NOT NULL
+      THEN
+        DAYS_BETWEEN("o_celonis_CustomerAccountCreditItem"."BaselineDate", "o_celonis_CustomerAccountCreditItem"."ClearingDate")
+        * "o_celonis_CustomerAccountCreditItem"."Amount"
+    END
+  )
+  /
+  SUM("o_celonis_CustomerAccountCreditItem"."Amount")
 )
-/
-SUM("o_celonis_CustomerInvoiceItem"."NetAmount")
