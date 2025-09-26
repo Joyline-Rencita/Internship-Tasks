@@ -10,8 +10,8 @@ SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 			
     'SAP'                                                                    						AS "SourceSystemType",
 	<%=sourceSystem%>  || "VTTK"."MANDT"                                        					AS "SourceSystemInstance",
     "VTTK"."TKNUM"                                                           						AS "SystemShipmentNumber",
-    "VTTK"."TKNUM"                                                           AS "DatabaseShipmentNumber",
-    "VTTK"."SHTYP"                                                           AS "ShippingType",
+    "VTTK"."TKNUM"                                                           						AS "DatabaseShipmentNumber",
+    "VTTK"."SHTYP"                                                           						AS "ShippingType",
     "VTTK"."VSBED"                                                           AS "ShippingConditions",
     "VTTK"."ROUTE"                                                           AS "ShipmentRoute"
 
