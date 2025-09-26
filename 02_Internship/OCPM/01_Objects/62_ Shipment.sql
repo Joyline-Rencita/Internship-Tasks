@@ -1,4 +1,5 @@
-                ******************************      VTTK      ************************************
+
+				******************************      VTTK      ************************************
 
 SELECT <%=sourceSystem%>  || 'Shipment_' || "VTTK"."MANDT" || "VTTK"."TKNUM" 						AS "ID",
     CAST("VTTK"."ERDAT" AS DATE) + CAST(TIMESTAMPDIFF(SECOND, CAST("VTTK"."ERZET" AS DATE),
@@ -42,11 +43,11 @@ SELECT <%=sourceSystem%>  || 'Shipment_' || "CDPOS"."TABKEY" 							AS "ObjectID
            WHEN "CDPOS"."VALUE_NEW" LIKE '%-' THEN CONCAT('-', REPLACE(LTRIM("CDPOS"."VALUE_NEW"), '-', ''))
            ELSE "CDPOS"."VALUE_NEW" END                      							AS "NewValue",
        'User_' || "CDHDR"."MANDANT" || "CDHDR"."USERNAME"    							AS "ChangedBy",
-       "CDHDR"."TCODE"                                       AS "OperationType",
-       "CDHDR"."CHANGENR"                                    AS "OperationID",
+       "CDHDR"."TCODE"                                       							AS "OperationType",
+       "CDHDR"."CHANGENR"                                    							AS "OperationID",
        CASE
            WHEN "USR02"."USTYP" IN ('B', 'C') THEN 'Automatic'
-           ELSE 'Manual' END                                 AS "ExecutionType"
+           ELSE 'Manual' END                                 							AS "ExecutionType"
 FROM "CDPOS" AS "CDPOS"
          LEFT JOIN "CDHDR" AS "CDHDR"
                    ON "CDPOS"."MANDANT" = "CDHDR"."MANDANT"
