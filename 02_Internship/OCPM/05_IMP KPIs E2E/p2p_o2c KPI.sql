@@ -216,4 +216,6 @@ SUM(
    END
 )
 
-17.  
+17.  Invoices Paid On Time Rate :
+
+
