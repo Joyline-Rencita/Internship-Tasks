@@ -308,3 +308,13 @@ ROUND(
   /
   COUNT(DISTINCT "o_celonis_SalesOrder"."ID")
 )*100
+
+
+24.  PO Backlog Value :
+
+SUM(
+  CASE WHEN "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate" is null
+  AND "o_celonis_PurchaseOrderScheduleLine"."PurchaseOrderItem_ID" = "o_celonis_PurchaseOrderItem"."ID"
+  THEN ( "o_celonis_PurchaseOrderItem"."NetAmount")
+   END
+)
