@@ -203,4 +203,8 @@ END
 
 count("o_celonis_SalesOrderItem"."ID")
 
-15 . 
+15 . SO linked with POs in Value :
+
+SUM ( "o_celonis_SalesOrderItem"."NetAmount" )
+
+16. 
