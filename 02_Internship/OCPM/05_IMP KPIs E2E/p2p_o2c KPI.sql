@@ -218,4 +218,30 @@ SUM(
 
 17.  Invoices Paid On Time Rate :
 
+(
+  SUM(
+    CASE 
+      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" <= "o_celonis_VendorAccountCreditItem"."BaseLineDate"
+      THEN 1.0
+      ELSE 0.0
+    END
+  )
+  /
+  COUNT(
+    CASE 
+      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NOT NULL THEN 1
+    END
+  )
+) * 100
 
+18.  Invoice Processing Time :     correction needed
+
+AVG(
+  DAYS_BETWEEN(
+    "o_celonis_VendorAccountCreditItem"."DocumentDate",
+    "o_celonis_VendorAccountCreditItem"."CreationTime"
+  )
+)
+
+
+19. 
