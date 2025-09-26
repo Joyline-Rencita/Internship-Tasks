@@ -75,30 +75,21 @@ AVG(
 
 6.  Invoices Paid On Time :  Percentage of customer invoices paid within agreed payment terms.
   
+(
+  SUM(
+    CASE 
+      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" <= "o_celonis_VendorAccountCreditItem"."BaseLineDate"
+      THEN 1.0
+      ELSE 0.0
+    END
+  )
+  /
   COUNT(
-  CASE
-    WHEN "o_celonis_CustomerInvoice"."Customer_Invoice_TPT"   <= 
-            CASE
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'D016' THEN 30.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'NT00' THEN 45.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'NT45' THEN 45.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'CRG2' THEN 60.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = 'Z100' THEN 30.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = '0001' THEN 30.0
-              WHEN "o_celonis_CustomerInvoice"."PaymentTerms" = '0009' THEN 60.0
-              ELSE 0.0
-            END
-    THEN "o_celonis_CustomerInvoice"."ID"
-  END
-)
-/
-COUNT(
-  CASE
-    WHEN "o_celonis_CustomerInvoice"."PaymentTerms" IS NOT NULL
-    THEN "o_celonis_CustomerInvoice"."ID"
-  END
-)
-* 100
+    CASE 
+      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NOT NULL THEN 1
+    END
+  )
+) * 100
 
 
 7. Credit Block Release Cycle Time : 
@@ -216,23 +207,14 @@ SUM(
    END
 )
 
-17.  Invoices Paid On Time Rate :
+17.  
 
-(
-  SUM(
-    CASE 
-      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" <= "o_celonis_VendorAccountCreditItem"."BaseLineDate"
-      THEN 1.0
-      ELSE 0.0
-    END
-  )
-  /
-  COUNT(
-    CASE 
-      WHEN "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NOT NULL THEN 1
-    END
-  )
-) * 100
+
+
+
+
+
+  
 
 18.  Invoice Processing Time :     correction needed
 
