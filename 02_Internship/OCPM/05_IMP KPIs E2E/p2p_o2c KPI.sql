@@ -158,3 +158,27 @@ AVG(
     PU_FIRST("o_celonis_MaterialMasterPlant", "o_celonis_PurchaseOrderItem"."CreationTime")
   )
 )
+
+
+11.  Not Received (Past Due)  p2p
+
+COUNT(
+  CASE
+    WHEN "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate" < today()
+         AND COALESCE("o_celonis_PurchaseOrderScheduleLine"."GoodsReceivedQuantity", 0) < 
+             "o_celonis_PurchaseOrderScheduleLine"."ScheduledQuantity"
+    THEN "o_celonis_PurchaseOrderScheduleLine"."Id"
+  END
+) 
+
+12.  Not Delivered(Past due)  o2c :
+
+COUNT(
+  CASE
+  WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" < TODAY()
+  AND "o_celonis_Delivery"."DeliveryDate" IS NULL
+  THEN DAYS_BETWEEN("o_celonis_SalesOrder"."RequestedDeliveryDate", TODAY())
+END
+)
+
+13.  
