@@ -141,7 +141,7 @@ SUM(
   SUM("o_celonis_CustomerAccountCreditItem"."Amount")
 )
 
-10. 
+10.   SO creation to Delivery CT:
 
 AVG(
   DAYS_BETWEEN(
@@ -149,3 +149,6 @@ AVG(
     "o_celonis_Delivery"."DeliveryDate"
   )
 )
+
+10 :  PO creation to Delivery CT :
+
