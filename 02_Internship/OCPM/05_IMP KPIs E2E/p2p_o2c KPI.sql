@@ -318,3 +318,8 @@ SUM(
   THEN ( "o_celonis_PurchaseOrderItem"."NetAmount")
    END
 )
+
+25.  Sales Order :
+count( "o_celonis_SalesOrder"."ID")
+
+26.  
