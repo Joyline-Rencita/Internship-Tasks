@@ -335,3 +335,5 @@ count("o_celonis_PurchaseOrder"."ID")
 count("o_celonis_PurchaseOrderItem"."ID")
 
 30. Purchase Order Value :
+Sum("o_celonis_PurchaseOrderItem"."NetAmount")
+
