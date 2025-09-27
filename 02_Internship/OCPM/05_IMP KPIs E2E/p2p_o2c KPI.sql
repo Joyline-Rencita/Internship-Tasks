@@ -325,4 +325,7 @@ count( "o_celonis_SalesOrder"."ID")
 26.  Sales Order Items :
 count( "o_celonis_SalesOrderItem"."ID")
 
-27. 
+27. Sales Order Value :
+Sum("o_celonis_SalesOrderItem"."NetAmount")
+
+28. 
