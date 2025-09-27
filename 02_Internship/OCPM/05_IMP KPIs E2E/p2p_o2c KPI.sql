@@ -326,10 +326,12 @@ count( "o_celonis_SalesOrder"."ID")
 count( "o_celonis_SalesOrderItem"."ID")
 
 27. Sales Order Value :
-Sum("o_celonis_SalesOrderItem"."NetAmount")
+SUM("o_celonis_SalesOrderItem"."NetAmount")
 
 28.  Purchase Order :
 count("o_celonis_PurchaseOrder"."ID")
 
 29. Purchase Order Item :
+count("o_celonis_PurchaseOrderItem"."ID")
 
+30. Purchase Order Value :
