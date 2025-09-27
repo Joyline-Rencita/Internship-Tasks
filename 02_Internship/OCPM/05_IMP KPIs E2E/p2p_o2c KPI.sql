@@ -322,4 +322,7 @@ SUM(
 25.  Sales Order :
 count( "o_celonis_SalesOrder"."ID")
 
-26.  
+26.  Sales Order Items :
+count( "o_celonis_SalesOrderItem"."ID")
+
+27. 
