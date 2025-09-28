@@ -306,6 +306,7 @@ ROUND(
   )
   /
   COUNT(DISTINCT "o_celonis_SalesOrder"."ID")
+  
 )*100
 
 
@@ -335,4 +336,3 @@ count("o_celonis_PurchaseOrderItem"."ID")
 
 30. Purchase Order Value :
 Sum("o_celonis_PurchaseOrderItem"."NetAmount")
-
