@@ -1,4 +1,4 @@
-
+              *********************    EVENT     **************************
 
 SELECT 'DeletePurchaseOrder' || '_' || "PurchaseOrder_Changes"."ID" AS "ID",
        "PurchaseOrder"."ID"                                         AS "PurchaseOrder",
