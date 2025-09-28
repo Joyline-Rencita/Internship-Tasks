@@ -1,3 +1,5 @@
+                     *********************    EVENT     **************************
+
 SELECT 'CreateVendorInvoice' || '_' || "VendorInvoice"."ID" AS "ID",
        "VendorInvoice"."ID"                                 AS "VendorInvoice",
        "VendorInvoice"."CreationTime"                       AS "Time",
