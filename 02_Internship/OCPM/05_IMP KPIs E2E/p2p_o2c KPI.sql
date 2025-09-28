@@ -150,7 +150,6 @@ AVG(
   )
 )
 
-
 11.  Not Received (Past Due)  p2p
 
 COUNT(
