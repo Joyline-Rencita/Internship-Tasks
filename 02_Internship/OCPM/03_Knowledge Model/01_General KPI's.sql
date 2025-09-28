@@ -190,10 +190,10 @@ COUNT_TABLE ( "o_celonis_VendorAccountCreditItem" )
 Vendor Debit Items :
 COUNT_TABLE ( "o_celonis_VendorAccountDebitItem" )
 
-25.  Sales Order :
+Sales Order :
 count( "o_celonis_SalesOrder"."ID")
 
-26.  Sales Order Items :
+Sales Order Items :
 count( "o_celonis_SalesOrderItem"."ID")
 
 27. Sales Order Value :
