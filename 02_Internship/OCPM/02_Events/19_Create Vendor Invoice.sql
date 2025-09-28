@@ -8,7 +8,7 @@ SELECT 'CreateVendorInvoice' || '_' || "VendorInvoice"."ID" AS "ID",
 FROM "o_celonis_VendorInvoice" AS "VendorInvoice"
 WHERE "VendorInvoice"."CreationTime" IS NOT NULL
 
-========================================================================================================================================================
+=======================================================================================================================================================================
 
 SELECT DISTINCT "Event"."ID"  AS "ID",
                 "Object"."ID" AS "IncomingMaterialDocumentItems"
