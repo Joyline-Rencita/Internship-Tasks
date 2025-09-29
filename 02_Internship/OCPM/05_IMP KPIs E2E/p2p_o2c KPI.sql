@@ -160,8 +160,16 @@ COUNT(
     THEN "o_celonis_PurchaseOrderScheduleLine"."Id"
   END
 ) 
-
-
+                            OR
+COUNT(
+  CASE
+    WHEN "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate" < TODAY()
+         AND COALESCE("o_celonis_PurchaseOrderScheduleLine"."GoodsReceivedQuantity", 0) <
+             "o_celonis_PurchaseOrderScheduleLine"."ScheduledQuantity"
+         AND COALESCE("o_celonis_PurchaseOrderItem"."custom_DeliveryCompletedIndicator", '') != 'X'
+    THEN DAYS_BETWEEN("o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate", TODAY())
+  END
+)
   
 
 12.  Not Delivered(Past due)  o2c :
@@ -174,7 +182,7 @@ COUNT(
 END
 )
 
-
+                            OR
 COUNT(
   CASE
     WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" < TODAY()
