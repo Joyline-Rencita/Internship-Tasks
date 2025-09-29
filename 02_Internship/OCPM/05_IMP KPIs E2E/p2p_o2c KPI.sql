@@ -228,7 +228,7 @@ SUM(
    END
 )
 
-17.    Supplier On-Time Delivery :
+17.    Supplier On-Time Delivery :        correction needed
 
 100 * (
   COUNT (DISTINCT CASE
