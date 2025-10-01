@@ -30,3 +30,13 @@
 
 7.  SO Value Affected :
 
+  BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."NetAmount")
+
+8.  PO Affected :
+
+  PU_FIRST("o_celonis_MaterialMasterPlant" , 
+            BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrder"."ID")
+  
+  )
+
+9. 
