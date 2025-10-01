@@ -6,8 +6,10 @@
 
 PU_FIRST("o_celonis_MaterialMasterPlant" ,  BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrder"."CreationTime") )
 
-3. 
+3. Goods Scheduled Qty :
 
 PU_FIRST("o_celonis_MaterialMasterPlant" , 
   PU_FIRST("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrderScheduleLine"."ScheduledQuantity")
 )
+
+4. 
