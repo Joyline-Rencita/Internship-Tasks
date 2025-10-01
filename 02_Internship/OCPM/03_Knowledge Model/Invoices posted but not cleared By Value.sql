@@ -9,7 +9,7 @@ Invoices posted but not cleared -By Value (in USD):
 SUM(
   CASE 
     WHEN "o_custom_OpenInvoiceDeepdiveManualFile"."Status" = 'Invoices Posted but Not Cleared'
-    AND "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
+        AND "o_celonis_VendorAccountCreditItem"."ClearingDate" IS NULL
     THEN CURRENCY_CONVERT(
              "o_celonis_VendorAccountCreditItem"."Amount",
              FROM ("o_celonis_VendorAccountCreditItem"."Currency"),
