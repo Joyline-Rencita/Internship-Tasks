@@ -24,4 +24,6 @@
   
   BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."ID")
 
-6. 
+6.  SO Value Affected :
+
+BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."NetAmount")
