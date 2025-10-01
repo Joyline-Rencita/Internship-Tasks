@@ -39,4 +39,13 @@
   
   )
 
-9. 
+9. PO Values Affected :
+
+  PU_FIRST("o_celonis_MaterialMasterPlant" , 
+            BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrderItem"."NetAmount")
+  
+  )
+
+10.  Inefficiencies :
+
+
