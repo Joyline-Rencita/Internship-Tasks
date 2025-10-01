@@ -435,3 +435,17 @@ AVG(
   COUNT(DISTINCT "o_celonis_PurchaseOrderItem"."ID")
 ) 
 * 100
+
+35.  Vendor not in Full Delivery :
+
+AVG(
+  CASE
+    WHEN "o_celonis_PurchaseOrderScheduleLine"."GoodsReceivedQuantity" 
+         < "o_celonis_PurchaseOrderScheduleLine"."ScheduledQuantity"
+    THEN 1
+    ELSE 0
+  END
+) * 100
+
+
+36. 
