@@ -406,6 +406,7 @@ ROUND(
 
 
 33. Delayed PO Creation :
+  
 AVG(
   CASE
     WHEN DAYS_BETWEEN(
@@ -417,3 +418,6 @@ AVG(
     ELSE 0
   END
 ) * 100
+
+
+34. Vendor Late Delivery :
