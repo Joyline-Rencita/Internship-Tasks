@@ -25,7 +25,9 @@
 
 5.  SO Affected :
   
+ COUNT(
   BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."ID")
+)
 
 6.  SO Value Affected :
 
