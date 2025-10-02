@@ -39,11 +39,13 @@ SUM(
 
 8.  PO Affected :
 
+COUNT(
   PU_FIRST("o_celonis_MaterialMasterPlant" , 
-            BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrder"."ID")
-  
-  )
+          BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrder"."ID")
 
+  )
+)
+                       
 9. PO Values Affected :
 
   PU_FIRST("o_celonis_MaterialMasterPlant" , 
