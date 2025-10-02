@@ -31,11 +31,11 @@
 
 6.  SO Value Affected :
 
+SUM(
   BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."NetAmount")
+)
 
-7.  SO Value Affected :
 
-  BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."NetAmount")
 
 8.  PO Affected :
 
