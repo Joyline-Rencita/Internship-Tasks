@@ -37,7 +37,7 @@ SUM(
 
 
 
-8.  PO Affected :
+7.  PO Affected :
 
 COUNT(
   PU_FIRST("o_celonis_MaterialMasterPlant" , 
@@ -46,7 +46,7 @@ COUNT(
   )
 )
                        
-9. PO Values Affected :
+8. PO Values Affected :
 
 SUM(
   PU_FIRST("o_celonis_MaterialMasterPlant" , 
@@ -55,7 +55,7 @@ SUM(
   )
 )
 
-10.  Inefficiencies :
+9.  Inefficiencies :
 
 CASE
 
