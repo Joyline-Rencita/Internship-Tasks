@@ -1,7 +1,7 @@
             *************************      PQL QUERIES FOR COLUMNS    ***********************
 
 
-1. SO creation time :
+1. SO creation Time :
   
   BIND("o_celonis_SalesOrderItem", "o_celonis_SalesOrder"."CreationTime")
 
