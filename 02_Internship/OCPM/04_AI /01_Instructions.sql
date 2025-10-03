@@ -99,4 +99,3 @@ Regards, AP Team
 
 ${invoice_value}  : Sum of invoice value.
 ${average_aging_of_invoices} : Average aging of overdue invoices.
-
