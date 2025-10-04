@@ -481,4 +481,12 @@ AVG(
   )
 )
 
-39. 
+39. PO Creation to Vendor Delivery CT :
+
+AVG(
+  DAYS_BETWEEN(
+    "o_celonis_PurchaseOrderItem"."CreationTime",
+    "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate"
+    
+  )
+)
