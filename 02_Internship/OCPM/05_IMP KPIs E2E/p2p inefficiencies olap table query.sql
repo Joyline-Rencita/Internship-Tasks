@@ -119,4 +119,8 @@ PU_FIRST("o_celonis_MaterialMasterPlant" ,
 
 13. Goods Received Qty :
 
+PU_FIRST("o_celonis_MaterialMasterPlant" , 
+  PU_FIRST("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrderScheduleLine"."GoodsReceivedQuantity")
+)
 
+14. 
