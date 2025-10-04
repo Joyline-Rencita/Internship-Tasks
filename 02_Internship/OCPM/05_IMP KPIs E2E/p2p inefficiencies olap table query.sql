@@ -87,7 +87,4 @@ CASE
       ) IS NULL
   THEN 'Non Contract Suppliers'
 
---   WHEN PU_COUNT("o_celonis_Vendor", "o_celonis_PurchaseOrder"."ID") = 1
---     THEN 'One Time Vendors'
-
 END
