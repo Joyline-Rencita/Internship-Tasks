@@ -57,6 +57,11 @@ SUM(
 
 CASE
 
+  WHEN PU_COUNT("o_celonis_MaterialMasterPlant" ,
+        BIND ("o_celonis_PurchaseOrderItem",
+        PU_COUNT("o_celonis_Vendor", "o_celonis_PurchaseOrder"."ID"))) = 1
+  THEN 'One Time Vendors'
+
   WHEN DAYS_BETWEEN(
       BIND("o_celonis_SalesOrderItem", "o_celonis_SalesOrder"."CreationTime"),
       PU_FIRST("o_celonis_MaterialMasterPlant" ,BIND("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrder"."CreationTime")
@@ -67,7 +72,8 @@ CASE
   WHEN 
      PU_FIRST("o_celonis_MaterialMasterPlant" , 
             PU_FIRST("o_celonis_PurchaseOrderItem",  "o_celonis_VendorConfirmation"."ConfirmationDeliveryDate"  )
-        )       >
+        )     
+          >
       PU_FIRST("o_celonis_MaterialMasterPlant" , 
             PU_FIRST("o_celonis_PurchaseOrderItem",  "o_celonis_PurchaseOrderScheduleLine"."ItemDeliveryDate"  )
         )
@@ -76,7 +82,7 @@ CASE
 
   WHEN PU_FIRST("o_celonis_MaterialMasterPlant" , 
             PU_FIRST("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrderScheduleLine"."GoodsReceivedQuantity")
-        )                      < 
+        )  < 
         PU_FIRST("o_celonis_MaterialMasterPlant" , 
             PU_FIRST("o_celonis_PurchaseOrderItem", "o_celonis_PurchaseOrderScheduleLine"."ScheduledQuantity")
         )
