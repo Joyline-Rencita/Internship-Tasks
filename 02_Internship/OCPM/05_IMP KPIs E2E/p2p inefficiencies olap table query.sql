@@ -94,3 +94,14 @@ CASE
   THEN 'Non Contract Suppliers'
 
 END
+
+
+
+                                            ADDITONALS
+
+10. SO creation time :
+
+BIND("o_celonis_SalesOrderItem", "o_celonis_SalesOrder"."CreationTime")
+
+
+11. 
