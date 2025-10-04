@@ -182,16 +182,16 @@ COUNT(
 END
 )
 
-                            OR
-COUNT(
-  CASE
-    WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" < TODAY()
-         AND COALESCE(
-           BIND("o_celonis_RelationshipCustomerInvoiceItem", 
-           "o_celonis_OutgoingMaterialDocumentItem"."custom_DeliveryCompletedIndicator"), '') != 'X'
-    THEN DAYS_BETWEEN("o_celonis_SalesOrder"."RequestedDeliveryDate", TODAY())
-  END
-)
+--                             OR
+-- COUNT(
+--   CASE
+--     WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" < TODAY()
+--          AND COALESCE(
+--            BIND("o_celonis_RelationshipCustomerInvoiceItem", 
+--            "o_celonis_OutgoingMaterialDocumentItem"."custom_DeliveryCompletedIndicator"), '') != 'X'
+--     THEN DAYS_BETWEEN("o_celonis_SalesOrder"."RequestedDeliveryDate", TODAY())
+--   END
+-- )
 
 13.  Vendor OTIF :
 
