@@ -471,3 +471,14 @@ SUM(
   COUNT(DISTINCT "o_celonis_PurchaseOrderItem"."ID")
 ) * 100
 
+38. SO Creation to PO Creation CT:
+
+AVG(
+  DAYS_BETWEEN(
+    
+    PU_FIRST("o_celonis_MaterialMasterPlant", "o_celonis_PurchaseOrderItem"."CreationTime"),
+    PU_FIRST( "o_celonis_MaterialMasterPlant","o_celonis_SalesOrderItem"."CreationTime")
+  )
+)
+
+39. 
