@@ -10,6 +10,10 @@ SUM("o_celonis_SalesOrderItem"."NetAmount")
 Purchase Order :
 count("o_celonis_PurchaseOrder"."ID")
 
+COUNT( DISTINCT PU_FIRST("o_celonis_MaterialMasterPlant" , 
+          BIND("o_celonis_PurchaseOrderItem","o_celonis_PurchaseOrder"."ID")
+))
+
 Purchase Order Item :
 count("o_celonis_PurchaseOrderItem"."ID")
 
