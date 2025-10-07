@@ -23,3 +23,5 @@ Sum("o_celonis_PurchaseOrderItem"."NetAmount")
 WEEK :
 YEAR("o_celonis_SalesOrder"."CreationTime") || '-' || CALENDAR_WEEK("o_celonis_SalesOrder"."CreationTime")
 
+MONTH :
+MONTH("o_celonis_SalesOrder"."CreationTime")
