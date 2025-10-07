@@ -20,3 +20,6 @@ count("o_celonis_PurchaseOrderItem"."ID")
 Purchase Order Value :
 Sum("o_celonis_PurchaseOrderItem"."NetAmount")
 
+WEEK :
+YEAR("o_celonis_SalesOrder"."CreationTime") || '-' || CALENDAR_WEEK("o_celonis_SalesOrder"."CreationTime")
+
