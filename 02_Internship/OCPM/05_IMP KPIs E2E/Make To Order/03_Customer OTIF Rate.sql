@@ -12,3 +12,17 @@ Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, a
   /
   COUNT("o_celonis_SalesOrder"."ID")
 ) * 100
+
+
+  Alternative Approach While Multiple Tables are Involved :
+
+AVG(
+  CASE
+      WHEN BIND("o_celonis_RelationshipCustomerInvoiceItem", "o_celonis_Delivery"."DeliveryDate") <=  
+            BIND("o_celonis_RelationshipCustomerInvoiceItem", "o_celonis_SalesOrder"."RequestedDeliveryDate")
+        AND "o_celonis_Delivery"."Customer_ID" = "o_celonis_SalesOrder"."Customer_ID"
+        AND "o_celonis_SalesOrderItem"."OrderedQuantity" = "o_celonis_DeliveryItem"."Quantity"
+      THEN 'Yes'
+      ELSE 'No'
+END
+)
