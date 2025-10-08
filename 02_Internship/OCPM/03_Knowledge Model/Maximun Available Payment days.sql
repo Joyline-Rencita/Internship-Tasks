@@ -6,9 +6,8 @@ Maximun Available Payment days :
 
 ROUND(CASE 
     WHEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" > 0 
-    THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" 
-    WHEN  "o_celonis_VendorAccountCreditItem"."VendorPaymentDays2" > 0 
-        AND "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" = 0 
+        THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" 
+    WHEN  "o_celonis_VendorAccountCreditItem"."VendorPaymentDays2" > 0  AND "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" = 0 
     THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays2" 
     WHEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays1" > 0 
         AND "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" = 0 
