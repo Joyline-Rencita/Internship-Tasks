@@ -20,3 +20,17 @@ AVG(
     "o_celonis_Delivery"."ID"
   )
 ) * 100
+
+
+  Alternative Approach  While Multiple Tables are Involved :
+
+AVG(
+  CASE 
+      WHEN 
+       BIND("o_celonis_RelationshipCustomerInvoiceItem", "o_celonis_Delivery"."DeliveryDate") 
+            <=       
+          BIND("o_celonis_RelationshipCustomerInvoiceItem", "o_celonis_SalesOrder"."RequestedDeliveryDate")
+      THEN 'Yes'
+      ELSE 'No'
+  END
+)
