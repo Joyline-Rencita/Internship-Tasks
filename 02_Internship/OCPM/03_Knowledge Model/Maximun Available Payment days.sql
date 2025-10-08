@@ -13,6 +13,7 @@ ROUND(
     WHEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays1" > 0 
         AND "o_celonis_VendorAccountCreditItem"."VendorPaymentDays3" = 0 
         AND "o_celonis_VendorAccountCreditItem"."VendorPaymentDays2" = 0
-    THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays1" 
-  ELSE 0 
-  END)
+          THEN "o_celonis_VendorAccountCreditItem"."VendorPaymentDays1" 
+    ELSE 0 
+  END
+)
