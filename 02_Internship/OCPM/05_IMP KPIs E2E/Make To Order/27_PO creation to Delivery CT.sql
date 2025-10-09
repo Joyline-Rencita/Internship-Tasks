@@ -8,7 +8,7 @@ AVG(
   )
 )  
 
-                    p2p connecting o2c. but not recommended
+                    p2p connecting o2c. but not recommended :
 AVG(
   DAYS_BETWEEN(
     BIND("o_celonis_RelationshipCustomerInvoiceItem", "o_celonis_Delivery"."DeliveryDate"),
