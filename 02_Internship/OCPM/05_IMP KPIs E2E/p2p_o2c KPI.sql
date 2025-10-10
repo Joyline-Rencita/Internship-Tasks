@@ -7,6 +7,7 @@ AVG(                                                            --Invoice Postin
   ) 
 )
 
+
 2.  Cust OTD Rate :    Percentage of customer deliveries completed on or before the requested delivery date.
 
 AVG(
