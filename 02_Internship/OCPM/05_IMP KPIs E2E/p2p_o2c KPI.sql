@@ -33,7 +33,7 @@ AVG(
 
 
 
-3.  Cust OTIF Rate :    Percentage of customer orders delivered on time, complete, and without errors.
+3.  Cust OTIF Rate :  Percentage of customer orders delivered on time, complete, and without errors.
   
 (
   COUNT(
