@@ -94,7 +94,6 @@ Dear Supplier 826,
 We identified 450 invoices (~$40M) pending due to duplicate submissions (avg delay 210 days). Please review the attached list and confirm valid entries or provide credit notes to proceed with payment.
 Regards, AP Team
 
-
 ==============================================   TERMINILOGIES   =====================================================
 
 
