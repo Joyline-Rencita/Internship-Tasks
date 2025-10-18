@@ -20,3 +20,22 @@ CASE
   WHEN "o_celonis_SalesOrder"."RequestedDeliveryDate" < TODAY() THEN 'Passed'
   ELSE 'Unknown'
 END
+
+Supplier :
+PU_FIRST(
+  "o_celonis_MaterialMasterPlant",
+  BIND(
+    "o_celonis_PurchaseOrderItem",
+    "o_celonis_PurchaseOrder"."Vendor_ID"
+  )
+)
+
+Materials :
+PU_FIRST(
+    "o_celonis_MaterialMasterPlant",
+    BIND(
+        "o_celonis_PurchaseOrderItem",
+        "o_celonis_PurchaseOrderItem"."Material_ID" || ' - ' || "o_celonis_PurchaseOrderItem"."ShortText"
+    )
+)
+
