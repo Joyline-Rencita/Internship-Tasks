@@ -9,3 +9,7 @@ COUNT(
     ELSE NULL
   END
 )
+
+COUNT( DISTINCT
+  BIND("o_celonis_SalesOrderItem","o_celonis_SalesOrder"."ID")
+)
