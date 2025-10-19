@@ -8,6 +8,6 @@ ROUND(
     WHEN
     "BSEG"."ZBD1T" > 0 AND "BSEG"."ZBD3T" = 0.0 AND "BSEG"."ZBD2T" = 0.0
     THEN "BSEG"."ZBD1T" 
-  ELSE 0.0 
-END
+   ELSE 0.0 
+ END
 )
